@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K8S Resource Designer</title>
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <style>
+        html, body, pre, code, kbd, samp {
+            font-family: "Press Start 2P", cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #212529;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,.2) 2px,
+                    rgba(0,0,0,.2) 4px
+                );
+        }
+
+        .header {
+            background: #209CEE;
+            color: white;
+            padding: 20px 30px;
+            border-bottom: 4px solid #000;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #000;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .header p {
+            font-size: 8px;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 380px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar h2 {
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 8px;
+            color: #fff;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            font-size: 8px;
+        }
+
+        .nes-input,
+        .nes-select select {
+            font-family: "Press Start 2P", cursive;
+        }
+
+        .component-section {
+            margin-bottom: 20px;
+        }
+
+        .component-section h3 {
+            font-size: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            padding: 0px 5px;
+            background: #92CC41;
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .section-title-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .section-title-left:hover {
+            opacity: 0.8;
+        }
+
+        .add-btn {
+            font-size: 8px;
+            padding: 4px 8px;
+        }
+
+        .collapse-arrow {
+            font-size: 10px;
+            transition: none;
+            min-width: 12px;
+        }
+
+        .collapse-arrow.collapsed::before {
+            content: '▶';
+        }
+
+        .collapse-arrow::before {
+            content: '▼';
+        }
+
+        .component-content {
+            overflow: hidden;
+            transition: none;
+        }
+
+        .component-content.collapsed {
+            max-height: 0 !important;
+            opacity: 0;
+            display: none;
+        }
+
+        .component-list {
+            margin-bottom: 15px;
+        }
+
+        .component-item {
+            background: #fff;
+            border: 4px solid #000;
+            padding: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .component-item-content {
+            flex: 1;
+            font-size: 8px;
+            word-break: break-word;
+        }
+
+        .component-item-content strong {
+            color: #209CEE;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #f7d51d;
+            border: 4px solid #000;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 12px;
+            color: #000;
+        }
+
+        .modal-close {
+            font-size: 8px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-bottom: 15px;
+        }
+
+        .modal-body input,
+        .modal-body select {
+            margin-bottom: 12px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer .nes-btn {
+            font-size: 8px;
+        }
+
+        .main-content {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-config-bar {
+            border: 4px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            background: #209CEE;
+        }
+
+        .resource-config-bar .form-group {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .resource-config-bar .form-group label {
+            font-size: 8px;
+            margin-bottom: 8px;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .output-header h2 {
+            font-size: 12px;
+            color: #fff;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .yaml-output {
+            flex: 1;
+            background: #000;
+            color: #92CC41;
+            padding: 20px;
+            overflow: auto;
+            font-family: "Press Start 2P", cursive;
+            font-size: 8px;
+            line-height: 1.8;
+            white-space: pre;
+            border: 4px solid #000;
+            box-shadow: inset 4px 4px 0px rgba(0,0,0,0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .inline-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .inline-form input,
+        .inline-form select {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .inline-form .nes-btn {
+            flex-shrink: 0;
+            font-size: 8px;
+        }
+
+        /* NES.css overrides */
+        .nes-btn {
+            font-size: 8px;
+            /* padding: 8px 16px; */
+            margin: 6px;
+        }
+
+        .nes-input,
+        .nes-select select {
+            font-size: 8px;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #212529;
+            border: 4px solid #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #92CC41;
+            border: 4px solid #000;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #76c442;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 320px;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background: #212529;
+            border-top: 4px solid #000;
+        }
+
+        .footer a {
+            color: #92CC41;
+            text-decoration: none;
+            font-size: 6px;
+        }
+
+        .footer a:hover {
+            color: #76c442;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Kubernetes Resource Designer</h1>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h2>Component Builder</h2>
+
+            <div id="workloadConfig" class="workload-config">
+                <div class="form-group">
+                    <label>Container Image</label>
+                    <input type="text" class="nes-input" id="containerImage" placeholder="nginx:latest" value="nginx:latest">
+                </div>
+
+                <div class="form-group">
+                    <label>Replicas</label>
+                    <input type="number" class="nes-input" id="replicas" value="3" min="1">
+                </div>
+
+                <div class="component-section">
+                    <h3>
+                        <div class="section-title-left" onclick="toggleSection(this)">
+                            <span class="collapse-arrow"></span>
+                            <span>Ports</span>
+                        </div>
+                        <button class="nes-btn is-primary add-btn" onclick="openModal('portModal')">+ Add</button>
+                    </h3>
+                    <div class="component-content">
+                        <div class="component-list" id="portsList"></div>
+                    </div>
+                </div>
+
+                <div class="component-section">
+                    <h3>
+                        <div class="section-title-left" onclick="toggleSection(this)">
+                            <span class="collapse-arrow"></span>
+                            <span>Environment Variables</span>
+                        </div>
+                        <button class="nes-btn is-primary add-btn" onclick="openModal('envModal')">+ Add</button>
+                    </h3>
+                    <div class="component-content">
+                        <div class="component-list" id="envVarsList"></div>
+                    </div>
+                </div>
+
+                <div class="component-section">
+                    <h3>
+                        <div class="section-title-left" onclick="toggleSection(this)">
+                            <span class="collapse-arrow"></span>
+                            <span>Volume Mounts</span>
+                        </div>
+                        <button class="nes-btn is-primary add-btn" onclick="openModal('volumeMountModal')">+ Add</button>
+                    </h3>
+                    <div class="component-content">
+                        <div class="component-list" id="volumeMountsList"></div>
+                    </div>
+                </div>
+
+                <div class="component-section">
+                    <h3>
+                        <div class="section-title-left" onclick="toggleSection(this)">
+                            <span class="collapse-arrow"></span>
+                            <span>Volumes</span>
+                        </div>
+                        <button class="nes-btn is-primary add-btn" onclick="openModal('volumeModal')">+ Add</button>
+                    </h3>
+                    <div class="component-content">
+                        <div class="component-list" id="volumesList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="serviceConfig" class="hidden">
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <div class="nes-select">
+                        <select id="serviceType">
+                            <option value="ClusterIP">ClusterIP</option>
+                            <option value="NodePort">NodePort</option>
+                            <option value="LoadBalancer">LoadBalancer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="component-section">
+                    <h3>
+                        <div class="section-title-left" onclick="toggleSection(this)">
+                            <span class="collapse-arrow"></span>
+                            <span>Service Ports</span>
+                        </div>
+                        <button class="nes-btn is-primary add-btn" onclick="openModal('servicePortModal')">+ Add</button>
+                    </h3>
+                    <div class="component-content">
+                        <div class="component-list" id="servicePortsList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="resource-config-bar">
+                <div class="form-group">
+                    <label>Resource Type</label>
+                    <div class="nes-select">
+                        <select id="resourceType">
+                            <option value="Deployment">Deployment</option>
+                            <option value="StatefulSet">StatefulSet</option>
+                            <option value="Service">Service</option>
+                            <option value="ConfigMap">ConfigMap</option>
+                            <option value="PersistentVolumeClaim">PersistentVolumeClaim</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="nes-input" id="resourceName" placeholder="my-app" value="my-app">
+                </div>
+
+                <div class="form-group">
+                    <label>Namespace</label>
+                    <input type="text" class="nes-input" id="namespace" placeholder="default" value="default">
+                </div>
+            </div>
+
+            <div class="output-header">
+                <h2>YAML Definition</h2>
+                <div class="button-group">
+                    <button class="nes-btn is-success" onclick="downloadYAML()">Download</button>
+                    <button class="nes-btn is-primary" onclick="copyToClipboard()">Copy</button>
+                </div>
+            </div>
+            <div class="yaml-output" id="yamlOutput"></div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Port Modal -->
+    <div id="portModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Port</div>
+                <button class="nes-btn is-error modal-close" onclick="closeModal('portModal')">X</button>
+            </div>
+            <div class="modal-body">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Port Name</label>
+                <input type="text" class="nes-input" id="modalPortName" placeholder="http">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Port Number</label>
+                <input type="number" class="nes-input" id="modalPortNumber" placeholder="80">
+            </div>
+            <div class="modal-footer">
+                <button class="nes-btn" onclick="closeModal('portModal')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="addPortFromModal()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Environment Variable Modal -->
+    <div id="envModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Environment Variable</div>
+                <button class="nes-btn is-error modal-close" onclick="closeModal('envModal')">X</button>
+            </div>
+            <div class="modal-body">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Variable Name</label>
+                <input type="text" class="nes-input" id="modalEnvName" placeholder="KEY">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Value</label>
+                <input type="text" class="nes-input" id="modalEnvValue" placeholder="value">
+            </div>
+            <div class="modal-footer">
+                <button class="nes-btn" onclick="closeModal('envModal')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="addEnvVarFromModal()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volume Mount Modal -->
+    <div id="volumeMountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Volume Mount</div>
+                <button class="nes-btn is-error modal-close" onclick="closeModal('volumeMountModal')">X</button>
+            </div>
+            <div class="modal-body">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Volume Name</label>
+                <input type="text" class="nes-input" id="modalVolumeName" placeholder="vol-name">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Mount Path</label>
+                <input type="text" class="nes-input" id="modalMountPath" placeholder="/data">
+            </div>
+            <div class="modal-footer">
+                <button class="nes-btn" onclick="closeModal('volumeMountModal')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="addVolumeMountFromModal()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volume Modal -->
+    <div id="volumeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Volume</div>
+                <button class="nes-btn is-error modal-close" onclick="closeModal('volumeModal')">X</button>
+            </div>
+            <div class="modal-body">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Volume Name</label>
+                <input type="text" class="nes-input" id="modalVolName" placeholder="vol-name">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Volume Type</label>
+                <div class="nes-select">
+                    <select id="modalVolumeType">
+                        <option value="emptyDir">emptyDir</option>
+                        <option value="persistentVolumeClaim">PVC</option>
+                        <option value="configMap">ConfigMap</option>
+                        <option value="secret">Secret</option>
+                    </select>
+                </div>
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Source (for PVC/ConfigMap/Secret)</label>
+                <input type="text" class="nes-input" id="modalVolumeSource" placeholder="source">
+            </div>
+            <div class="modal-footer">
+                <button class="nes-btn" onclick="closeModal('volumeModal')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="addVolumeFromModal()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Port Modal -->
+    <div id="servicePortModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Service Port</div>
+                <button class="nes-btn is-error modal-close" onclick="closeModal('servicePortModal')">X</button>
+            </div>
+            <div class="modal-body">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Port Name (optional)</label>
+                <input type="text" class="nes-input" id="modalSvcPortName" placeholder="http">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Port</label>
+                <input type="number" class="nes-input" id="modalSvcPort" placeholder="80">
+                <label style="font-size: 8px; color: #000; margin-bottom: 8px; display: block;">Target Port</label>
+                <input type="number" class="nes-input" id="modalSvcTargetPort" placeholder="8080">
+            </div>
+            <div class="modal-footer">
+                <button class="nes-btn" onclick="closeModal('servicePortModal')">Cancel</button>
+                <button class="nes-btn is-primary" onclick="addServicePortFromModal()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const state = {
+            ports: [],
+            envVars: [],
+            volumeMounts: [],
+            volumes: [],
+            servicePorts: []
+        };
+
+        function removePort(index) {
+            state.ports.splice(index, 1);
+            renderPorts();
+            updateYAML();
+        }
+
+        function renderPorts() {
+            const list = document.getElementById('portsList');
+            list.innerHTML = state.ports.map((port, index) => `
+                <div class="component-item">
+                    <div class="component-item-content">
+                        <strong>${port.name}</strong>: ${port.containerPort}
+                    </div>
+                    <button class="nes-btn is-error" onclick="removePort(${index})">X</button>
+                </div>
+            `).join('');
+        }
+
+        function removeEnvVar(index) {
+            state.envVars.splice(index, 1);
+            renderEnvVars();
+            updateYAML();
+        }
+
+        function renderEnvVars() {
+            const list = document.getElementById('envVarsList');
+            list.innerHTML = state.envVars.map((env, index) => `
+                <div class="component-item">
+                    <div class="component-item-content">
+                        <strong>${env.name}</strong>: ${env.value}
+                    </div>
+                    <button class="nes-btn is-error" onclick="removeEnvVar(${index})">X</button>
+                </div>
+            `).join('');
+        }
+
+        function removeVolumeMount(index) {
+            state.volumeMounts.splice(index, 1);
+            renderVolumeMounts();
+            updateYAML();
+        }
+
+        function renderVolumeMounts() {
+            const list = document.getElementById('volumeMountsList');
+            list.innerHTML = state.volumeMounts.map((mount, index) => `
+                <div class="component-item">
+                    <div class="component-item-content">
+                        <strong>${mount.name}</strong>: ${mount.mountPath}
+                    </div>
+                    <button class="nes-btn is-error" onclick="removeVolumeMount(${index})">X</button>
+                </div>
+            `).join('');
+        }
+
+        function removeVolume(index) {
+            state.volumes.splice(index, 1);
+            renderVolumes();
+            updateYAML();
+        }
+
+        function renderVolumes() {
+            const list = document.getElementById('volumesList');
+            list.innerHTML = state.volumes.map((vol, index) => `
+                <div class="component-item">
+                    <div class="component-item-content">
+                        <strong>${vol.name}</strong>: ${vol.type}${vol.source ? ' (' + vol.source + ')' : ''}
+                    </div>
+                    <button class="nes-btn is-error" onclick="removeVolume(${index})">X</button>
+                </div>
+            `).join('');
+        }
+
+        function removeServicePort(index) {
+            state.servicePorts.splice(index, 1);
+            renderServicePorts();
+            updateYAML();
+        }
+
+        function renderServicePorts() {
+            const list = document.getElementById('servicePortsList');
+            list.innerHTML = state.servicePorts.map((port, index) => `
+                <div class="component-item">
+                    <div class="component-item-content">
+                        ${port.name ? '<strong>' + port.name + '</strong>: ' : ''}${port.port} → ${port.targetPort}
+                    </div>
+                    <button class="nes-btn is-error" onclick="removeServicePort(${index})">X</button>
+                </div>
+            `).join('');
+        }
+
+        function generateYAML() {
+            const resourceType = document.getElementById('resourceType').value;
+            const name = document.getElementById('resourceName').value || 'my-resource';
+            const namespace = document.getElementById('namespace').value || 'default';
+
+            if (resourceType === 'Service') {
+                return generateServiceYAML(name, namespace);
+            } else if (resourceType === 'ConfigMap') {
+                return generateConfigMapYAML(name, namespace);
+            } else if (resourceType === 'PersistentVolumeClaim') {
+                return generatePVCYAML(name, namespace);
+            } else {
+                return generateWorkloadYAML(resourceType, name, namespace);
+            }
+        }
+
+        function generateWorkloadYAML(kind, name, namespace) {
+            const image = document.getElementById('containerImage').value || 'nginx:latest';
+            const replicas = document.getElementById('replicas').value || 3;
+
+            let yaml = `apiVersion: apps/v1
+kind: ${kind}
+metadata:
+  name: ${name}
+  namespace: ${namespace}
+spec:
+  replicas: ${replicas}
+  selector:
+    matchLabels:
+      app: ${name}
+  template:
+    metadata:
+      labels:
+        app: ${name}
+    spec:
+      containers:
+      - name: ${name}
+        image: ${image}`;
+
+            if (state.ports.length > 0) {
+                yaml += '\n        ports:';
+                state.ports.forEach(port => {
+                    yaml += `\n        - name: ${port.name}\n          containerPort: ${port.containerPort}`;
+                });
+            }
+
+            if (state.envVars.length > 0) {
+                yaml += '\n        env:';
+                state.envVars.forEach(env => {
+                    yaml += `\n        - name: ${env.name}\n          value: "${env.value}"`;
+                });
+            }
+
+            if (state.volumeMounts.length > 0) {
+                yaml += '\n        volumeMounts:';
+                state.volumeMounts.forEach(mount => {
+                    yaml += `\n        - name: ${mount.name}\n          mountPath: ${mount.mountPath}`;
+                });
+            }
+
+            if (state.volumes.length > 0) {
+                yaml += '\n      volumes:';
+                state.volumes.forEach(vol => {
+                    yaml += `\n      - name: ${vol.name}`;
+                    if (vol.type === 'emptyDir') {
+                        yaml += '\n        emptyDir: {}';
+                    } else if (vol.type === 'persistentVolumeClaim' && vol.source) {
+                        yaml += `\n        persistentVolumeClaim:\n          claimName: ${vol.source}`;
+                    } else if (vol.type === 'configMap' && vol.source) {
+                        yaml += `\n        configMap:\n          name: ${vol.source}`;
+                    } else if (vol.type === 'secret' && vol.source) {
+                        yaml += `\n        secret:\n          secretName: ${vol.source}`;
+                    }
+                });
+            }
+
+            return yaml;
+        }
+
+        function generateServiceYAML(name, namespace) {
+            const serviceType = document.getElementById('serviceType').value || 'ClusterIP';
+
+            let yaml = `apiVersion: v1
+kind: Service
+metadata:
+  name: ${name}
+  namespace: ${namespace}
+spec:
+  type: ${serviceType}
+  selector:
+    app: ${name}`;
+
+            if (state.servicePorts.length > 0) {
+                yaml += '\n  ports:';
+                state.servicePorts.forEach(port => {
+                    yaml += '\n  - ';
+                    if (port.name) {
+                        yaml += `name: ${port.name}\n    `;
+                    }
+                    yaml += `port: ${port.port}\n    targetPort: ${port.targetPort}`;
+                });
+            }
+
+            return yaml;
+        }
+
+        function generateConfigMapYAML(name, namespace) {
+            let yaml = `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${name}
+  namespace: ${namespace}
+data:`;
+
+            if (state.envVars.length > 0) {
+                state.envVars.forEach(env => {
+                    yaml += `\n  ${env.name}: "${env.value}"`;
+                });
+            } else {
+                yaml += '\n  # Add your configuration data here';
+            }
+
+            return yaml;
+        }
+
+        function generatePVCYAML(name, namespace) {
+            return `apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${name}
+  namespace: ${namespace}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi`;
+        }
+
+        function updateYAML() {
+            const yaml = generateYAML();
+            document.getElementById('yamlOutput').textContent = yaml;
+        }
+
+        function downloadYAML() {
+            const yaml = generateYAML();
+            const resourceType = document.getElementById('resourceType').value.toLowerCase();
+            const name = document.getElementById('resourceName').value || 'my-resource';
+            const blob = new Blob([yaml], { type: 'text/yaml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}-${resourceType}.yaml`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function copyToClipboard() {
+            const yaml = generateYAML();
+            navigator.clipboard.writeText(yaml).then(() => {
+                alert('YAML copied to clipboard!');
+            });
+        }
+
+        // Event listeners
+        document.getElementById('resourceType').addEventListener('change', function() {
+            const type = this.value;
+            const workloadConfig = document.getElementById('workloadConfig');
+            const serviceConfig = document.getElementById('serviceConfig');
+
+            if (type === 'Service') {
+                workloadConfig.classList.add('hidden');
+                serviceConfig.classList.remove('hidden');
+            } else if (type === 'ConfigMap' || type === 'PersistentVolumeClaim') {
+                workloadConfig.classList.add('hidden');
+                serviceConfig.classList.add('hidden');
+            } else {
+                workloadConfig.classList.remove('hidden');
+                serviceConfig.classList.add('hidden');
+            }
+
+            updateYAML();
+        });
+
+        document.getElementById('resourceName').addEventListener('input', updateYAML);
+        document.getElementById('namespace').addEventListener('input', updateYAML);
+        document.getElementById('containerImage').addEventListener('input', updateYAML);
+        document.getElementById('replicas').addEventListener('input', updateYAML);
+        document.getElementById('serviceType').addEventListener('change', updateYAML);
+
+        // Allow Enter key to add items from modals
+        document.getElementById('modalPortNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addPortFromModal();
+        });
+        document.getElementById('modalEnvValue').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addEnvVarFromModal();
+        });
+        document.getElementById('modalMountPath').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addVolumeMountFromModal();
+        });
+        document.getElementById('modalVolumeSource').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addVolumeFromModal();
+        });
+        document.getElementById('modalSvcTargetPort').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addServicePortFromModal();
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            // Clear modal inputs
+            const modal = document.getElementById(modalId);
+            const inputs = modal.querySelectorAll('input');
+            inputs.forEach(input => input.value = '');
+        }
+
+        // Add from modal functions
+        function addPortFromModal() {
+            const name = document.getElementById('modalPortName').value;
+            const port = document.getElementById('modalPortNumber').value;
+
+            if (name && port) {
+                state.ports.push({ name, containerPort: parseInt(port) });
+                renderPorts();
+                updateYAML();
+                closeModal('portModal');
+            }
+        }
+
+        function addEnvVarFromModal() {
+            const name = document.getElementById('modalEnvName').value;
+            const value = document.getElementById('modalEnvValue').value;
+
+            if (name && value) {
+                state.envVars.push({ name, value });
+                renderEnvVars();
+                updateYAML();
+                closeModal('envModal');
+            }
+        }
+
+        function addVolumeMountFromModal() {
+            const name = document.getElementById('modalVolumeName').value;
+            const mountPath = document.getElementById('modalMountPath').value;
+
+            if (name && mountPath) {
+                state.volumeMounts.push({ name, mountPath });
+                renderVolumeMounts();
+                updateYAML();
+                closeModal('volumeMountModal');
+            }
+        }
+
+        function addVolumeFromModal() {
+            const name = document.getElementById('modalVolName').value;
+            const type = document.getElementById('modalVolumeType').value;
+            const source = document.getElementById('modalVolumeSource').value;
+
+            if (name) {
+                state.volumes.push({ name, type, source });
+                renderVolumes();
+                updateYAML();
+                closeModal('volumeModal');
+            }
+        }
+
+        function addServicePortFromModal() {
+            const name = document.getElementById('modalSvcPortName').value;
+            const port = document.getElementById('modalSvcPort').value;
+            const targetPort = document.getElementById('modalSvcTargetPort').value;
+
+            if (port && targetPort) {
+                state.servicePorts.push({
+                    name: name || undefined,
+                    port: parseInt(port),
+                    targetPort: parseInt(targetPort)
+                });
+                renderServicePorts();
+                updateYAML();
+                closeModal('servicePortModal');
+            }
+        }
+
+        // Collapse/expand functionality
+        function toggleSection(headerElement) {
+            const arrow = headerElement.querySelector('.collapse-arrow');
+            const h3 = headerElement.closest('h3');
+            const content = h3.nextElementSibling;
+
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                arrow.classList.remove('collapsed');
+            } else {
+                content.classList.add('collapsed');
+                arrow.classList.add('collapsed');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Initialize
+        updateYAML();
+    </script>
+
+    <div class="footer">
+        <a href="https://anthonyl.com" target="_blank" rel="noopener noreferrer">built by anthony linsday</a>
+    </div>
+</body>
+</html>
