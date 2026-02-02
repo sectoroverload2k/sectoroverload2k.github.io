@@ -1,0 +1,733 @@
+/* Fullpage CRT Monitor Layout */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Override colors - all green theme */
+:root {
+  --fp-bright-green: #00ff88;
+  --fp-green: #00cc77;
+  --fp-dim-green: #338855;
+  --fp-glow-green: rgba(0, 255, 136, 0.5);
+}
+
+body {
+  font-family: var(--font-mono);
+  background: #050508;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Hide the default scanlines - we'll use our own */
+body > .scanlines {
+  display: none;
+}
+
+/* CRT Monitor Frame */
+.crt-monitor {
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  max-height: 95vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-dark);
+  border: 4px solid var(--metal-dark);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 2px 0 var(--metal-mid),
+    inset 0 -2px 0 var(--border-outer),
+    0 0 0 2px var(--border-outer),
+    0 0 0 6px var(--metal-dark),
+    0 0 0 8px var(--metal-mid),
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    0 0 100px rgba(0, 80, 60, 0.15);
+  overflow: hidden;
+}
+
+/* Outer monitor bezel */
+.crt-monitor::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 8px solid transparent;
+  border-image: linear-gradient(
+    135deg,
+    var(--metal-light) 0%,
+    var(--metal-dark) 25%,
+    var(--metal-mid) 50%,
+    var(--metal-dark) 75%,
+    var(--metal-light) 100%
+  ) 1;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Inner screen glow */
+.crt-monitor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow:
+    inset 0 0 100px rgba(0, 200, 150, 0.05),
+    inset 0 0 200px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 50;
+  border-radius: 4px;
+}
+
+/* CRT Screen area */
+.crt-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at center, rgba(0, 30, 20, 0.3) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(10, 15, 12, 0.8) 0%, rgba(5, 10, 8, 0.85) 100%),
+    url('../assets/panel-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Scanlines overlay for entire screen */
+.crt-screen::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  pointer-events: none;
+  z-index: 5;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.4;
+  border-radius: 2px;
+}
+
+/* Moving scanline bar */
+.crt-screen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 150, 0.1),
+    transparent
+  );
+  animation: screen-scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+@keyframes screen-scanline {
+  0% { top: -10px; }
+  100% { top: 100%; }
+}
+
+/* CRT Monitor corner sprites */
+.crt-monitor > .corner {
+  position: absolute;
+  z-index: 200;
+  pointer-events: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.crt-monitor > .corner-tl {
+  top: -4px;
+  left: -4px;
+  width: 50px;
+  height: 46px;
+  background-image: url('../assets/window-tl.png');
+  background-size: contain;
+}
+
+.crt-monitor > .corner-tr {
+  top: -4px;
+  right: -4px;
+  width: 50px;
+  height: 46px;
+  background-image: url('../assets/window-tr.png');
+  background-size: contain;
+}
+
+.crt-monitor > .corner-bl {
+  bottom: -4px;
+  left: -4px;
+  width: 50px;
+  height: 52px;
+  background-image: url('../assets/window-bl.png');
+  background-size: contain;
+}
+
+.crt-monitor > .corner-br {
+  bottom: -4px;
+  right: -4px;
+  width: 50px;
+  height: 52px;
+  background-image: url('../assets/window-br.png');
+  background-size: contain;
+}
+
+/* CRT Monitor edge sprites */
+.crt-monitor > .edge {
+  position: absolute;
+  background-image: url('../assets/window-side.png');
+  background-repeat: repeat;
+  z-index: 150;
+  pointer-events: none;
+}
+
+.crt-monitor > .edge-top {
+  top: -3px;
+  left: 46px;
+  right: 46px;
+  height: 12px;
+  background-size: 32px 32px;
+}
+
+.crt-monitor > .edge-bottom {
+  bottom: -4px;
+  left: 46px;
+  right: 46px;
+  height: 18px;
+  background-size: 32px 32px;
+}
+
+.crt-monitor > .edge-bottom::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+.crt-monitor > .edge-left {
+  top: 42px;
+  bottom: 48px;
+  left: -3px;
+  width: 12px;
+  background-size: 32px 32px;
+}
+
+.crt-monitor > .edge-right {
+  top: 42px;
+  bottom: 48px;
+  right: -4px;
+  width: 14px;
+  background-size: 32px 32px;
+}
+
+.crt-monitor > .edge-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+/* Header inside CRT */
+.crt-header {
+  /* background: rgba(5, 10, 8, 0.6); */
+  padding: 2rem 3rem;
+  margin: 15px 15px 0 15px;
+  text-align: center;
+  position: relative;
+  z-index: 1200;
+  flex-shrink: 0;
+  border: none;
+}
+
+/* Styled hr elements */
+.crt-screen hr {
+  border: none;
+  height: 1px;
+  background: var(--accent-green);
+  margin: 0 15px;
+  position: relative;
+  z-index: 1200;
+  box-shadow:
+    0 0 5px rgba(0, 204, 119, 0.5),
+    0 0 10px rgba(0, 204, 119, 0.3),
+    0 0 20px rgba(0, 204, 119, 0.2);
+}
+
+.crt-screen hr.header-divider {
+  margin-bottom: 20px;
+}
+
+.crt-screen hr.footer-divider {
+  margin-top: 20px;
+}
+
+/* Header top bar decoration */
+.crt-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--metal-dark) 0%,
+    var(--metal-mid) 20%,
+    var(--metal-light) 50%,
+    var(--metal-mid) 80%,
+    var(--metal-dark) 100%
+  );
+}
+
+.crt-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-shadow:
+    0 0 10px var(--glow-cyan),
+    0 0 20px var(--glow-cyan),
+    0 0 40px var(--glow-cyan),
+    2px 2px 0 var(--bg-dark);
+  margin-bottom: 0.5rem;
+}
+
+.crt-header .subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: var(--accent-cyan);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 5px var(--accent-cyan),
+    0 0 10px var(--accent-cyan),
+    0 0 20px var(--glow-cyan),
+    0 0 30px var(--glow-cyan);
+}
+
+/* Status indicators in header */
+.crt-header .status-bar {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  z-index: 15;
+}
+
+.crt-header .status-left {
+  color: var(--accent-green);
+  opacity: 0.8;
+  text-shadow: 0 0 4px var(--accent-green), 0 0 8px var(--glow-green);
+}
+
+.crt-header .status-right {
+  color: var(--accent-cyan);
+  opacity: 0.8;
+  text-shadow: 0 0 4px var(--accent-cyan), 0 0 8px var(--glow-cyan);
+}
+
+/* Scrollable content area - with custom scrollbar wrapper */
+.crt-content-wrapper {
+  flex: 1;
+  position: relative;
+  margin: 0 30px 15px 15px;
+  overflow: hidden;
+  z-index: 1100;
+}
+
+.crt-content {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1.5rem;
+  padding-right: 2rem;
+  margin-right: -50px;
+  padding-right: calc(2rem + 50px);
+  position: relative;
+  border: none;
+  background: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.crt-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar track */
+.custom-scrollbar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  width: 16px;
+  background: rgba(0, 15, 10, 0.9);
+  border: 1px solid rgba(0, 255, 128, 0.4);
+  z-index: 1200;
+}
+
+/* Custom scrollbar thumb */
+.custom-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  right: 1px;
+  width: 12px;
+  background: rgba(0, 255, 128, 0.3);
+  border: 1px solid #00cc77;
+  cursor: pointer;
+  box-shadow:
+    0 0 10px rgba(0, 255, 128, 0.4),
+    0 0 20px rgba(0, 255, 128, 0.2),
+    inset 0 0 10px rgba(0, 255, 128, 0.2);
+}
+
+.custom-scrollbar-thumb:hover {
+  background: rgba(0, 255, 128, 0.5);
+  box-shadow:
+    0 0 15px rgba(0, 255, 128, 0.6),
+    0 0 25px rgba(0, 255, 128, 0.3),
+    inset 0 0 15px rgba(0, 255, 128, 0.3);
+}
+
+/* Grid inside CRT content */
+.crt-content .grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer inside CRT */
+.crt-footer {
+  background: transparent;
+  padding: 0.75rem 2rem;
+  margin: 0 15px 15px 15px;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crt-footer .footer-left {
+  text-align: left;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 1rem;
+  color: var(--accent-green);
+  opacity: 0.7;
+}
+
+.crt-footer .footer-center {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-cyan);
+}
+
+.crt-footer .footer-right {
+  text-align: right;
+  flex: 1;
+  padding-left: 1rem;
+  color: var(--accent-green);
+  opacity: 0.7;
+}
+
+.crt-footer::before {
+  display: none;
+}
+
+/* Vignette effect for CRT screen */
+.crt-vignette {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10, 15, 12, 0.85) 0%, rgba(5, 10, 8, 0.9) 100%),
+    url('../assets/panel-bg.webp');
+
+  /* background:
+    radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.3) 100%),
+    linear-gradient(180deg, rgba(10, 15, 12, 0.9) 0%, rgba(5, 10, 8, 0.95) 100%); */
+  z-index: 1;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 100px rgba(0, 0, 0, 0.3),
+    inset 0 0 150px rgba(0, 0, 0, 0.2),
+    inset 0 0 30px rgba(0, 204, 119, 0.05);
+}
+
+/* Panel adjustments for fullpage - glowing green border, no background */
+.crt-content .panel {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent-green);
+  /* background: rgba(0, 10, 5, 0.7); */
+  box-shadow:
+    0 0 5px rgba(0, 204, 119, 0.3),
+    0 0 10px rgba(0, 204, 119, 0.2),
+    0 0 20px rgba(0, 204, 119, 0.1);
+  border-radius: 2px;
+}
+
+/* Remove background image, texture, and inner shadows from panels */
+.crt-content .panel::before {
+  display: none;
+}
+
+.crt-content .panel .panel-scanline,
+.crt-content .panel .panel-scanline::before,
+.crt-content .panel .panel-scanline::after {
+  display: none;
+}
+
+.crt-content .panel:hover {
+  border-color: #00ff88;
+  box-shadow:
+    0 0 8px rgba(0, 255, 136, 0.4),
+    0 0 15px rgba(0, 255, 136, 0.3),
+    0 0 30px rgba(0, 255, 136, 0.15);
+}
+
+/* Hide corner and edge sprites in fullpage panels */
+.crt-content .panel .corner,
+.crt-content .panel .edge {
+  display: none;
+}
+
+/* Remove the metal edge highlight since we're using green glow */
+.crt-content .panel::after {
+  display: none;
+}
+
+/* Adjust panel title padding without corner sprites */
+.crt-content .panel-title {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(0, 204, 119, 0.4);
+}
+
+/* Adjust panel content padding without corner sprites */
+.crt-content .panel-content {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+/* Remove container padding since CRT provides it */
+.crt-content .container {
+  padding: 0;
+  max-width: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .crt-monitor {
+    border-radius: 4px;
+  }
+
+  .crt-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .crt-header .status-bar {
+    padding: 0 20px;
+    font-size: 0.6rem;
+  }
+
+  .crt-content {
+    padding: 1rem;
+  }
+
+  .crt-corner {
+    display: none;
+  }
+}
+
+/* Flicker animation */
+@keyframes crt-flicker {
+  0% { opacity: 1; }
+  5% { opacity: 0.95; }
+  10% { opacity: 1; }
+  15% { opacity: 0.98; }
+  20% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.crt-screen {
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* ========== ALL GREEN COLOR THEME ========== */
+
+/* Header name - bright green with glow (was white/cyan) */
+.crt-header h1 {
+  color: var(--fp-bright-green);
+  text-shadow:
+    0 0 10px var(--fp-glow-green),
+    0 0 20px var(--fp-glow-green),
+    0 0 40px var(--fp-glow-green),
+    2px 2px 0 var(--bg-dark);
+}
+
+/* Subtitle - bright green with glow (was cyan) */
+.crt-header .subtitle {
+  color: var(--fp-bright-green);
+  text-shadow:
+    0 0 5px var(--fp-bright-green),
+    0 0 10px var(--fp-bright-green),
+    0 0 20px var(--fp-glow-green),
+    0 0 30px var(--fp-glow-green);
+}
+
+/* Status bar text - bright green with glow */
+.crt-header .status-left,
+.crt-header .status-right {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 4px var(--fp-bright-green), 0 0 8px var(--fp-glow-green);
+}
+
+/* Panel titles - already green, ensure glow */
+.crt-content .panel-title {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 10px var(--fp-glow-green);
+}
+
+/* Primary text - green without glow (was white/light grey) */
+.crt-content .panel-content,
+.crt-content .panel-content p,
+.crt-content .panel-content li,
+.crt-content .exp-role,
+.crt-content .about-list li {
+  color: var(--fp-green);
+}
+
+/* Secondary/dim text - dim green (was grey) */
+.crt-content .exp-desc,
+.crt-content .project-item p,
+.crt-footer {
+  color: var(--fp-dim-green);
+}
+
+/* Accent text that was cyan - now bright green with glow */
+.crt-content .exp-company,
+.crt-content .project-item h3 {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+}
+
+/* Year badges - bright green with glow */
+.crt-content .exp-year {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+}
+
+/* Contact links - bright green */
+.crt-content .contact-link {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+}
+
+.crt-content .contact-link:hover {
+  background: rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 12px var(--fp-glow-green);
+  box-shadow:
+    inset 0 0 20px rgba(0, 255, 136, 0.2),
+    0 0 15px var(--fp-glow-green);
+}
+
+/* Tags - bright green */
+.crt-content .tag {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.crt-content .tag:hover {
+  background: rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 12px var(--fp-glow-green);
+}
+
+/* Icons - bright green */
+.crt-content .icon {
+  color: var(--fp-bright-green);
+}
+
+/* About list icons */
+.crt-content .about-list .icon {
+  color: var(--fp-bright-green);
+}
+
+/* Footer text colors */
+.crt-footer .footer-left,
+.crt-footer .footer-right {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 4px var(--fp-bright-green), 0 0 8px var(--fp-glow-green);
+}
+
+.crt-footer .footer-center {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 4px var(--fp-bright-green), 0 0 8px var(--fp-glow-green);
+}
+
+/* Skill names and bars */
+.crt-content .skill-name {
+  color: var(--fp-bright-green);
+}
+
+/* Return icons in panel titles */
+.crt-content .return-icon {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+}
