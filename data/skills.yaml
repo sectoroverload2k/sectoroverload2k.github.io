@@ -1,0 +1,19 @@
+- name: "AWS"
+  icon: "cloud"
+  level: 95
+
+- name: "Linux"
+  icon: "ubuntu"
+  level: 90
+
+- name: "Python"
+  icon: "filetype-py"
+  level: 80
+
+- name: "Kubernetes"
+  icon: "diagram-3"
+  level: 85
+
+- name: "Terraform"
+  icon: "layers"
+  level: 88

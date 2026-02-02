@@ -1,0 +1,25 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="metalBL" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#5a6a72"/>
+      <stop offset="30%" style="stop-color:#3a4a52"/>
+      <stop offset="50%" style="stop-color:#4a5a62"/>
+      <stop offset="70%" style="stop-color:#2a3a42"/>
+      <stop offset="100%" style="stop-color:#1a2a32"/>
+    </linearGradient>
+    <linearGradient id="highlightBL" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7a8a92"/>
+      <stop offset="100%" style="stop-color:#4a5a62"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer bracket -->
+  <path d="M0,0 L0,32 L4,36 L8,36 L8,40 L40,40 L40,36 L12,36 L8,32 L8,28 L4,28 L4,0 Z" fill="url(#metalBL)"/>
+  <!-- Inner highlight -->
+  <path d="M2,2 L2,30 L6,34 L10,34 L10,38 L38,38 L38,36 L12,36 L8,32 L8,28 L4,28 L4,2 Z" fill="url(#highlightBL)" opacity="0.3"/>
+  <!-- Screws/rivets -->
+  <circle cx="6" cy="34" r="2" fill="#2a3a42"/>
+  <circle cx="6" cy="34" r="1" fill="#4a5a62"/>
+  <!-- Edge highlight -->
+  <path d="M4,28 L4,0" stroke="#6a7a82" stroke-width="0.5" opacity="0.5"/>
+  <path d="M12,36 L40,36" stroke="#6a7a82" stroke-width="0.5" opacity="0.5"/>
+</svg>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <!-- CRT Monitor Frame -->
+  <div class="crt-monitor">
+    <!-- Corner sprites -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <!-- Edge sprites -->
+    <div class="edge edge-top"></div>
+    <div class="edge edge-right"></div>
+    <div class="edge edge-bottom"></div>
+    <div class="edge edge-left"></div>
+
+    <!-- CRT Screen -->
+    <div class="crt-screen">
+      <!-- Vignette overlay -->
+      <div class="crt-vignette"></div>
+
+      <!-- Compact Header for Inner Pages -->
+      <header class="crt-header crt-header-compact">
+        <div class="status-bar">
+          <span class="status-left">> {{ if .IsPage }}{{ .FirstSection.Title | upper }} / {{ if eq .Parent .FirstSection }}{{ .Title | upper }}{{ else }}{{ .Parent.Title | upper }} / {{ .File.ContentBaseName | upper }}{{ end }}{{ else }}{{ if and .Parent (not .Parent.IsHome) }}{{ .Parent.Title | upper }} / {{ end }}{{ .Title | upper }}{{ end }}<span class="blink">_</span></span>
+          <span class="status-right"><span class="status-dot"></span>STATUS: ONLINE</span>
+        </div>
+        <div class="compact-nav">
+          <a href="/" class="site-title">
+            <h1>{{ .Site.Params.author | default "Anthony Linsday" }}</h1>
+          </a>
+          <nav>
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
+            {{ end }}
+          </nav>
+        </div>
+      </header>
+
+      <hr class="header-divider">
+
+      <!-- Scrollable Content Area -->
+      <div class="crt-content-wrapper">
+        <div class="crt-content">
+          <div class="page-container">
+            {{ block "main" . }}{{ end }}
+          </div>
+        </div>
+        <div class="custom-scrollbar">
+          <div class="custom-scrollbar-thumb"></div>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <!-- Footer -->
+      <footer class="crt-footer">
+        <span class="footer-left" id="user-agent"></span>
+        <span class="footer-center"><span id="user-ip">Detecting IP...</span></span>
+        <span class="footer-right" id="current-datetime"></span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/fullpage.js"></script>
+</body>
+</html>

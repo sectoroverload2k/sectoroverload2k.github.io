@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+
+<header>
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}
+  <p class="page-subtitle">{{ . }}</p>
+  {{ end }}
+</header>
+
+{{ with .Content }}
+<div class="article-content">
+  {{ . }}
+</div>
+{{ end }}
+
+<div class="card-grid">
+  {{ range .Pages }}
+  <a href="{{ .Permalink }}" class="card">
+    <h3>{{ .Title }}</h3>
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
+    <div class="card-meta">
+      {{ if .Date }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="tag-list">
+        {{ range first 3 . }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}

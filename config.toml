@@ -1,16 +1,19 @@
 baseURL = "https://anthonyl.com/"
 relativeURLs = true
 languageCode = "en-us"
-title = "Anthony Lindsay - Cloud Architect & DevOps Engineer"
-theme = "technical"
+title = "Anthony Linsday - Cloud Architect & DevOps Engineer"
+theme = "console"
 
 [params]
-  author = "Anthony Lindsay"
-  description = "AWS Solutions Architect with 15+ years building scalable infrastructure, automation pipelines, and cloud-native applications."
+  author = "Anthony Linsday"
+  role = "Cloud Infrastructure Engineer"
+  description = "AWS Solutions Architect with 20+ years building scalable infrastructure, automation pipelines, and cloud-native applications."
   email = "anthony@linsday.net"
   phone = "(704) 466-5581"
   github = "https://github.com/sectoroverload2k"
   linkedin = "https://linkedin.com/in/anthonylinsday"
+  location = "Charlotte, NC"
+  certifications = "AWS Certified Solutions Architect"
 
 [menu]
   [[menu.main]]
@@ -32,9 +35,13 @@ theme = "technical"
 
 [markup]
   [markup.highlight]
-    style = "github"
+    style = "monokai"
     lineNos = false
     lineNumbersInTable = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false

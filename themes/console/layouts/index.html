@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "header-full.html" . }}
+
+  <main class="grid">
+    <!-- About Panel -->
+    <section class="panel about">
+      <h2 class="panel-title">About <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        <p>{{ .Site.Params.description }}</p>
+        <ul class="about-list">
+          {{ with .Site.Params.certifications }}
+          <li><i class="bi bi-cloud icon"></i> {{ . }}</li>
+          {{ end }}
+          <li><i class="bi bi-diagram-3 icon"></i> Kubernetes & Container Orchestration</li>
+          {{ with .Site.Params.location }}
+          <li><i class="bi bi-geo-alt-fill icon"></i> {{ . }}</li>
+          {{ end }}
+          <li><i class="bi bi-lightning-fill icon"></i> Linux, Automation, DevOps</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience Panel -->
+    <section class="panel experience">
+      <h2 class="panel-title">Experience <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        {{ range .Site.Data.experience }}
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">{{ .company }}</span>
+            <span class="exp-year">{{ .year }}</span>
+          </div>
+          <p class="exp-role">{{ .role }}</p>
+          <p class="exp-desc">{{ .description }}</p>
+        </div>
+        {{ else }}
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">WelcomeSign / TSYS</span>
+            <span class="exp-year">2011</span>
+          </div>
+          <p class="exp-role">Senior DevOps Engineer</p>
+          <p class="exp-desc">Cloud infrastructure & automation</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Contract / Consulting</span>
+            <span class="exp-year">2020</span>
+          </div>
+          <p class="exp-role">Cloud Architect</p>
+          <p class="exp-desc">AWS migrations & Kubernetes</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Previous Roles</span>
+            <span class="exp-year">2008</span>
+          </div>
+          <p class="exp-role">Systems Administrator</p>
+          <p class="exp-desc">Linux infrastructure & networking</p>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    <!-- Skills Panel -->
+    <section class="panel skills">
+      <h2 class="panel-title">Skills <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        {{ range .Site.Data.skills }}
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-{{ .icon | default "gear" }} icon"></i>
+            <span class="skill-name">{{ .name }}</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="{{ .level }}"></div></div>
+        </div>
+        {{ else }}
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-cloud icon"></i>
+            <span class="skill-name">AWS</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="95"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-ubuntu icon"></i>
+            <span class="skill-name">Linux</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-filetype-py icon"></i>
+            <span class="skill-name">Python</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-diagram-3 icon"></i>
+            <span class="skill-name">Kubernetes</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <i class="bi bi-layers icon"></i>
+            <span class="skill-name">Terraform</span>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-level="88"></div></div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    <!-- Portfolio Panel -->
+    <section class="panel portfolio">
+      <h2 class="panel-title">Portfolio <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        {{ range first 3 (where .Site.RegularPages "Section" "portfolio") }}
+        <div class="project-item">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p>{{ .Description | default .Summary | truncate 100 }}</p>
+        </div>
+        {{ else }}
+        <div class="project-item">
+          <h3>AWS Explorer</h3>
+          <p>Interactive AWS architecture visualization tool for designing and documenting cloud infrastructure.</p>
+        </div>
+        <div class="project-item">
+          <h3>K8s Designer</h3>
+          <p>Kubernetes deployment planner with YAML generation and cluster visualization.</p>
+        </div>
+        <div class="project-item">
+          <h3>Infrastructure Automation</h3>
+          <p>Terraform modules and Ansible playbooks for repeatable cloud deployments.</p>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    <!-- Knowledge Base Panel -->
+    <section class="panel knowledge">
+      <h2 class="panel-title">Knowledge Base <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        <div class="tag-cloud">
+          {{ range .Site.Taxonomies.tags }}
+          <a href="{{ .Page.Permalink }}" class="tag"><i class="bi bi-tag icon"></i> {{ .Page.Title }}</a>
+          {{ else }}
+          <span class="tag"><i class="bi bi-cloud icon"></i> AWS</span>
+          <span class="tag"><i class="bi bi-diagram-3 icon"></i> Kubernetes</span>
+          <span class="tag"><i class="bi bi-layers icon"></i> Terraform</span>
+          <span class="tag"><i class="bi bi-box icon"></i> Docker</span>
+          <span class="tag"><i class="bi bi-ubuntu icon"></i> Linux</span>
+          <span class="tag"><i class="bi bi-filetype-py icon"></i> Python</span>
+          <span class="tag"><i class="bi bi-gear icon"></i> Ansible</span>
+          <span class="tag"><i class="bi bi-arrow-repeat icon"></i> CI/CD</span>
+          <span class="tag"><i class="bi bi-search icon"></i> OpenSearch</span>
+          <span class="tag"><i class="bi bi-hdd-network icon"></i> Networking</span>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Panel -->
+    <section class="panel contact">
+      <h2 class="panel-title">Contact <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        {{ with .Site.Params.email }}
+        <a href="mailto:{{ . }}" class="contact-link">
+          <i class="bi bi-envelope icon"></i> {{ . }}
+        </a>
+        {{ end }}
+        {{ with .Site.Params.linkedin }}
+        <a href="{{ . }}" target="_blank" rel="noopener" class="contact-link">
+          <i class="bi bi-linkedin icon"></i> {{ . | replaceRE "https?://(www\\.)?" "" }}
+        </a>
+        {{ end }}
+        {{ with .Site.Params.github }}
+        <a href="{{ . }}" target="_blank" rel="noopener" class="contact-link">
+          <i class="bi bi-github icon"></i> {{ . | replaceRE "https?://(www\\.)?" "" }}
+        </a>
+        {{ end }}
+      </div>
+    </section>
+  </main>
+
+  {{ partial "footer-full.html" . }}
+</body>
+</html>

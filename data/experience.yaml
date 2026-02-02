@@ -1,0 +1,14 @@
+- company: "WelcomeSign / TSYS"
+  year: "2011"
+  role: "Senior DevOps Engineer"
+  description: "Cloud infrastructure & automation"
+
+- company: "Contract / Consulting"
+  year: "2020"
+  role: "Cloud Architect"
+  description: "AWS migrations & Kubernetes"
+
+- company: "Previous Roles"
+  year: "2008"
+  role: "Systems Administrator"
+  description: "Linux infrastructure & networking"

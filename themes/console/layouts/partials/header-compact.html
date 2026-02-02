@@ -1,0 +1,18 @@
+<!-- Compact Header for Inner Pages -->
+<header class="compact-header">
+  <a href="/" class="site-title">
+    <h1>{{ .Site.Params.author | default "Anthony Linsday" }}</h1>
+    <span class="site-subtitle">{{ .Site.Params.role | default "Cloud Infrastructure Engineer" }}</span>
+  </a>
+
+  <nav>
+    {{ range .Site.Menus.main }}
+    <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+  </nav>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    <span>ONLINE</span>
+  </div>
+</header>

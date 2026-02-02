@@ -1,0 +1,44 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+
+<article class="knowledge-article">
+  <header>
+    <h1 class="page-title"><i class="bi bi-lightbulb"></i> {{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="page-subtitle">{{ . }}</p>
+    {{ end }}
+    {{ with .Params.tags }}
+    <div class="tag-list" style="margin-top: 0.5rem;">
+      {{ range . }}
+      <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  <!-- Table of Contents -->
+  {{ if .TableOfContents }}
+  <nav class="toc">
+    <h4><i class="bi bi-list-ul"></i> Contents</h4>
+    {{ .TableOfContents }}
+  </nav>
+  {{ end }}
+
+  <div class="article-content">
+    {{ .Content }}
+  </div>
+
+  <!-- Related -->
+  {{ $related := .Site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  <aside class="related-articles">
+    <h4><i class="bi bi-link-45deg"></i> Related</h4>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </aside>
+  {{ end }}
+</article>
+{{ end }}

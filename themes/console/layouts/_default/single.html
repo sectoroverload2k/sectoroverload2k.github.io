@@ -1,0 +1,42 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+
+<article>
+  <header>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="page-subtitle">{{ . }}</p>
+    {{ end }}
+    {{ if .Date }}
+    <p class="page-subtitle">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.tags }}
+      <span class="separator">|</span>
+      {{ range . }}
+      <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{ end }}
+      {{ end }}
+    </p>
+    {{ end }}
+  </header>
+
+  <div class="article-content">
+    {{ .Content }}
+  </div>
+
+  {{ if .PrevInSection }}
+  <nav class="page-navigation">
+    <a href="{{ .PrevInSection.Permalink }}" class="prev">
+      <span class="label">Previous</span>
+      <span class="title">{{ .PrevInSection.Title }}</span>
+    </a>
+    {{ if .NextInSection }}
+    <a href="{{ .NextInSection.Permalink }}" class="next">
+      <span class="label">Next</span>
+      <span class="title">{{ .NextInSection.Title }}</span>
+    </a>
+    {{ end }}
+  </nav>
+  {{ end }}
+</article>
+{{ end }}

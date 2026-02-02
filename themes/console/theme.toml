@@ -1,0 +1,12 @@
+name = "Console"
+license = "MIT"
+licenselink = "https://github.com/sectoroverload2k/sectoroverload2k.github.io"
+description = "CRT-style cyberpunk terminal theme for personal resume and knowledge base"
+homepage = "https://anthonyl.com/"
+tags = ["cyberpunk", "crt", "terminal", "resume", "portfolio"]
+features = ["responsive", "dark-mode"]
+min_version = "0.100.0"
+
+[author]
+  name = "Anthony Linsday"
+  homepage = "https://anthonyl.com/"

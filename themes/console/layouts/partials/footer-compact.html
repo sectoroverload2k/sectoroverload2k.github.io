@@ -1,0 +1,13 @@
+<!-- Compact Footer for Inner Pages -->
+<footer class="page-footer">
+  <p>
+    <a href="/">{{ .Site.Params.author | default "Anthony Linsday" }}</a>
+    <span class="separator">|</span>
+    <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+    <span class="separator">|</span>
+    <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub</a>
+    <span class="separator">|</span>
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
+  <p>&copy; {{ now.Year }} {{ .Site.Params.author | default "Anthony Linsday" }}. All rights reserved.</p>
+</footer>

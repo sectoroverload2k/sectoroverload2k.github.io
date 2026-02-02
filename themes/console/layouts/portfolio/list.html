@@ -1,0 +1,39 @@
+{{ define "main" }}
+<header>
+  <h1 class="page-title"><i class="bi bi-folder2-open"></i> Portfolio</h1>
+  <p class="page-subtitle">Open source projects, tools, and technical experiments</p>
+</header>
+
+{{ with .Content }}
+<div class="article-content">
+  {{ . }}
+</div>
+{{ end }}
+
+<div class="card-grid">
+  {{ range .Pages.ByWeight }}
+  <a href="{{ .Permalink }}" class="card">
+    {{ with .Params.icon }}
+    <i class="bi bi-{{ . }}" style="font-size: 2rem; color: var(--fp-bright-green); margin-bottom: 0.5rem;"></i>
+    {{ end }}
+    <h3>{{ .Title }}</h3>
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
+    <div class="card-meta">
+      {{ with .Params.tech }}
+      <div class="tag-list">
+        {{ range first 4 . }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+      {{ with .Params.github }}
+      <span><i class="bi bi-github"></i> GitHub</span>
+      {{ end }}
+      {{ with .Params.demo }}
+      <span><i class="bi bi-box-arrow-up-right"></i> Demo</span>
+      {{ end }}
+    </div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,42 @@
+{{ define "main" }}
+<header>
+  <h1 class="page-title"><i class="bi bi-journal-code"></i> Wiki</h1>
+  <p class="page-subtitle">Technical documentation, guides, and knowledge base articles</p>
+</header>
+
+{{ with .Content }}
+<div class="article-content">
+  {{ . }}
+</div>
+{{ end }}
+
+<!-- Categories/Tags filter -->
+{{ with .Site.Taxonomies.categories }}
+<div class="tag-list" style="margin-bottom: 2rem;">
+  {{ range . }}
+  <a href="{{ .Page.Permalink }}" class="tag"><i class="bi bi-folder icon"></i> {{ .Page.Title }} ({{ len .Pages }})</a>
+  {{ end }}
+</div>
+{{ end }}
+
+<div class="card-grid">
+  {{ range .Pages.ByDate.Reverse }}
+  <a href="{{ .Permalink }}" class="card">
+    <h3><i class="bi bi-file-text"></i> {{ .Title }}</h3>
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | truncate 100 }}{{ end }}</p>
+    <div class="card-meta">
+      {{ if .Date }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="tag-list">
+        {{ range first 3 . }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}

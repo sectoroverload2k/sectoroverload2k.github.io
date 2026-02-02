@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+
+<article class="wiki-article">
+  <header>
+    <h1 class="page-title"><i class="bi bi-file-text"></i> {{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="page-subtitle">{{ . }}</p>
+    {{ end }}
+    <p class="page-subtitle">
+      {{ if .Date }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">Last updated: {{ .Date.Format "January 2, 2006" }}</time>
+      {{ end }}
+      {{ with .Params.tags }}
+      <span class="separator">|</span>
+      {{ range . }}
+      <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{ end }}
+      {{ end }}
+    </p>
+  </header>
+
+  <!-- Table of Contents -->
+  {{ if .TableOfContents }}
+  <nav class="toc">
+    <h4><i class="bi bi-list-ul"></i> Contents</h4>
+    {{ .TableOfContents }}
+  </nav>
+  {{ end }}
+
+  <div class="article-content">
+    {{ .Content }}
+  </div>
+
+  <!-- Related Articles -->
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ with $related }}
+  <aside class="related-articles">
+    <h4><i class="bi bi-link-45deg"></i> Related Articles</h4>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </aside>
+  {{ end }}
+</article>
+{{ end }}

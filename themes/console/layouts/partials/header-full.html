@@ -1,0 +1,33 @@
+<!-- CRT Monitor Frame -->
+<div class="crt-monitor">
+  <!-- Corner sprites -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  <!-- Edge sprites -->
+  <div class="edge edge-top"></div>
+  <div class="edge edge-right"></div>
+  <div class="edge edge-bottom"></div>
+  <div class="edge edge-left"></div>
+
+  <!-- CRT Screen -->
+  <div class="crt-screen">
+    <!-- Vignette overlay -->
+    <div class="crt-vignette"></div>
+
+    <!-- Header -->
+    <header class="crt-header">
+      <div class="status-bar">
+        <span class="status-left">> SYSTEM INITIALIZED<span class="blink">_</span></span>
+        <span class="status-right"><span class="status-dot"></span>STATUS: ONLINE</span>
+      </div>
+      <h1 class="glitch" data-text="{{ .Site.Params.author | default "Anthony Linsday" }}">{{ .Site.Params.author | default "Anthony Linsday" }}</h1>
+      <p class="subtitle">{{ .Site.Params.role | default "Cloud Infrastructure Engineer" }}</p>
+    </header>
+
+    <hr class="header-divider">
+
+    <!-- Scrollable Content Area -->
+    <div class="crt-content-wrapper">
+      <div class="crt-content">
