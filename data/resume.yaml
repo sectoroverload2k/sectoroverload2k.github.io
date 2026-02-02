@@ -1,0 +1,101 @@
+# Resume Data
+# Used to populate homepage stats, skills grid, and highlights
+
+highlights:
+  - AWS
+  - Kubernetes
+  - Terraform
+  - Linux
+  - Docker
+  - Python
+  - OpenSearch
+  - Ansible
+
+stats:
+  - value: "15+"
+    label: "Years Experience"
+  - value: "50+"
+    label: "Projects Completed"
+  - value: "AWS"
+    label: "Certified Architect"
+  - value: "100%"
+    label: "Client Satisfaction"
+
+skills:
+  - category: "Cloud & Infrastructure"
+    items:
+      - "AWS (EC2, RDS, Lambda, S3, CloudFormation)"
+      - "Terraform & Infrastructure as Code"
+      - "Kubernetes & Container Orchestration"
+      - "Linux System Administration"
+      - "Network Architecture"
+
+  - category: "DevOps & Automation"
+    items:
+      - "CI/CD Pipelines (Jenkins, GitHub Actions)"
+      - "Ansible & Configuration Management"
+      - "Docker & Containerization"
+      - "Monitoring (ELK, OpenSearch, CloudWatch)"
+      - "Log Aggregation (Logstash, Filebeat)"
+
+  - category: "Development"
+    items:
+      - "Python, PHP, Perl"
+      - "JavaScript & Node.js"
+      - "RESTful APIs & WebSockets"
+      - "SQL (MySQL, SQL Server, PostgreSQL)"
+      - "Redis & Message Queues"
+
+  - category: "Security & Auth"
+    items:
+      - "OAuth 2.0 & OIDC"
+      - "SSL/TLS Certificate Management"
+      - "IAM & Access Control"
+      - "Network Security (iptables, VPNs)"
+      - "Security Best Practices"
+
+experience:
+  - title: "Owner / Manager"
+    company: "Carolina Brew Supply"
+    period: "Apr 2021 - May 2023"
+    highlights:
+      - "Designed and hosted POS software, integrated with e-commerce site"
+      - "Designed fault-tolerant and self-healing infrastructure using AWS CloudFormation"
+      - "Designed and implemented AWS SQS for internal printer operations"
+      - "Integrated DoorDash and Google Maps for delivery estimates"
+
+  - title: "Contractor: CloudOps Engineer"
+    company: "EverOps / Zendesk"
+    period: "Mar 2020 - Feb 2021"
+    highlights:
+      - "Used Jenkins, Kubernetes and Ansible for large scale deployments"
+      - "Worked with 100% remote team across multiple timezones"
+
+  - title: "Contractor: Senior Automation Engineer / Cloud Architect"
+    company: "Levvel"
+    period: "Jun 2019 - Mar 2020"
+    highlights:
+      - "Automated deployments for U.S Navy battleship systems"
+      - "Used AWS GovCloud to emulate SIPR and NIPR networks"
+      - "Automated cloud infrastructure builds with Ansible and Jenkins"
+
+  - title: "Senior Automation Engineer / Cloud Architect"
+    company: "Citco"
+    period: "Jan 2017 - May 2019"
+    highlights:
+      - "Automated cloud infrastructure with CloudFormation and CodePipeline"
+      - "Designed cross-region fail-over and recovery templates"
+      - "Built server provisioning portal with php/mysql"
+      - "Team lead for 3 remote engineers"
+
+education:
+  - degree: "Computer Information Systems"
+    institution: "Cape Fear Community College"
+    period: "2002 - 2006"
+
+contact:
+  email: "anthony@linsday.net"
+  phone: "(704) 466-5581"
+  github: "https://github.com/sectoroverload2k"
+  linkedin: "https://linkedin.com/in/anthonylinsday"
+  website: "https://anthonyl.com"

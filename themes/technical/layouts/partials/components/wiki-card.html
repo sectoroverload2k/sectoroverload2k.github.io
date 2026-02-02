@@ -1,0 +1,24 @@
+<article class="wiki-card card">
+  <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+  {{- with .Description }}
+  <p>{{ . }}</p>
+  {{- else }}
+  <p>{{ .Summary | truncate 150 }}</p>
+  {{- end }}
+  <div class="wiki-meta">
+    {{- with .Params.category }}
+    <span class="category">{{ . }}</span>
+    {{- end }}
+    {{- with .Params.difficulty }}
+    <span class="difficulty difficulty-{{ . | urlize }}">{{ . }}</span>
+    {{- end }}
+    <span class="date">{{ .Date.Format "Jan 2006" }}</span>
+  </div>
+  {{- if .Params.tags }}
+  <div class="tags">
+    {{- range first 3 .Params.tags }}
+    <span class="tag">{{ . }}</span>
+    {{- end }}
+  </div>
+  {{- end }}
+</article>

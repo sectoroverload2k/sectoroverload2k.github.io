@@ -1,0 +1,40 @@
+baseURL = "https://anthonyl.com/"
+relativeURLs = true
+languageCode = "en-us"
+title = "Anthony Lindsay - Cloud Architect & DevOps Engineer"
+theme = "technical"
+
+[params]
+  author = "Anthony Lindsay"
+  description = "AWS Solutions Architect with 15+ years building scalable infrastructure, automation pipelines, and cloud-native applications."
+  email = "anthony@linsday.net"
+  phone = "(704) 466-5581"
+  github = "https://github.com/sectoroverload2k"
+  linkedin = "https://linkedin.com/in/anthonylinsday"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Portfolio"
+    url = "/portfolio/"
+    weight = 2
+  [[menu.main]]
+    name = "Wiki"
+    url = "/wiki/"
+    weight = 3
+  [[menu.main]]
+    name = "Contact"
+    url = "#contact"
+    weight = 4
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    lineNumbersInTable = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

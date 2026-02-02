@@ -1,0 +1,28 @@
+<article class="project-card card">
+  {{- with .Params.icon }}
+  <div class="project-icon">{{ . }}</div>
+  {{- end }}
+  <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+  {{- with .Params.subtitle }}
+  <p class="project-subtitle">{{ . }}</p>
+  {{- else }}
+  <p class="project-subtitle">{{ .Summary | truncate 120 }}</p>
+  {{- end }}
+  <div class="project-meta-inline">
+    {{- with .Params.role }}
+    <span class="meta-tag">{{ . }}</span>
+    {{- end }}
+    {{- with .Params.status }}
+    <span class="meta-tag status-{{ . | urlize }}">{{ . }}</span>
+    {{- end }}
+  </div>
+  {{- if .Params.techStack }}
+  <div class="tech-tags">
+    {{- range $key, $value := .Params.techStack }}
+      {{- range $value }}
+      <span class="tag">{{ . }}</span>
+      {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+</article>

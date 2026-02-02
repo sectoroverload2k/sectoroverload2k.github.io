@@ -1,0 +1,7 @@
+<div class="breadcrumb">
+  <a href="{{ .Site.BaseURL }}">Home</a>
+  {{- range .Ancestors.Reverse }}
+  / <a href="{{ .Permalink }}">{{ .Title }}</a>
+  {{- end }}
+  / {{ .Title }}
+</div>

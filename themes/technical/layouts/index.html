@@ -1,0 +1,83 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <h1>{{ .Site.Params.author }}</h1>
+    <p class="subtitle">Cloud Architect & DevOps Engineer</p>
+    <p class="description">
+      {{ .Site.Params.description }}
+    </p>
+
+    <div class="tech-stack">
+      {{- range .Site.Data.resume.highlights }}
+      <span class="tech-pill">{{ . }}</span>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      {{- range .Site.Data.resume.stats }}
+      <div class="stat-item">
+        <div class="stat-number">{{ .value }}</div>
+        <div class="stat-label">{{ .label }}</div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio & Wiki Sections -->
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="section-card">
+        <div class="section-icon">&#128640;</div>
+        <h2>Portfolio</h2>
+        <p>
+          Explore my technical projects including SaaS platforms, infrastructure automation,
+          Android applications, and cloud architecture implementations. Each project includes
+          architecture diagrams, tech stack details, and lessons learned.
+        </p>
+        <a href="{{ "portfolio/" | relURL }}" class="btn">View Projects</a>
+      </div>
+
+      <div class="section-card">
+        <div class="section-icon">&#128218;</div>
+        <h2>Technical Wiki</h2>
+        <p>
+          Documentation and notes on solving complex technical problems. From OAuth implementations
+          to ELK stack configurations, iptables networking, and Kubernetes deployments.
+          Quick reference guides and deep-dives.
+        </p>
+        <a href="{{ "wiki/" | relURL }}" class="btn">Browse Wiki</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills-section">
+  <div class="container">
+    <h2 class="text-center">Technical Expertise</h2>
+    <p class="skills-subtitle">
+      Comprehensive experience across cloud infrastructure, automation, and full-stack development
+    </p>
+    <div class="grid grid-auto">
+      {{- range .Site.Data.resume.skills }}
+      <div class="skill-category">
+        <h3>{{ .category }}</h3>
+        <ul>
+          {{- range .items }}
+          <li>{{ . }}</li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{ end }}

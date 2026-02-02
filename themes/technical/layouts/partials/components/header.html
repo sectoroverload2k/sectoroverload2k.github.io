@@ -1,0 +1,17 @@
+<header class="navbar">
+  <nav class="container flex-between">
+    <a href="{{ .Site.BaseURL }}" class="logo">{{ .Site.Params.author | default "Anthony Lindsay" }}</a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links">
+      {{- range .Site.Menus.main }}
+      <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
+</header>

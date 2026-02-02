@@ -1,0 +1,12 @@
+name = "Technical"
+license = "MIT"
+licenselink = "https://github.com/sectoroverload2k/sectoroverload2k.github.io/blob/main/LICENSE"
+description = "A technical and structured portfolio theme for Hugo"
+homepage = "https://anthonyl.com"
+tags = ["portfolio", "resume", "wiki", "technical"]
+features = ["responsive", "minimal", "dark-header"]
+min_version = "0.80.0"
+
+[author]
+  name = "Anthony Lindsay"
+  homepage = "https://anthonyl.com"

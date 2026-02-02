@@ -1,0 +1,88 @@
+{{ define "main" }}
+<!-- Project Hero -->
+<section class="hero" style="padding: 4rem 0 3rem;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;">
+      <div>
+        <h1 style="font-size: 3rem;">{{ .Title }}</h1>
+        {{- with .Params.subtitle }}
+        <p class="subtitle">{{ . }}</p>
+        {{- end }}
+        <div class="project-meta">
+          {{- with .Params.role }}
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">{{ . }}</span>
+          </div>
+          {{- end }}
+          {{- with .Params.timeline }}
+          <div class="meta-item">
+            <span class="meta-label">Timeline</span>
+            <span class="meta-value">{{ . }}</span>
+          </div>
+          {{- end }}
+          {{- with .Params.status }}
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">{{ . }}</span>
+          </div>
+          {{- end }}
+        </div>
+      </div>
+      {{- with .Params.icon }}
+      <div style="font-size: 8rem;">{{ . }}</div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+{{- with .Params.stats }}
+<!-- Stats Section -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      {{- range . }}
+      <div class="stat-item">
+        <div class="stat-number">{{ .value }}</div>
+        <div class="stat-label">{{ .label }}</div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+<!-- Main Content -->
+<div class="container-narrow">
+  <article class="article" style="padding: 3rem 0;">
+    <div class="content">
+      {{ .Content }}
+    </div>
+
+    {{- with .Params.techStack }}
+    <!-- Tech Stack Section -->
+    <section class="section-alt" style="margin: 3rem -2rem; padding: 3rem 2rem; border-radius: 0.5rem;">
+      <h2>Technology Stack</h2>
+      <div class="grid grid-auto" style="margin-top: 2rem;">
+        {{- range $key, $value := . }}
+        <div class="skill-category">
+          <h3>{{ $key | humanize | title }}</h3>
+          <ul>
+            {{- range $value }}
+            <li>{{ . }}</li>
+            {{- end }}
+          </ul>
+        </div>
+        {{- end }}
+      </div>
+    </section>
+    {{- end }}
+  </article>
+</div>
+
+<footer class="footer" style="margin-top: 0;">
+  <div class="container">
+    <a href="{{ "portfolio/" | relURL }}" class="back-link">&larr; Back to Portfolio</a>
+  </div>
+</footer>
+{{ end }}

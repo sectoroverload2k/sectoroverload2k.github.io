@@ -1,0 +1,66 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero" style="padding: 4rem 0 3rem;">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    <p class="subtitle">Technical documentation and guides</p>
+    <p class="description">
+      Notes on solving complex technical problems. From OAuth implementations to ELK stack configurations,
+      iptables networking, and Kubernetes deployments. Quick reference guides and deep-dives.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {{- $sections := .Sections }}
+
+    {{- if $sections }}
+    <!-- Category Sections -->
+    <h2 style="margin-bottom: 2rem;">Categories</h2>
+    <div class="grid grid-auto" style="margin-bottom: 3rem;">
+      {{- range $sections }}
+      <article class="section-card">
+        <h3><a href="{{ .Permalink }}" style="color: inherit;">{{ .Title }}</a></h3>
+        <p>{{ .Description | default (printf "Browse %d articles" (len .RegularPages)) }}</p>
+        <div style="margin-top: 1rem;">
+          <span class="tag">{{ len .RegularPages }} {{ if eq (len .RegularPages) 1 }}article{{ else }}articles{{ end }}</span>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- /* Show all regular pages */ -}}
+    {{- $pages := .RegularPages }}
+    {{- if $pages }}
+    <h2 style="margin-bottom: 2rem;">All Articles</h2>
+    <div class="grid grid-auto">
+      {{- range $pages }}
+      <article class="card">
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        {{- with .Description }}
+        <p>{{ . }}</p>
+        {{- else }}
+        <p>{{ .Summary | truncate 150 }}</p>
+        {{- end }}
+        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem; font-size: 0.875rem; color: var(--color-text-muted);">
+          {{- with .Params.category }}
+          <span class="tag">{{ . }}</span>
+          {{- end }}
+          {{- with .Params.difficulty }}
+          <span class="tag">{{ . }}</span>
+          {{- end }}
+          <span>{{ .Date.Format "Jan 2006" }}</span>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- if and (not $sections) (not $pages) }}
+    <p style="text-align: center; color: var(--color-text-muted);">No articles yet. Check back soon!</p>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

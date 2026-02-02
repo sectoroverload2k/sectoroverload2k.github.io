@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="container-narrow">
+  {{ partial "components/breadcrumb.html" . }}
+
+  <article class="article">
+    <header class="article-header">
+      <h1 class="article-title">{{ .Title }}</h1>
+      <div class="article-meta">
+        <div class="meta-item">
+          <span>{{ .Date.Format "January 2006" }}</span>
+        </div>
+        {{- with .ReadingTime }}
+        <div class="meta-item">
+          <span>{{ . }} min read</span>
+        </div>
+        {{- end }}
+      </div>
+      {{- with .Params.tags }}
+      <div class="tags">
+        {{- range . }}
+        <span class="tag">{{ . }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+    </header>
+
+    <div class="content">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+{{ end }}
