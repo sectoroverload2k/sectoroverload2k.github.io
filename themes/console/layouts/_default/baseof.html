@@ -25,7 +25,7 @@
       <!-- Compact Header for Inner Pages -->
       <header class="crt-header crt-header-compact">
         <div class="status-bar">
-          <span class="status-left">> {{ if .IsPage }}{{ .FirstSection.Title | upper }} / {{ if eq .Parent .FirstSection }}{{ .Title | upper }}{{ else }}{{ .Parent.Title | upper }} / {{ .File.ContentBaseName | upper }}{{ end }}{{ else }}{{ if and .Parent (not .Parent.IsHome) }}{{ .Parent.Title | upper }} / {{ end }}{{ .Title | upper }}{{ end }}<span class="blink">_</span></span>
+          <span class="status-left">> SYSTEM READY<span class="blink">_</span></span>
           <span class="status-right"><span class="status-dot"></span>STATUS: ONLINE</span>
         </div>
         <div class="compact-nav">
@@ -66,5 +66,6 @@
   </div>
 
   <script src="/js/fullpage.js"></script>
+  <script src="/js/terminal-status.js"></script>
 </body>
 </html>

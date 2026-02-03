@@ -2,23 +2,23 @@
 {{ partial "breadcrumb.html" . }}
 
 <article class="wiki-article">
-  <header>
-    <h1 class="page-title"><i class="bi bi-file-text"></i> {{ .Title }}</h1>
-    {{ with .Description }}
-    <p class="page-subtitle">{{ . }}</p>
+  <h1 class="page-title"><i class="bi bi-file-text"></i> {{ .Title }}</h1>
+  {{ with .Description }}
+  <p class="page-subtitle">{{ . }}</p>
+  {{ end }}
+  {{ if or .Date .Params.tags }}
+  <p class="page-meta">
+    {{ if .Date }}
+    <time datetime="{{ .Date.Format "2006-01-02" }}">Last updated: {{ .Date.Format "January 2, 2006" }}</time>
     {{ end }}
-    <p class="page-subtitle">
-      {{ if .Date }}
-      <time datetime="{{ .Date.Format "2006-01-02" }}">Last updated: {{ .Date.Format "January 2, 2006" }}</time>
-      {{ end }}
-      {{ with .Params.tags }}
-      <span class="separator">|</span>
-      {{ range . }}
-      <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-      {{ end }}
-      {{ end }}
-    </p>
-  </header>
+    {{ with .Params.tags }}
+    <span class="separator">|</span>
+    {{ range . }}
+    <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    {{ end }}
+    {{ end }}
+  </p>
+  {{ end }}
 
   <!-- Table of Contents -->
   {{ if .TableOfContents }}

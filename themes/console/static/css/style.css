@@ -25,6 +25,11 @@
   --corner-size: 38px;
 }
 
+/* Global visited link styles - keep green, no purple */
+a:visited {
+  color: inherit;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -1132,6 +1137,20 @@ body::before {
       0 0 12px var(--accent-green),
       0 0 24px var(--glow-green);
   }
+}
+
+/* Offline status dot - empty circle */
+.status-dot.offline {
+  background: transparent;
+  border: 1px solid var(--fp-dim-green, #338855);
+  box-shadow: none;
+  animation: none;
+}
+
+/* Status right alignment */
+.status-right {
+  min-width: 140px;
+  text-align: left;
 }
 
 /* Responsive */

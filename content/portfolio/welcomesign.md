@@ -3,7 +3,7 @@ title: "WelcomeSign"
 subtitle: "Multi-platform digital guest experience platform transforming vacation rental TVs into intelligent information hubs and revenue centers"
 date: 2024-01-15
 draft: false
-icon: "&#128250;"
+icon: "tv"
 role: "Founder & Lead Architect"
 timeline: "2024 - Present"
 status: "Active Development"

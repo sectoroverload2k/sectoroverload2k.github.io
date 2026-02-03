@@ -121,9 +121,9 @@
 
     <!-- Portfolio Panel -->
     <section class="panel portfolio">
-      <h2 class="panel-title">Portfolio <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <h2 class="panel-title"><a href="/portfolio/">Portfolio</a> <i class="bi bi-arrow-return-left return-icon"></i></h2>
       <div class="panel-content">
-        {{ range first 3 (where .Site.RegularPages "Section" "portfolio") }}
+        {{ range first 5 (where .Site.RegularPages "Section" "portfolio") }}
         <div class="project-item">
           <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
           <p>{{ .Description | default .Summary | truncate 100 }}</p>
@@ -142,6 +142,7 @@
           <p>Terraform modules and Ansible playbooks for repeatable cloud deployments.</p>
         </div>
         {{ end }}
+        <a href="/portfolio/" class="see-more">> See more</a>
       </div>
     </section>
 

@@ -1,12 +1,10 @@
 {{ define "main" }}
 {{ partial "breadcrumb.html" . }}
 
-<header>
-  <h1 class="page-title">{{ .Title }}</h1>
-  {{ with .Description }}
-  <p class="page-subtitle">{{ . }}</p>
-  {{ end }}
-</header>
+<h1 class="page-title">{{ .Title }}</h1>
+{{ with .Description }}
+<p class="page-subtitle">{{ . }}</p>
+{{ end }}
 
 {{ with .Content }}
 <div class="article-content">

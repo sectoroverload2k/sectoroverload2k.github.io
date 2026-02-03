@@ -4,6 +4,7 @@ description: "Configure port forwarding and hairpin NAT (NAT loopback) on a Linu
 date: 2025-11-15
 draft: false
 category: "Networking"
+icon: "router"
 difficulty: "Intermediate"
 toc: true
 tags:

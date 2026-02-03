@@ -17,3 +17,11 @@
 - name: "Terraform"
   icon: "layers"
   level: 88
+
+- name: "PHP"
+  icon: "filetype-php"
+  level: 100
+
+- name: "MySQL"
+  icon: "database"
+  level: 100

@@ -1,20 +1,56 @@
 /* Inner Pages - Styles for pages within CRT frame */
 
+/* Global link visited state - keep green, no purple */
+a:visited {
+  color: inherit;
+}
+
+.terminal-breadcrumb a:visited {
+  color: var(--fp-green);
+}
+
+.article-content a:visited {
+  color: var(--fp-bright-green);
+}
+
+.card:visited,
+.card:visited h3 {
+  color: var(--fp-bright-green);
+}
+
+.card:visited p {
+  color: var(--fp-dim-green);
+}
+
+.tag:visited {
+  color: var(--fp-bright-green);
+}
+
+.toc a:visited,
+.related-articles a:visited {
+  color: var(--fp-green);
+}
+
+.page-navigation a:visited .title {
+  color: var(--fp-bright-green);
+}
+
 /* Compact Header inside CRT */
 .crt-header-compact {
   padding: 1rem 3rem 1.5rem;
 }
 
 .crt-header-compact .status-bar {
-  top: 8px;
-  padding: 0 30px;
+  top: 12px;
+  padding: 0 50px;
+  margin-bottom: 1.5rem;
 }
 
 .crt-header-compact .compact-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .crt-header-compact .site-title {
@@ -53,8 +89,10 @@
   font-size: 0.8rem;
   color: var(--fp-green);
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   padding: 0.5rem 1rem;
-  border: 1px solid transparent;
+  border: 1px solid var(--fp-green);
   transition: all 0.2s ease;
 }
 
@@ -84,29 +122,64 @@
   margin: 0 auto;
 }
 
-/* Breadcrumb */
-.breadcrumb {
+/* Terminal Breadcrumb */
+.terminal-breadcrumb {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fp-dim-green);
+  font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 204, 119, 0.3);
 }
 
-.breadcrumb a {
-  color: var(--fp-green);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.breadcrumb a:hover {
+.terminal-breadcrumb .prompt {
   color: var(--fp-bright-green);
   text-shadow: 0 0 8px var(--fp-glow-green);
 }
 
-.breadcrumb .separator {
+.terminal-breadcrumb a {
+  color: var(--fp-green);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.terminal-breadcrumb a:hover {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 10px var(--fp-glow-green);
+}
+
+.terminal-breadcrumb .separator {
+  color: var(--fp-dim-green);
+}
+
+.terminal-breadcrumb .current {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+  letter-spacing: 0.05em;
+}
+
+.terminal-breadcrumb .blink {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+}
+
+/* Page Meta (date, tags) */
+.page-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fp-dim-green);
+  margin-bottom: 1.5rem;
+}
+
+.page-meta time {
+  color: var(--fp-green);
+}
+
+.page-meta .separator {
+  margin: 0 0.5rem;
   color: var(--fp-dim-green);
 }
 
@@ -294,7 +367,6 @@
   box-shadow:
     0 0 8px rgba(0, 255, 136, 0.4),
     0 0 15px rgba(0, 255, 136, 0.2);
-  transform: translateY(-2px);
 }
 
 .card h3 {

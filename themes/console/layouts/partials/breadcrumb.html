@@ -1,10 +1,22 @@
-<!-- Breadcrumb Navigation -->
-<nav class="breadcrumb">
-  <a href="/">Home</a>
-  {{ range .Ancestors.Reverse }}
-  <span class="separator">/</span>
-  <a href="{{ .Permalink }}">{{ .Title }}</a>
+<!-- Terminal-style Breadcrumb Navigation -->
+<nav class="terminal-breadcrumb">
+  <span class="prompt">></span>
+  {{ if .IsPage }}
+    <a href="{{ .FirstSection.Permalink }}">{{ .FirstSection.Title | upper }}</a>
+    <span class="separator">/</span>
+    {{ if eq .Parent .FirstSection }}
+      <span class="current">{{ .Title | upper }}</span>
+    {{ else }}
+      <a href="{{ .Parent.Permalink }}">{{ .Parent.Title | upper }}</a>
+      <span class="separator">/</span>
+      <span class="current">{{ .File.ContentBaseName | upper }}</span>
+    {{ end }}
+  {{ else }}
+    {{ if and .Parent (not .Parent.IsHome) }}
+      <a href="{{ .Parent.Permalink }}">{{ .Parent.Title | upper }}</a>
+      <span class="separator">/</span>
+    {{ end }}
+    <span class="current">{{ .Title | upper }}</span>
   {{ end }}
-  <span class="separator">/</span>
-  <span>{{ .Title }}</span>
+  <span class="blink">_</span>
 </nav>

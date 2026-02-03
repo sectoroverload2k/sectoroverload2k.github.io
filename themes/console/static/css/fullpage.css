@@ -19,6 +19,24 @@ html, body {
   --fp-glow-green: rgba(0, 255, 136, 0.5);
 }
 
+/* Global visited link styles - keep green, no purple */
+a:visited {
+  color: inherit;
+}
+
+.contact-link:visited {
+  color: var(--fp-bright-green);
+}
+
+.tag:visited {
+  color: var(--fp-bright-green);
+}
+
+.project-item a:visited,
+.project-item a:visited h3 {
+  color: var(--fp-bright-green);
+}
+
 body {
   font-family: var(--font-mono);
   background: #050508;
@@ -644,6 +662,15 @@ body > .scanlines {
   text-shadow: 0 0 10px var(--fp-glow-green);
 }
 
+.crt-content .panel-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.crt-content .panel-title a:hover {
+  text-shadow: 0 0 15px var(--fp-glow-green), 0 0 25px var(--fp-glow-green);
+}
+
 /* Primary text - green without glow (was white/light grey) */
 .crt-content .panel-content,
 .crt-content .panel-content p,
@@ -665,6 +692,37 @@ body > .scanlines {
 .crt-content .project-item h3 {
   color: var(--fp-bright-green);
   text-shadow: 0 0 8px var(--fp-glow-green);
+}
+
+/* Project links - bright green */
+.crt-content .project-item a {
+  color: var(--fp-bright-green);
+  text-decoration: none;
+}
+
+.crt-content .project-item a:hover {
+  text-shadow: 0 0 10px var(--fp-glow-green);
+}
+
+/* See more button */
+.crt-content .see-more {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--fp-bright-green);
+  color: var(--fp-bright-green);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  transition: all 0.2s ease;
+}
+
+.crt-content .see-more:hover {
+  background: rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 12px var(--fp-glow-green);
+  box-shadow: 0 0 10px var(--fp-glow-green);
 }
 
 /* Year badges - bright green with glow */

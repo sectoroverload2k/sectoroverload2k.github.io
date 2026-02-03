@@ -1,8 +1,8 @@
 {{ define "main" }}
-<header>
-  <h1 class="page-title"><i class="bi bi-journal-code"></i> Wiki</h1>
-  <p class="page-subtitle">Technical documentation, guides, and knowledge base articles</p>
-</header>
+{{ partial "breadcrumb.html" . }}
+
+<h1 class="page-title"><i class="bi bi-journal-code"></i> {{ .Title }}</h1>
+<p class="page-subtitle">Technical documentation, guides, and knowledge base articles</p>
 
 {{ with .Content }}
 <div class="article-content">

@@ -224,9 +224,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   animatePanels();
 
-  // CRT screen power-on effect
+  // CRT screen power-on effect (homepage only)
   const crtScreen = document.querySelector('.crt-screen');
-  if (crtScreen) {
+  const isHomepage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+  if (crtScreen && isHomepage) {
     crtScreen.style.opacity = '0';
     crtScreen.style.transform = 'scaleY(0.01)';
     crtScreen.style.transition = 'none';

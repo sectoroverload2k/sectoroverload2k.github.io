@@ -2,38 +2,36 @@
 {{ partial "breadcrumb.html" . }}
 
 <article class="project-article">
-  <header>
-    <h1 class="page-title">
-      {{ with .Params.icon }}<i class="bi bi-{{ . }}"></i> {{ end }}
-      {{ .Title }}
-    </h1>
-    {{ with .Description }}
-    <p class="page-subtitle">{{ . }}</p>
-    {{ end }}
+  <h1 class="page-title">
+    {{ with .Params.icon }}<i class="bi bi-{{ . }}"></i> {{ end }}
+    {{ .Title }}
+  </h1>
+  {{ with .Description }}
+  <p class="page-subtitle">{{ . }}</p>
+  {{ end }}
 
-    <!-- Project Links -->
-    <div class="project-links" style="margin-top: 1rem;">
-      {{ with .Params.github }}
-      <a href="{{ . }}" target="_blank" rel="noopener" class="tag" style="text-decoration: none;">
-        <i class="bi bi-github icon"></i> View on GitHub
-      </a>
-      {{ end }}
-      {{ with .Params.demo }}
-      <a href="{{ . }}" target="_blank" rel="noopener" class="tag" style="text-decoration: none;">
-        <i class="bi bi-box-arrow-up-right icon"></i> Live Demo
-      </a>
-      {{ end }}
-    </div>
-
-    <!-- Tech Stack -->
-    {{ with .Params.tech }}
-    <div class="tag-list" style="margin-top: 1rem;">
-      {{ range . }}
-      <span class="tag">{{ . }}</span>
-      {{ end }}
-    </div>
+  <!-- Project Links -->
+  <div class="project-links" style="margin-top: 1rem;">
+    {{ with .Params.github }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="tag" style="text-decoration: none;">
+      <i class="bi bi-github icon"></i> View on GitHub
+    </a>
     {{ end }}
-  </header>
+    {{ with .Params.demo }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="tag" style="text-decoration: none;">
+      <i class="bi bi-box-arrow-up-right icon"></i> Live Demo
+    </a>
+    {{ end }}
+  </div>
+
+  <!-- Tech Stack -->
+  {{ with .Params.tech }}
+  <div class="tag-list" style="margin-top: 1rem;">
+    {{ range . }}
+    <span class="tag">{{ . }}</span>
+    {{ end }}
+  </div>
+  {{ end }}
 
   <div class="article-content">
     {{ .Content }}
