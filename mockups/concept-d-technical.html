@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Linsday — Cloud Architect &amp; Technical Founder</title>
+<meta name="description" content="AWS Solutions Architect and technical founder. Infrastructure that scales, products that ship, and field notes from production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== CONCEPT D — "TECHNICAL CREDIBILITY (terminal-tasteful)" =====
+     Clean light base, mono accents, code-block proof. Evolves the console theme
+     without scaring non-technical buyers. Static MOCKUP — [bracketed] = placeholder. */
+  :root{
+    --paper:#fcfdfe;--paper-2:#f1f5f9;--panel:#0d1521;--panel-2:#111c2e;
+    --ink:#0f1b2d;--ink-2:#3b4a60;--muted:#6b7a90;--line:#dde4ee;
+    --green:#16a34a;--cyan:#0891b2;--blue:#2563eb;--amber:#b45309;
+    --term-green:#3ddc84;--term-cyan:#33d6e0;--term-dim:#7fa6b8;
+    --mono:'JetBrains Mono',ui-monospace,monospace;--sans:'IBM Plex Sans',system-ui,sans-serif;
+    --radius:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink-2);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{color:var(--ink);line-height:1.14;letter-spacing:-.01em}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.04em;color:var(--cyan)}
+  .eyebrow::before{content:"$ ";color:var(--green)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.93rem;padding:.8rem 1.4rem;border-radius:var(--radius);transition:.18s;font-family:var(--mono)}
+  .btn-primary{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+  .btn-primary:hover{background:var(--blue);border-color:var(--blue)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);background:#fff}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(252,253,254,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--mono);font-weight:700;color:var(--ink)}
+  .brand .mark{width:28px;height:28px;border-radius:7px;background:var(--panel);color:var(--term-green);display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:.95rem}
+  .brand .cursor{color:var(--green);animation:blink 1.1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  nav.links{display:flex;gap:1.9rem;font-family:var(--mono);font-size:.86rem;color:var(--ink-2)}
+  nav.links a:hover{color:var(--blue)}
+  @media(max-width:780px){nav.links{display:none}}
+
+  .hero{padding:80px 0 56px}
+  .hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:50px;align-items:center}
+  .hero h1{font-size:clamp(2.3rem,4.4vw,3.4rem);font-weight:700;margin:16px 0 18px}
+  .hero h1 .hl{color:var(--blue)}
+  .hero p.lede{font-size:1.14rem;max-width:38ch}
+  .hero-cta{display:flex;gap:14px;margin:28px 0 24px;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:.78rem}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--ink-2);padding:.25rem .6rem;border-radius:6px}
+  .chip b{color:var(--green)}
+  /* terminal card with photo */
+  .hero-term{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(15,27,45,.3);background:var(--panel)}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--panel-2);border-bottom:1px solid rgba(255,255,255,.07)}
+  .term-bar .d{width:11px;height:11px;border-radius:50%}
+  .term-bar .d.r{background:#ff5f57}.term-bar .d.y{background:#febc2e}.term-bar .d.g{background:#28c840}
+  .term-bar .t{margin-left:8px;font-family:var(--mono);font-size:.78rem;color:var(--term-dim)}
+  .hero-term .portrait{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;object-position:top center}
+  .term-body{font-family:var(--mono);font-size:.82rem;color:var(--term-green);padding:14px 16px;background:var(--panel);line-height:1.8}
+  .term-body .c{color:var(--term-dim)}
+  .term-body .v{color:var(--term-cyan)}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:38px}}
+
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2)}
+  .strip-inner{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;padding:18px 0;font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+  .strip-inner span::before{content:"› ";color:var(--green)}
+
+  section.block{padding:76px 0}
+  .sec-head{max-width:620px;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;margin:10px 0}
+  .sec-head p{font-size:1.04rem}
+
+  .ventures{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .vcard{border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;transition:.18s}
+  .vcard:hover{transform:translateY(-4px);box-shadow:0 16px 32px -18px rgba(15,27,45,.28);border-color:#c4cedd}
+  .vcard .head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--paper-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+  .vcard .head .st{color:var(--green)}
+  .vcard .body{padding:20px 18px}
+  .vcard h3{font-size:1.2rem;font-family:var(--mono)}
+  .vcard p{font-size:.94rem;margin:10px 0 16px}
+  .tags{display:flex;gap:7px;flex-wrap:wrap}
+  .tag{font-family:var(--mono);font-size:.72rem;color:var(--ink-2);background:var(--paper-2);padding:.2rem .5rem;border-radius:5px}
+  .vlink{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:.85rem;color:var(--blue)}
+  .vlink::after{content:" →"}
+  @media(max-width:860px){.ventures{grid-template-columns:1fr}}
+
+  .work{background:var(--panel);border-radius:14px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;color:#aebed3}
+  .work .eyebrow{color:var(--term-cyan)}
+  .work .eyebrow::before{color:var(--term-green)}
+  .work h2{color:#fff;font-size:1.9rem}
+  .work p{margin:14px 0 20px;color:#94a6bf}
+  .codeblock{background:#0a121e;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px;font-family:var(--mono);font-size:.82rem;line-height:1.9}
+  .codeblock .k{color:var(--term-cyan)}.codeblock .n{color:#ffd479}.codeblock .c{color:#5c7186}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .metric .n{font-family:var(--mono);font-size:1.7rem;font-weight:700;color:var(--term-green)}
+  .metric .l{font-size:.78rem;color:#7e91ab}
+  @media(max-width:860px){.work{grid-template-columns:1fr;padding:28px}}
+
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .acard{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:22px;transition:.18s;position:relative}
+  .acard::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;background:var(--cyan);border-radius:3px;opacity:0;transition:.18s}
+  .acard:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(15,27,45,.25)}
+  .acard:hover::before{opacity:1}
+  .acard .cat{font-family:var(--mono);font-size:.74rem;color:var(--cyan)}
+  .acard h3{font-size:1.06rem;margin:8px 0 10px}
+  .acard p{font-size:.9rem}
+  .acard .meta{margin-top:12px;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+  @media(max-width:860px){.articles{grid-template-columns:1fr}}
+
+  .cta{border:1px solid var(--line);border-radius:14px;background:var(--paper-2);padding:50px;text-align:center}
+  .cta h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;max-width:22ch;margin:0 auto 14px}
+  .cta p{max-width:52ch;margin:0 auto 26px;font-size:1.06rem}
+  .cta .prompt{font-family:var(--mono);color:var(--green);font-size:.85rem;margin-bottom:18px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-family:var(--mono);font-size:.84rem}
+  .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .foot-inner a:hover{color:var(--blue)}
+  .ribbon{background:var(--panel);color:var(--term-green);text-align:center;font-family:var(--mono);font-size:.78rem;padding:8px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="ribbon"># STATIC CONCEPT MOCKUP — "Technical Credibility" direction · placeholder copy in [brackets] · review only</div>
+
+<header class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="#"><span class="mark">A</span> anthonyl<span class="cursor">_</span></a>
+  <nav class="links"><a href="#ventures">./ventures</a><a href="#work">./work</a><a href="#articles">./writing</a><a href="#">./about</a></nav>
+  <a class="btn btn-primary" href="#cta">work_with_me</a>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow">whoami</span>
+    <h1>Cloud infrastructure that scales — and the <span class="hl">products</span> that run on it.</h1>
+    <p class="lede">AWS Solutions Architect &amp; technical founder, 20+ years in production. I design resilient systems, ship the SaaS built on them, and write up what I learn.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#cta">./book-consult</a>
+      <a class="btn btn-ghost" href="#ventures">cat ventures.md</a>
+    </div>
+    <div class="chips">
+      <span class="chip"><b>✓</b> AWS Certified SA</span>
+      <span class="chip"><b>✓</b> 20+ yrs prod</span>
+      <span class="chip"><b>✓</b> 4 live ventures</span>
+      <span class="chip"><b>✓</b> Charlotte, NC</span>
+    </div>
+  </div>
+  <div class="hero-term">
+    <div class="term-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="t">~/anthony — zsh</span></div>
+    <img class="portrait" src="assets/anthony-headshot.png" alt="Anthony Linsday">
+    <div class="term-body">
+      <div><span class="c">$</span> status --now</div>
+      <div>building: <span class="v">YonderSim</span> <span class="c"># live</span></div>
+      <div>advisory: <span class="v">open</span> · resp &lt; <span class="v">24h</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="strip"><div class="wrap strip-inner">
+  <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>PostgreSQL</span><span>Node.js</span><span>Python</span><span>Linux</span>
+</div></div>
+
+<section class="block wrap" id="ventures">
+  <div class="sec-head"><span class="eyebrow">ls ./ventures</span><h2>Products I’ve founded &amp; operate</h2>
+  <p>Live SaaS with real users — built on infrastructure I architected myself.</p></div>
+  <div class="ventures">
+    <div class="vcard"><div class="head"><span>yondersim</span><span class="st">● live</span></div>
+      <div class="body"><h3>YonderSim</h3><p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">saas</span><span class="tag">simulation</span><span class="tag">aws</span></div>
+      <a class="vlink" href="#">case_study</a></div></div>
+    <div class="vcard"><div class="head"><span>faultworx</span><span class="st">● live</span></div>
+      <div class="body"><h3>FaultWorx</h3><p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">reliability</span><span class="tag">monitoring</span><span class="tag">devops</span></div>
+      <a class="vlink" href="#">case_study</a></div></div>
+    <div class="vcard"><div class="head"><span>purgemail</span><span class="st">● live</span></div>
+      <div class="body"><h3>PurgeMail</h3><p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">email</span><span class="tag">privacy</span><span class="tag">api</span></div>
+      <a class="vlink" href="#">case_study</a></div></div>
+  </div>
+</section>
+
+<section class="block wrap" id="work"><div class="work">
+  <div><span class="eyebrow">cat case-study/welcomesign</span><h2>WelcomeSign</h2>
+    <p>Multi-platform digital guest-experience platform turning vacation-rental TVs into intelligent info hubs and revenue centers. Founder &amp; lead architect.</p>
+    <div class="metrics">
+      <div class="metric"><div class="n">[6]</div><div class="l">platforms</div></div>
+      <div class="metric"><div class="n">[99.9%]</div><div class="l">uptime SLA</div></div>
+      <div class="metric"><div class="n">[—]</div><div class="l">real KPI</div></div>
+    </div>
+  </div>
+  <div class="codeblock">
+    <div><span class="c"># stack.tf</span></div>
+    <div><span class="k">module</span> <span class="n">"welcomesign"</span> {</div>
+    <div>&nbsp;&nbsp;frontend = <span class="n">"react+ts"</span></div>
+    <div>&nbsp;&nbsp;backend&nbsp; = <span class="n">"node+postgres"</span></div>
+    <div>&nbsp;&nbsp;cloud&nbsp;&nbsp;&nbsp;= <span class="n">"aws"</span></div>
+    <div>&nbsp;&nbsp;scaling&nbsp;= <span class="n">"auto"</span></div>
+    <div>}</div>
+  </div>
+</div></section>
+
+<section class="block wrap" id="articles">
+  <div class="sec-head"><span class="eyebrow">grep -r ./writing</span><h2>Field notes from production</h2>
+  <p>Deep technical guides — the content that brings engineering teams to my door.</p></div>
+  <div class="articles">
+    <div class="acard"><div class="cat">// networking</div><h3>Linux Router: Port Forwarding &amp; Hairpin NAT with iptables</h3><p>Copy-paste walkthrough for NAT loopback on a Linux router.</p><div class="meta">intermediate · 12m</div></div>
+    <div class="acard"><div class="cat">// terraform</div><h3>Reusable AWS infrastructure with Terraform</h3><p>Module &amp; cross-account patterns that survive production.</p><div class="meta">advanced · 16m</div></div>
+    <div class="acard"><div class="cat">// architecture</div><h3>[Next flagship guide — high-intent keyword]</h3><p>[The article that ranks and converts.]</p><div class="meta">coming_soon</div></div>
+  </div>
+</section>
+
+<section class="block wrap" id="cta"><div class="cta">
+  <div class="prompt">$ ./hire anthony --engagement</div>
+  <h2>Senior cloud architecture, without the full-time hire.</h2>
+  <p>A small number of advisory and build engagements each quarter — infrastructure, migrations, automation, and product architecture.</p>
+  <a class="btn btn-primary" href="mailto:anthony@linsday.net">book a 30-min consult →</a>
+</div></section>
+
+<footer><div class="wrap foot-inner">
+  <div>© 2026 anthony linsday · charlotte, nc</div>
+  <div style="display:flex;gap:22px"><a href="mailto:anthony@linsday.net">email</a><a href="#">linkedin</a><a href="#">github</a></div>
+</div></footer>
+</body>
+</html>

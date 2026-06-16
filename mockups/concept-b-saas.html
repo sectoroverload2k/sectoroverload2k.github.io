@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Linsday — Technical Founder &amp; Cloud Architect</title>
+<meta name="description" content="Technical founder and AWS Solutions Architect running a portfolio of SaaS ventures. I design the infrastructure and ship the product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== CONCEPT B — "PRODUCT STUDIO / MODERN SAAS" =====
+     Dark, vivid gradients, product-forward. Founder-with-a-portfolio energy.
+     Static MOCKUP — [bracketed] copy is placeholder. */
+  :root{
+    --bg:#0a0b18;--bg-2:#10122a;--card:#15173a;--card-2:#1a1d44;
+    --line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.14);
+    --txt:#e7e8f5;--txt-2:#a6a9c8;--muted:#6f7398;
+    --violet:#7c5cff;--blue:#2f6bff;--cyan:#24d6e0;--pink:#ff5ca8;
+    --grad:linear-gradient(120deg,var(--violet),var(--blue) 55%,var(--cyan));
+    --radius:18px;--sans:'Plus Jakarta Sans',system-ui,sans-serif;--disp:'Space Grotesk',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--txt-2);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{color:var(--txt);font-family:var(--disp);line-height:1.1;letter-spacing:-.02em}
+  .gradtext{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;padding:.85rem 1.5rem;border-radius:12px;transition:.18s}
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 30px -8px rgba(124,92,255,.6)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line-2);color:var(--txt)}
+  .btn-ghost:hover{background:rgba(255,255,255,.05)}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(10,11,24,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--disp);font-weight:700;color:#fff;font-size:1.1rem}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700}
+  nav.links{display:flex;gap:2rem;font-size:.93rem;font-weight:500}
+  nav.links a:hover{color:var(--txt)}
+  @media(max-width:780px){nav.links{display:none}}
+
+  .hero{position:relative;padding:96px 0 70px}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(640px 360px at 78% 6%,rgba(124,92,255,.28),transparent 60%),
+    radial-gradient(560px 320px at 12% 0%,rgba(36,214,224,.16),transparent 60%);pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.2fr .9fr;gap:54px;align-items:center}
+  .hero .badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--txt);border:1px solid var(--line-2);background:rgba(255,255,255,.04);padding:.4rem .8rem;border-radius:999px}
+  .hero .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  .hero h1{font-size:clamp(2.5rem,5vw,3.8rem);font-weight:700;margin:20px 0}
+  .hero p.lede{font-size:1.18rem;max-width:36ch}
+  .hero-cta{display:flex;gap:14px;margin:30px 0 28px;flex-wrap:wrap}
+  .stats{display:flex;gap:30px;flex-wrap:wrap}
+  .stats .s .n{font-family:var(--disp);font-size:1.5rem;font-weight:700;color:#fff}
+  .stats .s .l{font-size:.8rem;color:var(--muted)}
+  .hero-photo{position:relative}
+  .hero-photo .portrait{width:100%;border-radius:20px;display:block;aspect-ratio:4/5;object-fit:cover;object-position:top center;border:1px solid var(--line-2);box-shadow:0 30px 70px -20px rgba(124,92,255,.5)}
+  .hero-photo::before{content:"";position:absolute;inset:-2px;border-radius:22px;padding:2px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:1;pointer-events:none}
+  .float-card{position:absolute;left:-26px;bottom:24px;background:var(--card);border:1px solid var(--line-2);border-radius:14px;padding:14px 16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.6);z-index:2}
+  .float-card .t{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .float-card .b{font-family:var(--disp);font-weight:700;color:#fff;display:flex;align-items:center;gap:.5rem}
+  .float-card .live{font-size:.65rem;background:rgba(36,214,224,.15);color:var(--cyan);padding:.15rem .45rem;border-radius:999px;font-weight:700}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px}.float-card{left:0}}
+
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .strip-inner{display:flex;gap:38px;justify-content:center;flex-wrap:wrap;padding:20px 0;color:var(--muted);font-family:var(--disp);font-weight:600;letter-spacing:.04em}
+
+  section.block{padding:84px 0}
+  .sec-head{max-width:640px;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:700;margin:12px 0}
+  .sec-head p{font-size:1.06rem}
+
+  .ventures{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .vcard{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:linear-gradient(180deg,var(--card),var(--bg-2));overflow:hidden;transition:.2s}
+  .vcard::after{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;background:var(--grad);opacity:0;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:.2s}
+  .vcard:hover{transform:translateY(-5px)}
+  .vcard:hover::after{opacity:1}
+  .vcard .ico{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-size:1.4rem;background:rgba(124,92,255,.14);margin-bottom:16px}
+  .vcard h3{font-size:1.25rem}
+  .vcard p{font-size:.95rem;margin:10px 0 16px}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:.72rem;font-weight:600;color:var(--txt-2);border:1px solid var(--line-2);padding:.2rem .55rem;border-radius:7px}
+  .vlink{display:inline-block;margin-top:16px;font-weight:700;color:var(--cyan);font-size:.9rem}
+  @media(max-width:860px){.ventures{grid-template-columns:1fr}}
+
+  .work{border:1px solid var(--line);border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:
+    radial-gradient(500px 300px at 90% 10%,rgba(36,214,224,.12),transparent 60%),var(--bg-2)}
+  .work h2{font-size:2rem}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+  .metric .n{font-family:var(--disp);font-size:2rem;font-weight:700}
+  .metric .n.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metric .l{font-size:.8rem;color:var(--muted)}
+  .work-vis{background:var(--card);border:1px solid var(--line-2);border-radius:16px;height:240px;display:grid;place-items:center}
+  @media(max-width:860px){.work{grid-template-columns:1fr;padding:30px}}
+
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .acard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);transition:.2s}
+  .acard:hover{transform:translateY(-4px);border-color:var(--line-2)}
+  .acard .top{height:6px;background:var(--grad)}
+  .acard .body{padding:24px}
+  .acard .cat{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+  .acard h3{font-size:1.1rem;margin:10px 0;font-family:var(--sans);font-weight:700}
+  .acard p{font-size:.9rem}
+  .acard .meta{margin-top:14px;font-size:.8rem;color:var(--muted)}
+  @media(max-width:860px){.articles{grid-template-columns:1fr}}
+
+  .cta{position:relative;border-radius:24px;padding:60px;text-align:center;overflow:hidden;background:var(--bg-2);border:1px solid var(--line)}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(500px 260px at 50% 0%,rgba(124,92,255,.3),transparent 65%)}
+  .cta>*{position:relative}
+  .cta h2{font-size:clamp(1.9rem,3.2vw,2.6rem);max-width:20ch;margin:0 auto 14px}
+  .cta p{max-width:52ch;margin:0 auto 28px;font-size:1.08rem}
+
+  footer{border-top:1px solid var(--line);padding:42px 0;color:var(--muted);font-size:.88rem}
+  .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .foot-inner a:hover{color:var(--txt)}
+  .ribbon{background:var(--grad);color:#fff;text-align:center;font-size:.8rem;font-weight:700;padding:7px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="ribbon">◆ STATIC CONCEPT MOCKUP — “Product Studio” direction · placeholder copy in [brackets] · for review only</div>
+
+<header class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="#"><span class="mark">A</span> Anthony Linsday</a>
+  <nav class="links"><a href="#ventures">Ventures</a><a href="#work">Work</a><a href="#articles">Writing</a><a href="#">About</a></nav>
+  <a class="btn btn-primary" href="#cta">Work with me</a>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="badge"><span class="dot"></span> Currently building YonderSim</span>
+    <h1>I architect the cloud — then <span class="gradtext">ship the products</span> that live on it.</h1>
+    <p class="lede">AWS Solutions Architect &amp; technical founder. A portfolio of SaaS ventures, built and operated end to end. Available for select advisory and build engagements.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#cta">Book a consult →</a>
+      <a class="btn btn-ghost" href="#ventures">Explore the ventures</a>
+    </div>
+    <div class="stats">
+      <div class="s"><div class="n">20+</div><div class="l">years in production</div></div>
+      <div class="s"><div class="n">4</div><div class="l">active ventures</div></div>
+      <div class="s"><div class="n gradtext">[28]</div><div class="l">technical guides</div></div>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img class="portrait" src="assets/anthony-headshot.png" alt="Anthony Linsday">
+    <div class="float-card">
+      <div class="t">Now shipping</div>
+      <div class="b">YonderSim <span class="live">LIVE</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="strip"><div class="wrap strip-inner">
+  <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>PostgreSQL</span><span>Node.js</span><span>Python</span>
+</div></div>
+
+<section class="block wrap" id="ventures">
+  <div class="sec-head"><span class="eyebrow">The portfolio</span><h2>Ventures I’ve founded &amp; run</h2>
+  <p>Not a list of side projects — live SaaS products with real users, built on infrastructure I designed.</p></div>
+  <div class="ventures">
+    <div class="vcard"><div class="ico">🛰️</div><h3>YonderSim</h3>
+      <p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">SaaS</span><span class="tag">Simulation</span><span class="tag">AWS</span></div>
+      <a class="vlink" href="#">View case study →</a></div>
+    <div class="vcard"><div class="ico">🛡️</div><h3>FaultWorx</h3>
+      <p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">Reliability</span><span class="tag">Monitoring</span><span class="tag">DevOps</span></div>
+      <a class="vlink" href="#">View case study →</a></div>
+    <div class="vcard"><div class="ico">✉️</div><h3>PurgeMail</h3>
+      <p>[One-line value prop — replace with real description.]</p>
+      <div class="tags"><span class="tag">Email</span><span class="tag">Privacy</span><span class="tag">API</span></div>
+      <a class="vlink" href="#">View case study →</a></div>
+  </div>
+</section>
+
+<section class="block wrap" id="work"><div class="work">
+  <div><span class="eyebrow">Selected work</span><h2>WelcomeSign</h2>
+    <p>Multi-platform digital guest-experience platform turning vacation-rental TVs into intelligent info hubs and revenue centers. Founder &amp; lead architect.</p>
+    <div class="metrics">
+      <div class="metric"><div class="n g">[6]</div><div class="l">platforms shipped</div></div>
+      <div class="metric"><div class="n g">[99.9%]</div><div class="l">uptime SLA</div></div>
+      <div class="metric"><div class="n g">[—]</div><div class="l">add real KPI</div></div>
+    </div>
+  </div>
+  <div class="work-vis">
+    <svg viewBox="0 0 200 120" fill="none" stroke="#7c5cff" stroke-width="2"><rect x="20" y="20" width="160" height="80" rx="6"/><line x1="20" y1="40" x2="180" y2="40" stroke="#2f6bff"/><circle cx="32" cy="30" r="3" fill="#24d6e0" stroke="none"/><rect x="34" y="54" width="60" height="34" rx="3" stroke="#24d6e0"/><rect x="104" y="54" width="60" height="14" rx="3"/><rect x="104" y="74" width="40" height="14" rx="3"/></svg>
+  </div>
+</div></section>
+
+<section class="block wrap" id="articles">
+  <div class="sec-head"><span class="eyebrow">Writing &amp; tutorials</span><h2>Field notes from production</h2>
+  <p>The deep technical guides that bring engineering teams to my door.</p></div>
+  <div class="articles">
+    <div class="acard"><div class="top"></div><div class="body"><div class="cat">Networking</div><h3>Linux Router: Port Forwarding &amp; Hairpin NAT with iptables</h3><p>Copy-paste walkthrough for NAT loopback on a Linux router.</p><div class="meta">Intermediate · 12 min</div></div></div>
+    <div class="acard"><div class="top"></div><div class="body"><div class="cat">Terraform</div><h3>Reusable AWS infrastructure with Terraform</h3><p>Module &amp; cross-account patterns that hold up in production.</p><div class="meta">Advanced · 16 min</div></div></div>
+    <div class="acard"><div class="top"></div><div class="body"><div class="cat">Architecture</div><h3>[Next flagship guide — high-intent keyword]</h3><p>[The article that ranks and converts.]</p><div class="meta">Coming soon</div></div></div>
+  </div>
+</section>
+
+<section class="block wrap" id="cta"><div class="cta">
+  <span class="eyebrow">Let’s build</span>
+  <h2>Senior cloud architecture, without the full-time hire.</h2>
+  <p>I take a small number of advisory and build engagements each quarter — infrastructure, migrations, automation, product architecture.</p>
+  <a class="btn btn-primary" href="mailto:anthony@linsday.net">Book a 30-min consult →</a>
+</div></section>
+
+<footer><div class="wrap foot-inner">
+  <div>© 2026 Anthony Linsday · Charlotte, NC</div>
+  <div style="display:flex;gap:22px"><a href="mailto:anthony@linsday.net">Email</a><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+</div></footer>
+</body>
+</html>

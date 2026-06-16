@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Linsday — Cloud Architect</title>
+<meta name="description" content="AWS Solutions Architect and technical founder. Resilient cloud infrastructure and the products built on it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== CONCEPT C — "QUIET LUXURY / MINIMALIST" =====
+     Whitespace, near-monochrome, one warm accent, large serif. Premium/senior.
+     Static MOCKUP — [bracketed] copy is placeholder. */
+  :root{
+    --paper:#fbfbf9;--paper-2:#f4f2ec;--ink:#16150f;--ink-2:#44423a;
+    --muted:#8c897d;--line:#e4e1d8;--accent:#9a6a3a;/* warm bronze */
+    --serif:'Newsreader',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink-2);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 32px}
+  h1,h2,h3{color:var(--ink);font-family:var(--serif);font-weight:500;line-height:1.15;letter-spacing:-.01em}
+  .eyebrow{font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .rule{width:34px;height:1px;background:var(--accent);margin:18px 0}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;font-weight:500;font-size:.92rem;padding:.8rem 1.6rem;border-radius:2px;transition:.2s;letter-spacing:.02em}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--accent)}
+  .btn-text{color:var(--ink);border-bottom:1px solid var(--accent);padding:0 0 2px;border-radius:0}
+  .btn-text:hover{color:var(--accent)}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(251,251,249,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .brand{font-family:var(--serif);font-size:1.25rem;color:var(--ink);letter-spacing:.01em}
+  .brand b{font-weight:600}
+  nav.links{display:flex;gap:2.4rem;font-size:.86rem;letter-spacing:.04em;color:var(--ink-2)}
+  nav.links a:hover{color:var(--accent)}
+  @media(max-width:780px){nav.links{display:none}}
+
+  .hero{padding:110px 0 90px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,5vw,4rem);margin:22px 0 24px}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p.lede{font-size:1.16rem;max-width:40ch;color:var(--ink-2)}
+  .hero-cta{display:flex;gap:28px;align-items:center;margin-top:34px;flex-wrap:wrap}
+  .hero-photo{position:relative}
+  .hero-photo .portrait{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:top center;filter:grayscale(100%) contrast(1.02);transition:.5s}
+  .hero-photo:hover .portrait{filter:grayscale(0%)}
+  .hero-photo .frame{position:absolute;inset:14px -14px -14px 14px;border:1px solid var(--accent);z-index:-1}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero-photo{order:-1;max-width:340px}}
+
+  .meta-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .meta-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:30px 0}
+  .meta-inner .m .n{font-family:var(--serif);font-size:1.7rem;color:var(--ink)}
+  .meta-inner .m .l{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  section.block{padding:92px 0}
+  .sec-head{margin-bottom:54px;max-width:560px}
+  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:14px}
+
+  .ventures{display:grid;grid-template-columns:1fr;gap:0}
+  .vrow{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);transition:.2s}
+  .vrow:last-child{border-bottom:1px solid var(--line)}
+  .vrow:hover{padding-left:10px}
+  .vrow .idx{font-family:var(--serif);font-size:1.1rem;color:var(--accent)}
+  .vrow h3{font-size:1.5rem;margin-bottom:6px}
+  .vrow .desc{font-size:.98rem;color:var(--ink-2);max-width:60ch}
+  .vrow .tags{margin-top:10px;font-size:.78rem;letter-spacing:.06em;color:var(--muted)}
+  .vrow .go{font-size:.86rem;color:var(--ink);white-space:nowrap;border-bottom:1px solid var(--accent);padding-bottom:2px}
+  @media(max-width:680px){.vrow{grid-template-columns:1fr;gap:8px}.vrow .go{justify-self:start}}
+
+  .work{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .work h2{font-size:2.2rem}
+  .work p{margin:16px 0 24px}
+  .work .metrics{display:flex;gap:40px;flex-wrap:wrap}
+  .work .metric .n{font-family:var(--serif);font-size:2rem;color:var(--ink)}
+  .work .metric .l{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .work-vis{aspect-ratio:4/3;background:var(--paper-2);display:grid;place-items:center;border:1px solid var(--line)}
+  @media(max-width:780px){.work{grid-template-columns:1fr;gap:32px}}
+
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+  .acard{padding:30px 26px 30px 0;border-right:1px solid var(--line);transition:.2s}
+  .acard:last-child{border-right:0}
+  .acard:hover{background:var(--paper-2);padding-left:14px}
+  .acard .cat{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .acard h3{font-size:1.2rem;margin:12px 0;font-weight:500}
+  .acard p{font-size:.92rem}
+  .acard .meta{margin-top:14px;font-size:.78rem;color:var(--muted)}
+  @media(max-width:780px){.articles{grid-template-columns:1fr}.acard{border-right:0;border-bottom:1px solid var(--line)}}
+
+  .cta{text-align:center;padding:100px 0}
+  .cta h2{font-size:clamp(2rem,3.6vw,3rem);max-width:18ch;margin:14px auto 22px}
+  .cta p{max-width:48ch;margin:0 auto 34px;font-size:1.1rem}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-size:.85rem}
+  .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .foot-inner a:hover{color:var(--accent)}
+  .ribbon{background:var(--ink);color:var(--paper);text-align:center;font-size:.78rem;font-weight:500;padding:8px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="ribbon">STATIC CONCEPT MOCKUP — “Quiet Luxury” direction · placeholder copy in [brackets] · for review only</div>
+
+<header class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="#">Anthony <b>Linsday</b></a>
+  <nav class="links"><a href="#ventures">Ventures</a><a href="#work">Work</a><a href="#articles">Writing</a><a href="#">About</a><a href="#cta">Contact</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow">Cloud Architect · Technical Founder</span>
+    <h1>Resilient infrastructure, and the products <em>built upon it.</em></h1>
+    <p class="lede">An AWS Solutions Architect with two decades in production systems — now founding and operating a small portfolio of software ventures, and advising the teams who need that depth.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#cta">Request a consultation</a>
+      <a class="btn btn-text" href="#ventures">View the work</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <span class="frame"></span>
+    <img class="portrait" src="assets/anthony-headshot.png" alt="Anthony Linsday">
+  </div>
+</div></section>
+
+<div class="meta-bar"><div class="wrap meta-inner">
+  <div class="m"><div class="n">20+</div><div class="l">Years in production</div></div>
+  <div class="m"><div class="n">AWS</div><div class="l">Certified Solutions Architect</div></div>
+  <div class="m"><div class="n">4</div><div class="l">Active ventures</div></div>
+  <div class="m"><div class="n">Charlotte</div><div class="l">North Carolina</div></div>
+</div></div>
+
+<section class="block wrap" id="ventures">
+  <div class="sec-head"><span class="eyebrow">Portfolio</span><h2>A selected portfolio of ventures.</h2></div>
+  <div class="ventures">
+    <div class="vrow"><span class="idx">01</span>
+      <div><h3>YonderSim</h3><div class="desc">[One-line value prop — replace with real description.]</div><div class="tags">SaaS · Simulation · AWS</div></div>
+      <a class="go" href="#">Case study →</a></div>
+    <div class="vrow"><span class="idx">02</span>
+      <div><h3>FaultWorx</h3><div class="desc">[One-line value prop — replace with real description.]</div><div class="tags">Reliability · Monitoring · DevOps</div></div>
+      <a class="go" href="#">Case study →</a></div>
+    <div class="vrow"><span class="idx">03</span>
+      <div><h3>PurgeMail</h3><div class="desc">[One-line value prop — replace with real description.]</div><div class="tags">Email · Privacy · API</div></div>
+      <a class="go" href="#">Case study →</a></div>
+  </div>
+</section>
+
+<section class="block wrap" id="work"><div class="work">
+  <div><span class="eyebrow">Selected work</span><h2>WelcomeSign</h2>
+    <p>A multi-platform digital guest-experience platform — turning vacation-rental televisions into intelligent information hubs and revenue centers. Founder &amp; lead architect.</p>
+    <div class="metrics">
+      <div class="metric"><div class="n">[6]</div><div class="l">Platforms</div></div>
+      <div class="metric"><div class="n">[99.9%]</div><div class="l">Uptime</div></div>
+      <div class="metric"><div class="n">[—]</div><div class="l">Real KPI</div></div>
+    </div>
+  </div>
+  <div class="work-vis">
+    <svg width="60%" viewBox="0 0 200 120" fill="none" stroke="#9a6a3a" stroke-width="1.5"><rect x="20" y="20" width="160" height="80" rx="2"/><line x1="20" y1="40" x2="180" y2="40"/><rect x="34" y="54" width="60" height="34" rx="2"/><rect x="104" y="54" width="60" height="14" rx="2"/><rect x="104" y="74" width="40" height="14" rx="2"/></svg>
+  </div>
+</div></section>
+
+<section class="block wrap" id="articles">
+  <div class="sec-head"><span class="eyebrow">Writing</span><h2>Notes from production.</h2></div>
+  <div class="articles">
+    <div class="acard"><div class="cat">Networking</div><h3>Port Forwarding &amp; Hairpin NAT with iptables</h3><p>A precise walkthrough for NAT loopback on a Linux router.</p><div class="meta">Intermediate · 12 min</div></div>
+    <div class="acard"><div class="cat">Terraform</div><h3>Reusable AWS infrastructure with Terraform</h3><p>Patterns for modules and cross-account deployments.</p><div class="meta">Advanced · 16 min</div></div>
+    <div class="acard"><div class="cat">Architecture</div><h3>[Next flagship guide]</h3><p>[The article that ranks and converts.]</p><div class="meta">Forthcoming</div></div>
+  </div>
+</section>
+
+<section class="cta wrap">
+  <span class="eyebrow">Engagements</span>
+  <h2>A few engagements each quarter.</h2>
+  <p>Infrastructure design, migrations, automation, and product architecture — for teams that need senior depth without a full-time hire.</p>
+  <a class="btn btn-primary" href="mailto:anthony@linsday.net">Request a consultation</a>
+</section>
+
+<footer><div class="wrap foot-inner">
+  <div>© 2026 Anthony Linsday</div>
+  <div style="display:flex;gap:24px"><a href="mailto:anthony@linsday.net">Email</a><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+</div></footer>
+</body>
+</html>
