@@ -62,7 +62,11 @@
   .hero-cta{display:flex;gap:14px;margin:30px 0 26px;flex-wrap:wrap}
   .trustbar{display:flex;align-items:center;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:.83rem;font-weight:600;letter-spacing:.02em}
   .trustbar .sep{width:1px;height:16px;background:var(--line)}
-  .hero-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+  .hero-photo{position:relative}
+  .hero-photo .portrait{width:100%;border-radius:18px;display:block;box-shadow:var(--shadow);background:var(--paper-2);aspect-ratio:4/5;object-fit:cover;object-position:top center}
+  .hero-photo::before{content:"";position:absolute;inset:-14px -14px 28px 28px;background:linear-gradient(135deg,rgba(47,107,255,.10),rgba(11,184,166,.08));border-radius:22px;z-index:-1}
+  .hero-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;position:absolute;left:-28px;bottom:-26px;width:78%;max-width:340px}
+  @media(max-width:860px){.hero-card{position:static;width:100%;left:0;bottom:0;margin-top:18px}.hero-photo::before{display:none}}
   .hero-card .row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);font-size:.92rem}
   .hero-card .row:last-child{border-bottom:0}
   .hero-card .k{color:var(--muted)}
@@ -165,12 +169,14 @@
         <span>Charlotte, NC</span>
       </div>
     </div>
-    <div class="hero-card">
-      <div class="row"><span class="k">Currently building</span><span class="v">YonderSim <span class="pill">live</span></span></div>
-      <div class="row"><span class="k">Specialty</span><span class="v">AWS · Kubernetes · Automation</span></div>
-      <div class="row"><span class="k">Advisory</span><span class="v">Fractional Cloud Architect</span></div>
-      <div class="row"><span class="k">Writing</span><span class="v">[28] technical guides</span></div>
-      <div class="row"><span class="k">Response time</span><span class="v">&lt; 24 hrs</span></div>
+    <div class="hero-photo">
+      <img class="portrait" src="assets/anthony-headshot.png" alt="Anthony Linsday">
+      <div class="hero-card">
+        <div class="row"><span class="k">Currently building</span><span class="v">YonderSim <span class="pill">live</span></span></div>
+        <div class="row"><span class="k">Specialty</span><span class="v">AWS · Automation</span></div>
+        <div class="row"><span class="k">Advisory</span><span class="v">Fractional Architect</span></div>
+        <div class="row"><span class="k">Response</span><span class="v">&lt; 24 hrs</span></div>
+      </div>
     </div>
   </div>
 </section>
