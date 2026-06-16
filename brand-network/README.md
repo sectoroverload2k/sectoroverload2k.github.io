@@ -15,13 +15,15 @@ with real numbers/clients before publishing. Nothing here is live; it lives only
                          │  sends leads down ↓     ↑ sends trust/authority up
                          ▼
                   choosetriton.com  ── THE UMBRELLA HUB (commercial front door)
-        ┌──────────────┬──────────────┬───────────────┬────────────────┐
-        ▼            ▼            ▼            ▼            ▼            ▼
-  Triton        RewardPads    Triton       Cloud /      Network/      Email / SaaS
-  Processing    (loyalty,     Agency (AI)  Infra (AWS)  Phone/Host    (Triton Email,
-  (payments)    formerly
-  RewardPads) tritonag.ai               =PazNetworks   Startup Email)
-  tritonproc.   tritonrewards                               (partner)
+   ┌───────────────┬───────────────┬──────────────┬───────────────┬──────────────┐
+   ▼               ▼               ▼              ▼               ▼              ▼
+ Triton          Triton          Triton         Cloud /        Network/       Email / SaaS
+ Processing      Rewards         Agency (AI)    Infra (AWS)    Phone/Host     (Triton Email,
+ (payments)      (loyalty;       tritonag.ai                   = PazNetworks   Startup Email)
+ tritonproc.     formerly                                       (partner)
+                 RewardPads)
+
+ — MERCHANT STACK (launch #1): Triton Processing + Triton Rewards [+ Triton POS, deferred] —
 ```
 
 ## Contents
@@ -34,7 +36,7 @@ with real numbers/clients before publishing. Nothing here is live; it lives only
 | `strategy/04-site-recommendations.md` | Per-site positioning, niche, content, proof, CTAs |
 | `sites/choosetriton/index.html` | Umbrella hub landing page |
 | `sites/tritonprocessing/index.html` | Payments spoke landing page |
-| `sites/tritonrewards/index.html` | Loyalty spoke — RewardPads rebuild ("a Triton company") |
+| `sites/tritonrewards/index.html` | Loyalty spoke — Triton Rewards (formerly RewardPads) |
 | `sites/tritonagency/index.html` | AI spoke landing page (narrowed to AI-only) |
 | `sites/anthonyl/README.md` | Pointer to the chosen anthonyl.com concept (see `/mockups`) |
 
