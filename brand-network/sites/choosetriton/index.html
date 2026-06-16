@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triton — Payments, Technology &amp; Infrastructure for Multi-Location Operators</title>
+<meta name="description" content="One partner for payments, cloud, software, and IT — across every location. Triton runs the technology for multi-site operators, with network partner PazNetworks handling everything physical.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  /* ChooseTriton — UMBRELLA HUB. Navy + signal blue (family base). Static mockup; [ ] = placeholder. */
+  :root{
+    --ink:#0f1b2d;--ink-2:#33425a;--muted:#6b7891;--line:#e6e9f0;
+    --paper:#fff;--paper-2:#f7f8fb;--sand:#f3efe7;
+    --blue:#2f6bff;--blue-ink:#1b4fd6;--teal:#0bb8a6;--navy:#0c1830;
+    --radius:14px;--shadow:0 1px 2px rgba(15,27,45,.06),0 12px 30px -12px rgba(15,27,45,.18);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--serif:'Fraunces',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink-2);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{color:var(--ink);line-height:1.12;letter-spacing:-.01em}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem;padding:.8rem 1.4rem;border-radius:10px;transition:.18s;border:1px solid transparent}
+  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px -8px rgba(47,107,255,.6)}
+  .btn-primary:hover{background:var(--blue-ink);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:#fff}
+  .btn-ghost:hover{border-color:var(--ink)}
+
+  /* shared Triton-network bar */
+  .netbar{background:var(--navy);color:#aab7cc;font-size:.78rem}
+  .netbar-inner{display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap;padding:8px 0}
+  .netbar a{color:#cdd8ea;font-weight:600}
+  .netbar a:hover{color:#fff}
+  .netbar .here{color:#fff;border-bottom:2px solid var(--blue);padding-bottom:2px}
+  .netbar .lbl{color:#6f7f97;letter-spacing:.12em;text-transform:uppercase;font-size:.7rem}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--ink);font-size:1.1rem;letter-spacing:-.02em}
+  .brand .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--navy),var(--blue));display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:600}
+  nav.links{display:flex;gap:1.9rem;font-size:.93rem;font-weight:500}
+  nav.links a:hover{color:var(--blue)}
+  @media(max-width:820px){nav.links{display:none}}
+
+  .hero{padding:80px 0 56px;background:radial-gradient(900px 380px at 85% -10%,rgba(47,107,255,.08),transparent 60%)}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.5rem);font-weight:800;margin:16px 0 18px;max-width:18ch}
+  .hero h1 .accent{font-family:var(--serif);font-weight:600;font-style:italic;color:var(--blue)}
+  .hero p.lede{font-size:1.18rem;max-width:60ch}
+  .hero-cta{display:flex;gap:14px;margin:30px 0 26px;flex-wrap:wrap}
+  .trust{display:flex;gap:20px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:.84rem;font-weight:600}
+  .trust .sep{width:1px;height:15px;background:var(--line)}
+
+  .badges{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2)}
+  .badges-inner{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;padding:22px 0}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;color:var(--ink-2);border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px}
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+
+  section.block{padding:78px 0}
+  .sec-head{max-width:640px;margin-bottom:42px}
+  .sec-head h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;margin:10px 0}
+  .sec-head p{font-size:1.06rem}
+
+  .services{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .scard{display:flex;gap:18px;border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:#fff;transition:.2s}
+  .scard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#d4dbe8}
+  .scard .ico{flex:0 0 48px;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;background:var(--sand)}
+  .scard h3{font-size:1.18rem;display:flex;align-items:center;gap:.5rem}
+  .scard p{font-size:.94rem;margin:8px 0 12px}
+  .scard .go{font-weight:600;color:var(--blue);font-size:.9rem}
+  .scard .go::after{content:" →"}
+  .scard .ext{font-size:.72rem;color:var(--muted);font-weight:600;border:1px solid var(--line);padding:.1rem .45rem;border-radius:6px;margin-left:auto}
+  @media(max-width:760px){.services{grid-template-columns:1fr}}
+
+  /* land-and-expand flow */
+  .flow{background:var(--navy);color:#bcc9dd;border-radius:20px;padding:46px}
+  .flow h2{color:#fff;font-size:1.9rem;margin-bottom:8px}
+  .flow .eyebrow{color:var(--teal)}
+  .flow p.sub{color:#93a3bd;margin-bottom:28px;max-width:60ch}
+  .chain{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .step{flex:1;min-width:150px;background:#12233d;border:1px solid #20324f;border-radius:12px;padding:18px;position:relative;margin:6px}
+  .step .n{font-family:var(--serif);color:var(--teal);font-size:.9rem}
+  .step h4{color:#fff;font-size:1rem;margin:4px 0 6px}
+  .step span{font-size:.8rem;color:#8fa1bd}
+  .step .who{display:inline-block;margin-top:8px;font-size:.7rem;font-weight:700;color:#cdd8ea;background:#0c1830;border:1px solid #20324f;padding:.15rem .5rem;border-radius:6px}
+
+  /* case study */
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;border:1px solid var(--line);border-radius:20px;padding:44px;background:var(--paper-2)}
+  .case h2{font-size:2rem}
+  .case p{margin:14px 0}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+  .metric .n{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--ink)}
+  .metric .l{font-size:.78rem;color:var(--muted)}
+  .case ul{list-style:none;font-size:.92rem}
+  .case ul li{padding:6px 0 6px 24px;position:relative}
+  .case ul li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+  @media(max-width:820px){.case{grid-template-columns:1fr;padding:30px}}
+
+  /* founder */
+  .founder{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:30px;background:#fff}
+  .founder img{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid var(--paper-2)}
+  .founder h3{font-size:1.2rem}
+  .founder p{font-size:.96rem;margin-top:6px}
+  .founder a{color:var(--blue);font-weight:600}
+  @media(max-width:560px){.founder{grid-template-columns:1fr;text-align:center}.founder img{margin:0 auto}}
+
+  /* partner */
+  .partner{display:flex;align-items:center;gap:24px;border:1px dashed var(--line);border-radius:16px;padding:26px;background:var(--paper-2);flex-wrap:wrap}
+  .partner .pmark{width:54px;height:54px;border-radius:12px;background:#0c1830;color:#fff;display:grid;place-items:center;font-weight:800;font-family:var(--serif)}
+  .partner h3{font-size:1.1rem}
+  .partner p{font-size:.92rem}
+  .partner .btn{margin-left:auto}
+
+  .cta{background:var(--sand);border-radius:20px;padding:54px;text-align:center}
+  .cta h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;max-width:20ch;margin:0 auto 14px}
+  .cta p{max-width:54ch;margin:0 auto 26px;font-size:1.08rem}
+
+  footer{border-top:1px solid var(--line);padding:42px 0;color:var(--muted);font-size:.88rem}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}
+  .foot-grid a:hover{color:var(--blue)}
+  .ribbon{background:var(--blue);color:#fff;text-align:center;font-size:.8rem;font-weight:600;padding:7px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="ribbon">◆ STATIC LANDING-PAGE MOCKUP — choosetriton.com (umbrella hub) · placeholder copy in [brackets] · review only</div>
+
+<!-- Shared Triton network bar (cross-linking) -->
+<div class="netbar"><div class="wrap netbar-inner">
+  <span class="lbl">Triton network</span>
+  <a class="here">Triton</a>
+  <a href="../tritonprocessing/index.html">Payments</a>
+  <a href="../tritonagency/index.html">AI Agency</a>
+  <a href="#">PazNetworks ↗</a>
+  <a href="#">anthonyl.com ↗</a>
+</div></div>
+
+<header class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="#"><span class="mark">T</span> Triton</a>
+  <nav class="links"><a href="#services">What we do</a><a href="#flow">How it works</a><a href="#case">Case study</a><a href="#founder">About</a></nav>
+  <a class="btn btn-primary" href="#cta">Free assessment</a>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <span class="eyebrow">For multi-location operators</span>
+  <h1>One partner for payments, technology &amp; infrastructure — <span class="accent">across every location.</span></h1>
+  <p class="lede">Triton runs the payments, cloud, software, and IT for multi-site operators — and our network partner PazNetworks handles everything physical: cabling, phones, surveillance, and on-site hands. One relationship. Every site. One number to call.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#cta">Get a free assessment →</a>
+    <a class="btn btn-ghost" href="#services">See what we do</a>
+  </div>
+  <div class="trust">
+    <span>Registered ISO of North American Bancard</span><span class="sep"></span>
+    <span>AWS-built infrastructure</span><span class="sep"></span>
+    <span>Network partner: PazNetworks</span><span class="sep"></span>
+    <span>[N]+ locations served</span>
+  </div>
+</div></section>
+
+<!-- PROOF BADGES -->
+<div class="badges"><div class="wrap badges-inner">
+  <span class="badge"><span class="dot"></span> North American Bancard ISO</span>
+  <span class="badge"><span class="dot"></span> Wells Fargo · BMO Harris · Citizens</span>
+  <span class="badge"><span class="dot"></span> AWS Partner <em style="color:var(--muted);font-style:normal">[in progress]</em></span>
+  <span class="badge"><span class="dot"></span> PazNetworks — network &amp; AV</span>
+  <span class="badge"><span class="dot"></span> Visa · Mastercard · Amex · Discover</span>
+</div></div>
+
+<!-- SERVICES (routing cards) -->
+<section class="block wrap" id="services">
+  <div class="sec-head"><span class="eyebrow">What we do</span><h2>Everything that powers a location — routed to the right team</h2>
+  <p>You get one partner and one point of contact. Behind it, each need goes to the specialists who do it best.</p></div>
+  <div class="services">
+    <a class="scard" href="../tritonprocessing/index.html">
+      <div class="ico">💳</div>
+      <div><h3>Payments <span class="ext">Triton Processing</span></h3>
+      <p>Merchant processing that typically saves businesses 40%+ a month. POS, e-commerce, mobile, virtual terminal, Clover.</p>
+      <span class="go">Explore payments</span></div>
+    </a>
+    <a class="scard" href="../tritonagency/index.html">
+      <div class="ico">🤖</div>
+      <div><h3>AI &amp; Software <span class="ext">Triton Agency</span></h3>
+      <p>Autonomous AI agents, custom AI development, automation, and integrations for businesses going digital.</p>
+      <span class="go">Explore AI</span></div>
+    </a>
+    <a class="scard" href="#cta">
+      <div class="ico">☁️</div>
+      <div><h3>Cloud &amp; Infrastructure</h3>
+      <p>AWS architecture, automation, migrations, email infrastructure, hosting, and managed support — built by a 20-yr AWS architect.</p>
+      <span class="go">Talk to us</span></div>
+    </a>
+    <a class="scard" href="#partner">
+      <div class="ico">🔌</div>
+      <div><h3>Network · Phone · Hosting <span class="ext">PazNetworks</span></h3>
+      <p>Structured cabling, business phone systems, surveillance, access control, and on-site installation — coast to coast.</p>
+      <span class="go">Meet our partner</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- LAND & EXPAND FLOW -->
+<section class="block wrap" id="flow"><div class="flow">
+  <span class="eyebrow">Why one partner</span>
+  <h2>The whole money-flow of your business, handled.</h2>
+  <p class="sub">Most vendors do one slice. We cover the chain — so adding the next piece is a conversation, not a new vendor search.</p>
+  <div class="chain">
+    <div class="step"><div class="n">01</div><h4>Take payments</h4><span>Processing &amp; POS</span><div class="who">Triton Processing</div></div>
+    <div class="step"><div class="n">02</div><h4>Wire the site</h4><span>Network, phones, cameras</span><div class="who">PazNetworks</div></div>
+    <div class="step"><div class="n">03</div><h4>Run the cloud</h4><span>AWS infra &amp; email</span><div class="who">Triton</div></div>
+    <div class="step"><div class="n">04</div><h4>Build the software</h4><span>Site &amp; AI agents</span><div class="who">Triton Agency</div></div>
+  </div>
+</div></section>
+
+<!-- CASE STUDY -->
+<section class="block wrap" id="case"><div class="case">
+  <div>
+    <span class="eyebrow">Flagship case study</span>
+    <h2>Carolina Brew Supply</h2>
+    <p>A single retail + e-commerce business, run end-to-end on the Triton stack — the proof that one partner can cover the whole chain.</p>
+    <div class="metrics">
+      <div class="metric"><div class="n">[—]</div><div class="l">orders automated</div></div>
+      <div class="metric"><div class="n">[—]</div><div class="l">% delivery uplift</div></div>
+      <div class="metric"><div class="n">[—]</div><div class="l">fees saved</div></div>
+    </div>
+  </div>
+  <div>
+    <ul>
+      <li>Hosted POS integrated with the e-commerce site</li>
+      <li>Triton Processing credit-card integration on POS + online</li>
+      <li>Fault-tolerant, self-healing AWS infrastructure (CloudFormation)</li>
+      <li>AWS SQS automation for kitchen tickets, shipping labels &amp; pick tickets</li>
+      <li>Custom DoorDash + Google Maps same-day delivery module</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- FOUNDER -->
+<section class="block wrap" id="founder"><div class="founder">
+  <img src="../../assets/anthony-headshot.png" alt="Anthony Linsday">
+  <div>
+    <span class="eyebrow">Who's behind Triton</span>
+    <h3>Founded by Anthony Linsday — AWS Certified Solutions Architect</h3>
+    <p>20+ years building resilient cloud infrastructure, automation pipelines, and the products that run on them. Triton is the consulting arm; the engineering depth is real and hands-on. <a href="#">Read Anthony's work &amp; technical guides →</a></p>
+  </div>
+</div></section>
+
+<!-- PARTNER -->
+<section class="block wrap" id="partner"><div class="partner">
+  <div class="pmark">PN</div>
+  <div>
+    <h3>Network, phone &amp; hosting by PazNetworks</h3>
+    <p>Our trusted partner for everything physical — structured cabling, business phone systems, video surveillance, access control, and nationwide on-site installation.</p>
+  </div>
+  <a class="btn btn-ghost" href="#">Visit PazNetworks ↗</a>
+</div></section>
+
+<!-- CTA -->
+<section class="block wrap" id="cta"><div class="cta">
+  <span class="eyebrow">No-obligation</span>
+  <h2>Get a free technology &amp; payments assessment.</h2>
+  <p>We'll review your current setup across payments, cloud, software, and IT — and show you where you're overpaying or exposed. One conversation, every location.</p>
+  <a class="btn btn-primary" href="mailto:team@choosetriton.com">Book my free assessment →</a>
+</div></section>
+
+<footer><div class="wrap foot-grid">
+  <div>© 2026 Triton · A Triton network company<br>team@choosetriton.com · +1 844-777-0881</div>
+  <div style="display:flex;gap:22px">
+    <a href="../tritonprocessing/index.html">Payments</a>
+    <a href="../tritonagency/index.html">AI Agency</a>
+    <a href="#">PazNetworks ↗</a>
+    <a href="#">anthonyl.com ↗</a>
+  </div>
+</div></footer>
+</body>
+</html>
