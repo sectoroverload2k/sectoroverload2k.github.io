@@ -86,29 +86,32 @@ for enterprises."
 
 ---
 
-## 3b. rewardpads.com — LOYALTY SPOKE (endorsed brand: "a Triton company")
+## 3b. tritonrewards.com — LOYALTY SPOKE (branded house; formerly RewardPads)
 
-**Real asset, not invented.** RewardPads is Anthony's existing loyalty/engagement product
-(digital punch-card replacement + SMS/email marketing + POS/WiFi integration). It **did $65k+/mo
-at peak** and is the real product behind ChatGPT's "Triton Rewards" concept. The live site is
-dated (~2016), neglected, has no pricing, and no Triton branding.
+**Decision (updated):** RewardPads has been **dead since 2016** — no live traffic, customers, or
+rankings to protect — and Anthony has **purchased tritonrewards.com**. So the earlier "keep the
+name" call is reversed: **rebrand to Triton Rewards** (branded house) for merchant-stack cohesion
+(*Triton Processing + Triton POS + Triton Rewards*). Keep rewardpads.com and **301-redirect it to
+tritonrewards.com** to catch any residual links/branded searches.
 
-**Branding decision (made):** **Keep the RewardPads name** and bring it under the umbrella as an
-*endorsed brand* — "RewardPads, a Triton company" — rather than renaming to "Triton Rewards."
-Rationale: preserve ~10 years of domain SEO/backlinks, existing-customer recognition, and the
-revenue brand equity. Cohesion comes from the shared design system + family bar + endorsement
-line, not from forcing a "Triton X" name. This makes the family a hybrid: branded house
-(Triton-native: Processing, Agency) + endorsed brand (RewardPads).
+**Publicity ("acquisition") — do the honest version.** Don't stage an arm's-length M&A to
+manufacture buzz (it's a related-party transfer; trade press will see through it and it's a
+credibility risk). The truthful, *stronger* story is a **founder revival**: "Triton acquired the
+RewardPads platform and relaunches it as Triton Rewards, now integrated with Triton payments &
+POS." Channels: a founder-story post on anthonyl.com ("Why I'm reviving the loyalty platform I
+built in 2016"), local Charlotte/NC small-business press, the merchant-stack launch announcement,
+and a reactivation email to any old RewardPads list. **Keep the $65k/mo strictly past-tense**
+("at its peak," "previously processed") so every claim stays true.
 
-**Why it matters strategically:** RewardPads + Triton Processing + POS form the **merchant stack**
-— payments → POS → loyalty — which is the SMB/restaurant land-and-expand engine and is literally
-the **Carolina Brew Supply** story (Anthony integrated RewardPads loyalty + Triton processing
-there). The $65k/mo figure is *real* proof that should replace invented vanity stats network-wide.
+**Real (past-tense) proof:** $65k+/mo at peak as RewardPads; live since 2016; phone-only signup;
+SMS/email marketing built in. Mock: `sites/tritonrewards/index.html`.
 
-**Rebuild priorities:** modern design in the family style; add pricing tiers; clarify POS/payments
-integration; add real trust (the $65k/mo peak, locations powered); fix the founder-name spelling
-("Anthony **Linsday**", not "Lindsay"); keep the strong "phone-number-only signup" and "14-day free
-trial + 100 SMS" hooks. Mock: `sites/rewardpads/index.html`.
+## 3c. POS — DEFERRED (KloudPOS, dormant)
+
+The POS brand (kloudpos.com) is **parked/dormant** — no live equity. Per the brand-architecture
+rule, the merchant stack is a branded house, so POS would become **Triton POS** (buy tritonpos.com,
+301 kloudpos.com). **Decision: defer.** Launch Processing + Triton Rewards first to prove the
+merchant stack, then decide the POS brand. Do not build a POS landing page yet.
 
 ## 4. anthonyl.com — PERSONAL BRAND (already mocked up)
 
