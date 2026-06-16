@@ -86,6 +86,30 @@ for enterprises."
 
 ---
 
+## 3b. rewardpads.com — LOYALTY SPOKE (endorsed brand: "a Triton company")
+
+**Real asset, not invented.** RewardPads is Anthony's existing loyalty/engagement product
+(digital punch-card replacement + SMS/email marketing + POS/WiFi integration). It **did $65k+/mo
+at peak** and is the real product behind ChatGPT's "Triton Rewards" concept. The live site is
+dated (~2016), neglected, has no pricing, and no Triton branding.
+
+**Branding decision (made):** **Keep the RewardPads name** and bring it under the umbrella as an
+*endorsed brand* — "RewardPads, a Triton company" — rather than renaming to "Triton Rewards."
+Rationale: preserve ~10 years of domain SEO/backlinks, existing-customer recognition, and the
+revenue brand equity. Cohesion comes from the shared design system + family bar + endorsement
+line, not from forcing a "Triton X" name. This makes the family a hybrid: branded house
+(Triton-native: Processing, Agency) + endorsed brand (RewardPads).
+
+**Why it matters strategically:** RewardPads + Triton Processing + POS form the **merchant stack**
+— payments → POS → loyalty — which is the SMB/restaurant land-and-expand engine and is literally
+the **Carolina Brew Supply** story (Anthony integrated RewardPads loyalty + Triton processing
+there). The $65k/mo figure is *real* proof that should replace invented vanity stats network-wide.
+
+**Rebuild priorities:** modern design in the family style; add pricing tiers; clarify POS/payments
+integration; add real trust (the $65k/mo peak, locations powered); fix the founder-name spelling
+("Anthony **Linsday**", not "Lindsay"); keep the strong "phone-number-only signup" and "14-day free
+trial + 100 SMS" hooks. Mock: `sites/rewardpads/index.html`.
+
 ## 4. anthonyl.com — PERSONAL BRAND (already mocked up)
 
 Stays personal: about, projects (YonderSim, FaultWorx, PurgeMail, WelcomeSign, ShotBotz), and the

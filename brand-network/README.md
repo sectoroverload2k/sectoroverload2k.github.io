@@ -16,11 +16,11 @@ with real numbers/clients before publishing. Nothing here is live; it lives only
                          ▼
                   choosetriton.com  ── THE UMBRELLA HUB (commercial front door)
         ┌──────────────┬──────────────┬───────────────┬────────────────┐
-        ▼              ▼              ▼               ▼                ▼
-  Triton           Triton          Cloud /        Network/Phone/     Email / SaaS
-  Processing       Agency (AI)     Infra (AWS)    Hosting            (Triton Email,
-  (payments)       tritonagency.ai                = PazNetworks       Startup Email)
-  tritonprocessing                                  (partner)
+        ▼            ▼            ▼            ▼            ▼            ▼
+  Triton        RewardPads    Triton       Cloud /      Network/      Email / SaaS
+  Processing    (loyalty,     Agency (AI)  Infra (AWS)  Phone/Host    (Triton Email,
+  (payments)    a Triton co.) tritonag.ai               =PazNetworks   Startup Email)
+  tritonproc.   rewardpads                               (partner)
 ```
 
 ## Contents
@@ -33,6 +33,7 @@ with real numbers/clients before publishing. Nothing here is live; it lives only
 | `strategy/04-site-recommendations.md` | Per-site positioning, niche, content, proof, CTAs |
 | `sites/choosetriton/index.html` | Umbrella hub landing page |
 | `sites/tritonprocessing/index.html` | Payments spoke landing page |
+| `sites/rewardpads/index.html` | Loyalty spoke — RewardPads rebuild ("a Triton company") |
 | `sites/tritonagency/index.html` | AI spoke landing page (narrowed to AI-only) |
 | `sites/anthonyl/README.md` | Pointer to the chosen anthonyl.com concept (see `/mockups`) |
 

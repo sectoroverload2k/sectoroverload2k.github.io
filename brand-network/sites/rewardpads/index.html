@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RewardPads — Customer Loyalty &amp; Engagement That Brings Them Back</title>
+<meta name="description" content="RewardPads turns one-time customers into regulars — digital loyalty, SMS &amp; email marketing, and automated win-backs that integrate with your POS and payments. A Triton company.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+  /* RewardPads — LOYALTY SPOKE (endorsed brand: "a Triton company"). Family navy + MAGENTA accent. */
+  :root{
+    --ink:#0f1b2d;--ink-2:#33425a;--muted:#6b7891;--line:#e6e9f0;
+    --paper:#fff;--paper-2:#fdf6fb;--navy:#0c1830;
+    --mag:#c2348b;--mag-ink:#a01f70;--mag-soft:#fbe9f4;--gold:#e0a52e;--blue:#2f6bff;
+    --radius:14px;--shadow:0 1px 2px rgba(15,27,45,.06),0 12px 30px -12px rgba(15,27,45,.18);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--serif:'Fraunces',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink-2);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{color:var(--ink);line-height:1.12;letter-spacing:-.01em}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mag)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem;padding:.85rem 1.5rem;border-radius:10px;transition:.18s;border:1px solid transparent}
+  .btn-primary{background:var(--mag);color:#fff;box-shadow:0 8px 20px -8px rgba(194,52,139,.55)}
+  .btn-primary:hover{background:var(--mag-ink);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:#fff}
+  .btn-ghost:hover{border-color:var(--ink)}
+
+  .netbar{background:var(--navy);color:#aab7cc;font-size:.78rem}
+  .netbar-inner{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0}
+  .netbar a{color:#cdd8ea;font-weight:600}.netbar a:hover{color:#fff}
+  .netbar .here{color:#fff;border-bottom:2px solid var(--mag);padding-bottom:2px}
+  .netbar .lbl{color:#6f7f97;letter-spacing:.12em;text-transform:uppercase;font-size:.7rem}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--ink);font-size:1.05rem;letter-spacing:-.02em}
+  .brand .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--mag-ink),var(--mag));display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:600}
+  .brand small{font-weight:600;color:var(--muted);font-size:.72rem}
+  nav.links{display:flex;gap:1.8rem;font-size:.93rem;font-weight:500}
+  nav.links a:hover{color:var(--mag)}
+  @media(max-width:860px){nav.links{display:none}}
+
+  .hero{padding:80px 0 50px;background:radial-gradient(820px 360px at 80% -10%,rgba(194,52,139,.10),transparent 60%)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .95fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(2.4rem,4.8vw,3.5rem);font-weight:800;margin:16px 0 16px}
+  .hero h1 .accent{color:var(--mag)}
+  .hero p.lede{font-size:1.18rem;max-width:38ch}
+  .hero-cta{display:flex;gap:14px;margin:28px 0 20px;flex-wrap:wrap}
+  .micro{font-size:.84rem;color:var(--muted)}
+  /* phone mock */
+  .phone{justify-self:center;width:270px;background:#0c1830;border-radius:30px;padding:12px;box-shadow:var(--shadow);border:1px solid #20324f}
+  .phone .screen{background:#fff;border-radius:20px;overflow:hidden}
+  .phone .pbar{background:var(--mag);color:#fff;padding:16px;text-align:center}
+  .phone .pbar .t{font-size:.78rem;opacity:.9}
+  .phone .pbar .pts{font-family:var(--serif);font-size:2rem;font-weight:600;line-height:1}
+  .phone .pbody{padding:14px}
+  .phone .li{display:flex;justify-content:space-between;font-size:.8rem;padding:9px 0;border-bottom:1px solid var(--line)}
+  .phone .li:last-child{border-bottom:0}
+  .phone .li .r{color:var(--mag);font-weight:700}
+  .phone .reward{margin-top:10px;background:var(--mag-soft);border:1px dashed var(--mag);border-radius:10px;padding:10px;text-align:center;font-size:.8rem;font-weight:600;color:var(--mag-ink)}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+
+  .stats{background:var(--navy);color:#cbd6e6}
+  .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:34px 0;text-align:center}
+  .stat .n{font-family:var(--serif);font-size:2rem;font-weight:600;color:#fff}
+  .stat .l{font-size:.82rem;color:#93a3bd;margin-top:2px}
+  @media(max-width:760px){.stats-inner{grid-template-columns:repeat(2,1fr);gap:24px}}
+
+  section.block{padding:74px 0}
+  .sec-head{max-width:640px;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(1.8rem,3vw,2.3rem);font-weight:800;margin:10px 0}
+  .sec-head p{font-size:1.05rem}
+
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .fcard{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff;transition:.2s}
+  .fcard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .fcard .ico{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;font-size:1.3rem;background:var(--mag-soft);margin-bottom:14px}
+  .fcard h3{font-size:1.1rem}
+  .fcard p{font-size:.92rem;margin-top:8px}
+  @media(max-width:820px){.feat{grid-template-columns:1fr}}
+
+  /* integration / merchant stack */
+  .stack{display:flex;align-items:center;gap:24px;border:1px dashed var(--line);border-radius:16px;padding:26px;background:var(--paper-2);flex-wrap:wrap}
+  .stack .ico{font-size:1.6rem}
+  .stack h3{font-size:1.1rem}
+  .stack p{font-size:.92rem}
+  .stack .btn{margin-left:auto}
+
+  /* testimonial */
+  .quote{border:1px solid var(--line);border-radius:18px;padding:40px;background:#fff;text-align:center;max-width:760px;margin:0 auto}
+  .quote .q{font-family:var(--serif);font-size:1.5rem;color:var(--ink);line-height:1.4}
+  .quote .who{margin-top:16px;font-size:.9rem;color:var(--muted);font-weight:600}
+
+  /* pricing */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .price{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:#fff;display:flex;flex-direction:column}
+  .price.feat-plan{border-color:var(--mag);box-shadow:0 12px 30px -14px rgba(194,52,139,.4);position:relative}
+  .price.feat-plan .tagp{position:absolute;top:-12px;left:24px;background:var(--mag);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;letter-spacing:.06em}
+  .price h3{font-size:1.1rem}
+  .price .amt{font-family:var(--serif);font-size:2.2rem;font-weight:600;color:var(--ink);margin:10px 0 4px}
+  .price .amt small{font-size:.9rem;color:var(--muted);font-family:var(--sans)}
+  .price ul{list-style:none;margin:16px 0;font-size:.9rem;flex:1}
+  .price ul li{padding:6px 0 6px 22px;position:relative}
+  .price ul li::before{content:"✓";position:absolute;left:0;color:var(--mag);font-weight:700}
+  @media(max-width:820px){.pricing{grid-template-columns:1fr}}
+
+  .cta{background:linear-gradient(120deg,var(--mag),var(--mag-ink));color:#fff;border-radius:20px;padding:54px;text-align:center}
+  .cta h2{color:#fff;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;max-width:20ch;margin:0 auto 14px}
+  .cta p{max-width:52ch;margin:0 auto 26px;font-size:1.06rem;color:#ffe3f2}
+  .cta .btn-primary{background:#fff;color:var(--mag-ink)}
+  .cta .btn-primary:hover{background:#ffe9f5}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:.86rem}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}
+  .foot-grid a:hover{color:var(--mag)}
+  .endorse{margin-top:14px;font-size:.8rem;color:var(--muted)}
+  .ribbon{background:var(--mag);color:#fff;text-align:center;font-size:.8rem;font-weight:600;padding:7px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="ribbon">◆ STATIC REBUILD MOCKUP — rewardpads.com (loyalty spoke · "a Triton company") · placeholder copy in [brackets] · review only</div>
+
+<div class="netbar"><div class="wrap netbar-inner">
+  <span class="lbl">Triton network</span>
+  <a href="../choosetriton/index.html">Triton</a>
+  <a href="../tritonprocessing/index.html">Payments</a>
+  <a class="here">RewardPads</a>
+  <a href="../tritonagency/index.html">AI Agency</a>
+  <a href="#">PazNetworks ↗</a>
+  <a href="#">anthonyl.com ↗</a>
+</div></div>
+
+<header class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="#"><span class="mark">R</span> RewardPads <small>a Triton company</small></a>
+  <nav class="links"><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#cta">Start free</a></nav>
+  <a class="btn btn-primary" href="#cta">Start 14-day free trial</a>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow">Customer loyalty &amp; engagement</span>
+    <h1>Turn one-time customers into <span class="accent">regulars.</span></h1>
+    <p class="lede">RewardPads replaces paper punch cards with digital loyalty, SMS &amp; email marketing, and automated win-backs — all tied to the customers you already serve. Sign up with just a phone number.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#cta">Start 14-day free trial →</a>
+      <a class="btn btn-ghost" href="#features">See features</a>
+    </div>
+    <p class="micro">No card required · 100 free SMS to start · cancel anytime</p>
+  </div>
+  <div class="phone">
+    <div class="screen">
+      <div class="pbar"><div class="t">Your rewards</div><div class="pts">250 pts</div></div>
+      <div class="pbody">
+        <div class="li"><span>Visit · Carolina Brew</span><span class="r">+25</span></div>
+        <div class="li"><span>Referral bonus</span><span class="r">+50</span></div>
+        <div class="li"><span>Birthday reward</span><span class="r">+100</span></div>
+        <div class="reward">🎁 50 more pts = free drink</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- STATS (REAL proof) -->
+<div class="stats"><div class="wrap stats-inner">
+  <div class="stat"><div class="n">$65K+/mo</div><div class="l">platform revenue at peak</div></div>
+  <div class="stat"><div class="n">[N]+</div><div class="l">locations powered</div></div>
+  <div class="stat"><div class="n">Phone-only</div><div class="l">signup — no app needed</div></div>
+  <div class="stat"><div class="n">SMS · Email</div><div class="l">built-in marketing</div></div>
+</div></div>
+
+<!-- FEATURES -->
+<section class="block wrap" id="features">
+  <div class="sec-head"><span class="eyebrow">More than loyalty</span><h2>A full suite of customer-engagement tools</h2>
+  <p>Everything you need to build a customer database and bring people back — without paper, apps, or guesswork.</p></div>
+  <div class="feat">
+    <div class="fcard"><div class="ico">📱</div><h3>Digital Loyalty</h3><p>Points and rewards that replace punch cards. Customers join with just a phone number.</p></div>
+    <div class="fcard"><div class="ico">💬</div><h3>SMS &amp; Email Marketing</h3><p>Send targeted offers and announcements across SMS, email, and social — from one place.</p></div>
+    <div class="fcard"><div class="ico">📊</div><h3>Live Reporting</h3><p>Real-time customer activity, visit tracking, and coupon-redemption analytics.</p></div>
+    <div class="fcard"><div class="ico">🎯</div><h3>Automated Win-Backs</h3><p>Automatically incentivize at-risk customers who haven't visited in a while.</p></div>
+    <div class="fcard"><div class="ico">👥</div><h3>Customer Database</h3><p>Every visit builds an owned list of customers you can reach any time.</p></div>
+    <div class="fcard"><div class="ico">🔁</div><h3>Referral Engine</h3><p>Reward customers for bringing friends — turn regulars into a growth channel.</p></div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS / MERCHANT STACK -->
+<section class="block wrap" id="integrations">
+  <div class="sec-head"><span class="eyebrow">Works with your stack</span><h2>Plugs into your POS, payments &amp; WiFi</h2>
+  <p>RewardPads is part of the Triton merchant stack — loyalty that talks to the systems already running your business.</p></div>
+  <div class="stack">
+    <span class="ico">🧩</span>
+    <div>
+      <h3>Better together with Triton Processing &amp; POS</h3>
+      <p>Run payments, point-of-sale, and loyalty as one connected system — every swipe can earn and redeem rewards automatically. Need the rest of the stack? Triton handles it.</p>
+    </div>
+    <a class="btn btn-ghost" href="../choosetriton/index.html">See the Triton merchant stack →</a>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="block wrap"><div class="quote">
+  <div class="q">“Why would you still want to use paper punch cards?”</div>
+  <div class="who">— Anthony Linsday, Founder, RewardPads</div>
+</div></section>
+
+<!-- PRICING -->
+<section class="block wrap" id="pricing">
+  <div class="sec-head"><span class="eyebrow">Pricing</span><h2>Simple plans that scale with you</h2>
+  <p>[Confirm tiers &amp; prices before publishing — placeholder structure below.]</p></div>
+  <div class="pricing">
+    <div class="price"><h3>Starter</h3><div class="amt">$[29]<small>/mo</small></div>
+      <ul><li>Digital loyalty program</li><li>[500] SMS / mo</li><li>Customer database</li><li>Basic reporting</li></ul>
+      <a class="btn btn-ghost" href="#cta">Start free</a></div>
+    <div class="price feat-plan"><span class="tagp">MOST POPULAR</span><h3>Growth</h3><div class="amt">$[79]<small>/mo</small></div>
+      <ul><li>Everything in Starter</li><li>[2,000] SMS / mo</li><li>Email + social campaigns</li><li>Automated win-backs</li><li>Referral engine</li></ul>
+      <a class="btn btn-primary" href="#cta">Start free</a></div>
+    <div class="price"><h3>Pro</h3><div class="amt">$[149]<small>/mo</small></div>
+      <ul><li>Everything in Growth</li><li>[Unlimited] SMS [add-on]</li><li>POS &amp; payments integration</li><li>Multi-location dashboard</li><li>Priority support</li></ul>
+      <a class="btn btn-ghost" href="#cta">Talk to us</a></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block wrap" id="cta"><div class="cta">
+  <span class="eyebrow" style="color:#ffd4ec">14 days free · no card</span>
+  <h2>Start bringing customers back this week.</h2>
+  <p>Set up your loyalty program in minutes and get 100 free SMS to launch your first campaign. No commitment.</p>
+  <a class="btn btn-primary" href="mailto:info@rewardpads.com?subject=RewardPads%20free%20trial">Start my free trial →</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div>© 2026 RewardPads<br>info@rewardpads.com · (888) 340-7769 · PO Box 39063, Charlotte, NC 28278</div>
+    <div style="display:flex;gap:22px">
+      <a href="../choosetriton/index.html">Triton</a>
+      <a href="../tritonprocessing/index.html">Payments</a>
+      <a href="../tritonagency/index.html">AI Agency</a>
+      <a href="#">PazNetworks ↗</a>
+      <a href="#">anthonyl.com ↗</a>
+    </div>
+  </div>
+  <p class="endorse">RewardPads is a Triton company — part of the Triton family of brands for payments, loyalty, software, and infrastructure.</p>
+</div></footer>
+</body>
+</html>
