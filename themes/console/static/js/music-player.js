@@ -58,6 +58,7 @@
   }
 
   function playIcon(btn, playing) {
+    if (!btn) return;
     var i = btn.querySelector('i');
     if (!i) return;
     i.className = playing ? 'bi bi-pause-fill' : 'bi bi-play-fill';
@@ -78,10 +79,7 @@
     var t = tracks[index];
 
     // clear previous row state
-    tracks.forEach(function (tr) {
-      tr.el.classList.remove('playing');
-      playIcon(tr.el.querySelector('.mp-track-play'), false);
-    });
+    tracks.forEach(function (tr) { tr.el.classList.remove('playing'); });
 
     current = index;
     audio.src = t.src;
@@ -186,13 +184,6 @@
       if (e.target.closest('.mp-track-play') || e.target.closest('.mp-track-share')) return;
       if (i === current) { togglePlay(); } else { load(i, true); }
     });
-    var b = t.el.querySelector('.mp-track-play');
-    if (b) {
-      b.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (i === current) { togglePlay(); } else { load(i, true); }
-      });
-    }
     var s = t.el.querySelector('.mp-track-share');
     if (s) {
       s.addEventListener('click', function (e) {
@@ -257,11 +248,11 @@
   // ---- Audio element events ----------------------------------------------
   audio.addEventListener('play', function () {
     playIcon(playBtn, true);
-    if (current > -1) playIcon(tracks[current].el.querySelector('.mp-track-play'), true);
+    app.classList.remove('paused');   // resume equalizer animation on the row
   });
   audio.addEventListener('pause', function () {
     playIcon(playBtn, false);
-    if (current > -1) playIcon(tracks[current].el.querySelector('.mp-track-play'), false);
+    app.classList.add('paused');      // freeze equalizer animation
   });
   audio.addEventListener('loadedmetadata', function () {
     durEl.textContent = fmt(audio.duration);

@@ -1,14 +1,23 @@
-{{ define "main" }}
-{{ partial "breadcrumb.html" . }}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#05080a">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:title" content="{{ .Title }} — {{ .Site.Params.author }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}Personal music library.{{ end }}">
+  <meta property="og:type" content="music.playlist">
+  <meta property="og:url" content="{{ .Permalink }}">
 
-<link rel="stylesheet" href="/css/music.css">
-
-<h1 class="page-title"><i class="bi bi-music-note-beamed"></i> {{ .Title }}</h1>
-<p class="page-subtitle">Personal audio archive // streaming from the terminal</p>
-
-{{ with .Content }}
-<div class="article-content">{{ . }}</div>
-{{ end }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/music.css">
+</head>
+<body class="music-page">
 
 {{/* ---- Build a filename -> metadata lookup from data/music.yaml ---- */}}
 {{ $meta := dict }}
@@ -60,79 +69,90 @@
 
 {{ $tracks = sort $tracks "title" }}
 
+<!-- Top bar (no site nav — just a home link + title) -->
+<header class="mp-topbar">
+  <a href="/" class="mp-home" aria-label="Back to home"><i class="bi bi-chevron-left"></i> Home</a>
+  <span class="mp-page-title"><i class="bi bi-music-note-beamed"></i> Music</span>
+  <span class="mp-count">{{ len $tracks }} {{ cond (eq (len $tracks) 1) "track" "tracks" }}</span>
+</header>
+
 {{ if gt (len $tracks) 0 }}
 <div class="music-app" data-track-count="{{ len $tracks }}">
 
-  <!-- Now Playing / Player -->
-  <div class="mp-player" id="mp-player" aria-label="Audio player">
-    <div class="mp-stage">
-      <div class="mp-cover" id="mp-cover" aria-hidden="true">
-        <i class="bi bi-music-note-beamed"></i>
-      </div>
-      <div class="mp-meta">
-        <div class="mp-eyebrow">> NOW PLAYING</div>
-        <div class="mp-title" id="mp-title">Select a track</div>
-        <div class="mp-artist" id="mp-artist">&mdash;</div>
-      </div>
-      <button class="mp-btn mp-share-current" id="mp-share" title="Share this track" aria-label="Share current track" disabled><i class="bi bi-share-fill"></i></button>
-    </div>
+  <!-- Scrollable playlist (main window) -->
+  <main class="mp-main">
+    <ol class="mp-list" id="mp-list">
+      {{ range $i, $t := $tracks }}
+      <li class="mp-track" id="track-{{ $t.slug }}" data-index="{{ $i }}"
+          data-src="{{ $t.src }}"
+          data-slug="{{ $t.slug }}"
+          data-title="{{ $t.title }}"
+          data-artist="{{ $t.artist }}"
+          data-album="{{ $t.album }}"
+          data-cover="{{ $t.cover }}">
+        <span class="mp-thumb"{{ with $t.cover }} style="background-image:url('{{ . }}')"{{ end }}>
+          <i class="bi bi-music-note"></i>
+          <i class="bi bi-play-fill mp-thumb-play"></i>
+          <span class="mp-eq"><span></span><span></span><span></span></span>
+        </span>
+        <div class="mp-track-info">
+          <span class="mp-track-title">{{ $t.title }}</span>
+          <span class="mp-track-sub">{{ with $t.artist }}{{ . }}{{ else }}Unknown artist{{ end }}{{ with $t.album }} &middot; {{ . }}{{ end }}</span>
+        </div>
+        <span class="mp-track-dur" data-src="{{ $t.src }}">--:--</span>
+        <button class="mp-track-share" aria-label="Share {{ $t.title }}" title="Share this track"><i class="bi bi-share-fill"></i></button>
+      </li>
+      {{ end }}
+    </ol>
+  </main>
 
+  <!-- Player docked to the bottom -->
+  <footer class="mp-player" id="mp-player" aria-label="Audio player">
     <div class="mp-progress">
       <span class="mp-time" id="mp-current">0:00</span>
       <input type="range" class="mp-seek" id="mp-seek" value="0" min="0" max="100" step="0.1" aria-label="Seek">
       <span class="mp-time" id="mp-duration">0:00</span>
     </div>
 
-    <div class="mp-controls">
-      <button class="mp-btn" id="mp-shuffle" title="Shuffle" aria-label="Shuffle"><i class="bi bi-shuffle"></i></button>
-      <button class="mp-btn" id="mp-prev" title="Previous" aria-label="Previous track"><i class="bi bi-skip-start-fill"></i></button>
-      <button class="mp-btn mp-btn-play" id="mp-play" title="Play" aria-label="Play"><i class="bi bi-play-fill"></i></button>
-      <button class="mp-btn" id="mp-next" title="Next" aria-label="Next track"><i class="bi bi-skip-end-fill"></i></button>
-      <button class="mp-btn" id="mp-repeat" title="Repeat" aria-label="Repeat"><i class="bi bi-repeat"></i></button>
-    </div>
+    <div class="mp-bar">
+      <div class="mp-nowplaying">
+        <span class="mp-cover" id="mp-cover" aria-hidden="true"><i class="bi bi-music-note-beamed"></i></span>
+        <span class="mp-meta">
+          <span class="mp-title" id="mp-title">Select a track</span>
+          <span class="mp-artist" id="mp-artist">&mdash;</span>
+        </span>
+      </div>
 
-    <div class="mp-volume">
-      <button class="mp-btn mp-btn-mute" id="mp-mute" title="Mute" aria-label="Mute"><i class="bi bi-volume-up-fill"></i></button>
-      <input type="range" class="mp-vol" id="mp-vol" value="100" min="0" max="100" step="1" aria-label="Volume">
+      <div class="mp-controls">
+        <button class="mp-btn mp-btn-sm" id="mp-shuffle" title="Shuffle" aria-label="Shuffle"><i class="bi bi-shuffle"></i></button>
+        <button class="mp-btn" id="mp-prev" title="Previous" aria-label="Previous track"><i class="bi bi-skip-start-fill"></i></button>
+        <button class="mp-btn mp-btn-play" id="mp-play" title="Play" aria-label="Play"><i class="bi bi-play-fill"></i></button>
+        <button class="mp-btn" id="mp-next" title="Next" aria-label="Next track"><i class="bi bi-skip-end-fill"></i></button>
+        <button class="mp-btn mp-btn-sm" id="mp-repeat" title="Repeat" aria-label="Repeat"><i class="bi bi-repeat"></i></button>
+      </div>
+
+      <div class="mp-extras">
+        <button class="mp-btn mp-btn-sm mp-share-current" id="mp-share" title="Share this track" aria-label="Share current track" disabled><i class="bi bi-share-fill"></i></button>
+        <button class="mp-btn mp-btn-sm mp-btn-mute" id="mp-mute" title="Mute" aria-label="Mute"><i class="bi bi-volume-up-fill"></i></button>
+        <input type="range" class="mp-vol" id="mp-vol" value="100" min="0" max="100" step="1" aria-label="Volume">
+      </div>
     </div>
 
     <audio id="mp-audio" preload="metadata"></audio>
-  </div>
-
-  <!-- Playlist -->
-  <ol class="mp-list" id="mp-list">
-    {{ range $i, $t := $tracks }}
-    <li class="mp-track" id="track-{{ $t.slug }}" data-index="{{ $i }}"
-        data-src="{{ $t.src }}"
-        data-slug="{{ $t.slug }}"
-        data-title="{{ $t.title }}"
-        data-artist="{{ $t.artist }}"
-        data-album="{{ $t.album }}"
-        data-cover="{{ $t.cover }}">
-      <span class="mp-num">{{ printf "%02d" (add $i 1) }}</span>
-      <button class="mp-track-play" aria-label="Play {{ $t.title }}"><i class="bi bi-play-fill"></i></button>
-      <div class="mp-track-info">
-        <span class="mp-track-title">{{ $t.title }}</span>
-        <span class="mp-track-sub">
-          {{ with $t.artist }}{{ . }}{{ else }}Unknown artist{{ end }}{{ with $t.album }} &middot; {{ . }}{{ end }}{{ with $t.year }} &middot; {{ . }}{{ end }}
-        </span>
-      </div>
-      <span class="mp-track-dur" data-src="{{ $t.src }}">--:--</span>
-      <button class="mp-track-share" aria-label="Copy share link for {{ $t.title }}" title="Share this track"><i class="bi bi-share-fill"></i></button>
-    </li>
-    {{ end }}
-  </ol>
+  </footer>
 
   <div class="mp-toast" id="mp-toast" role="status" aria-live="polite"></div>
-
 </div>
 {{ else }}
-<div class="mp-empty">
-  <i class="bi bi-music-note-list"></i>
-  <p>> NO TRACKS FOUND</p>
-  <p class="mp-empty-hint">Drop <code>.mp3</code> files into <code>static/music/</code> and they'll appear here.</p>
-</div>
+<main class="mp-main">
+  <div class="mp-empty">
+    <i class="bi bi-music-note-list"></i>
+    <p>&gt; NO TRACKS FOUND</p>
+    <p class="mp-empty-hint">Drop <code>.mp3</code> files into <code>static/music/</code> and they'll appear here.</p>
+  </div>
+</main>
 {{ end }}
 
 <script src="/js/music-player.js" defer></script>
-{{ end }}
+</body>
+</html>

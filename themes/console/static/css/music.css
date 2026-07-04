@@ -1,244 +1,191 @@
 /* ============================================================================
-   Music library + player — CRT terminal theme, mobile-first
+   Music library + player — standalone, mobile-first
+   Layout: fixed top bar · scrolling playlist (main) · docked player (footer)
    ========================================================================== */
 
-.music-app {
-  margin-top: 1.5rem;
-}
+.music-page {
+  --bg:      #05080a;
+  --bg-2:    #0a1210;
+  --green:   #00cc77;
+  --bright:  #00ff88;
+  --dim:     #3a9a68;
+  --glow:    rgba(0, 255, 136, 0.45);
+  --line:    rgba(0, 204, 119, 0.22);
+  --mono:    'Share Tech Mono', 'Courier New', monospace;
+  --display: 'Orbitron', 'Arial Black', sans-serif;
 
-/* ---- Player -------------------------------------------------------------- */
-.mp-player {
-  position: sticky;
-  top: 0.5rem;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  background: rgba(0, 15, 10, 0.92);
-  border: 1px solid var(--fp-green);
-  box-shadow: 0 0 12px rgba(0, 255, 136, 0.15);
-  backdrop-filter: blur(4px);
-}
-
-.mp-stage {
+  margin: 0;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(0, 60, 40, 0.35) 0%, transparent 60%),
+    var(--bg);
+  color: var(--green);
+  font-family: var(--mono);
+  -webkit-font-smoothing: antialiased;
 }
 
-.mp-cover {
+.music-page * { box-sizing: border-box; }
+
+/* ---- Top bar (no site nav) ---------------------------------------------- */
+.mp-topbar {
   flex: 0 0 auto;
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--fp-dim-green);
-  background: rgba(0, 255, 136, 0.06);
-  background-size: cover;
-  background-position: center;
-  color: var(--fp-dim-green);
-  font-size: 1.5rem;
-  overflow: hidden;
-}
-
-.mp-cover.has-art { color: transparent; }
-
-.mp-meta { min-width: 0; }
-
-.mp-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: var(--fp-dim-green);
-  margin-bottom: 0.15rem;
-}
-
-.mp-title {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--fp-bright-green);
-  text-shadow: 0 0 8px var(--fp-glow-green);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mp-artist {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--fp-green);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ---- Progress bar -------------------------------------------------------- */
-.mp-progress {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  padding: calc(0.55rem + env(safe-area-inset-top)) 0.9rem 0.55rem;
+  border-bottom: 1px solid var(--green);
 }
 
-.mp-time {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fp-dim-green);
-  min-width: 3ch;
-  text-align: center;
-  flex: 0 0 auto;
-}
-
-/* Range inputs (seek + volume) share the CRT slider look */
-.mp-seek, .mp-vol {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  background: rgba(0, 255, 136, 0.12);
-  border: 1px solid var(--fp-dim-green);
-  outline: none;
-  cursor: pointer;
-}
-
-.mp-seek { flex: 1 1 auto; }
-
-.mp-seek::-webkit-slider-thumb,
-.mp-vol::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: var(--fp-bright-green);
-  border: none;
-  box-shadow: 0 0 8px var(--fp-glow-green);
-  cursor: pointer;
-}
-
-.mp-seek::-moz-range-thumb,
-.mp-vol::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: var(--fp-bright-green);
-  border: none;
-  box-shadow: 0 0 8px var(--fp-glow-green);
-  cursor: pointer;
-}
-
-/* ---- Controls ------------------------------------------------------------ */
-.mp-controls {
-  display: flex;
+.mp-home {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.15rem;
+  color: var(--green);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  padding: 0.25rem 0.4rem;
+  transition: color 0.15s ease;
+}
+.mp-home:hover { color: var(--bright); text-shadow: 0 0 8px var(--glow); }
+
+.mp-page-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bright);
+  text-shadow: 0 0 10px var(--glow);
+  display: inline-flex;
+  align-items: center;
   gap: 0.4rem;
 }
 
-.mp-btn {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  background: transparent;
-  border: 1px solid var(--fp-dim-green);
-  color: var(--fp-green);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
+.mp-count {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--dim);
+  letter-spacing: 0.05em;
 }
 
-.mp-btn:hover,
-.mp-btn:focus-visible {
-  color: var(--fp-bright-green);
-  border-color: var(--fp-bright-green);
-  box-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
-  outline: none;
-}
-
-.mp-btn.active {
-  color: var(--fp-bright-green);
-  border-color: var(--fp-bright-green);
-  background: rgba(0, 255, 136, 0.1);
-}
-
-.mp-btn-play {
-  width: 52px;
-  height: 52px;
-  font-size: 1.5rem;
-  color: var(--fp-bright-green);
-  border-color: var(--fp-bright-green);
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
-}
-
-.mp-volume {
+/* ---- App column --------------------------------------------------------- */
+.music-app {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
 }
 
-.mp-volume .mp-vol { max-width: 120px; }
+/* ---- Scrolling playlist (main window) ----------------------------------- */
+.mp-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+.mp-main::-webkit-scrollbar { width: 8px; }
+.mp-main::-webkit-scrollbar-thumb {
+  background: rgba(0, 204, 119, 0.35);
+  border-radius: 4px;
+}
 
-/* ---- Playlist ------------------------------------------------------------ */
 .mp-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid rgba(0, 204, 119, 0.3);
 }
 
 .mp-track {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 0.85rem;
-  border-bottom: 1px solid rgba(0, 204, 119, 0.15);
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-
-.mp-track:last-child { border-bottom: none; }
-
-.mp-track:hover { background: rgba(0, 255, 136, 0.06); }
-
+.mp-track:active { background: rgba(0, 255, 136, 0.06); }
+@media (hover: hover) {
+  .mp-track:hover { background: rgba(0, 255, 136, 0.06); }
+}
 .mp-track.playing {
-  background: rgba(0, 255, 136, 0.1);
-  box-shadow: inset 3px 0 0 var(--fp-bright-green);
+  background: rgba(0, 255, 136, 0.09);
+  box-shadow: inset 3px 0 0 var(--bright);
 }
 
-.mp-num {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--fp-dim-green);
-  min-width: 2.2ch;
-  text-align: right;
+/* Thumbnail with cover / hover-play / equalizer-when-playing */
+.mp-thumb {
+  position: relative;
   flex: 0 0 auto;
-}
-
-.mp-track.playing .mp-num { color: var(--fp-bright-green); }
-
-.mp-track-play {
-  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  background: transparent;
-  border: 1px solid var(--fp-dim-green);
-  color: var(--fp-green);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  border: 1px solid var(--line);
+  background-color: rgba(0, 255, 136, 0.05);
+  background-size: cover;
+  background-position: center;
+  color: var(--dim);
+  font-size: 1.1rem;
+  overflow: hidden;
 }
+.mp-thumb[style] > .bi-music-note { display: none; }          /* has cover art */
 
-.mp-track:hover .mp-track-play,
-.mp-track.playing .mp-track-play {
-  color: var(--fp-bright-green);
-  border-color: var(--fp-bright-green);
+.mp-thumb-play,
+.mp-eq {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
 }
+.mp-thumb-play {
+  color: var(--bright);
+  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 8px var(--glow);
+}
+@media (hover: hover) {
+  .mp-track:hover .mp-thumb-play { display: grid; }
+}
+.mp-track.playing .mp-thumb-play { display: none !important; }
+
+/* Equalizer bars on the currently-playing row */
+.mp-eq {
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  padding-bottom: 9px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.mp-track.playing .mp-eq { display: flex; }
+.mp-eq span {
+  width: 3px;
+  height: 40%;
+  background: var(--bright);
+  box-shadow: 0 0 6px var(--glow);
+  animation: mp-eq 0.9s ease-in-out infinite;
+}
+.mp-eq span:nth-child(2) { animation-delay: 0.3s; }
+.mp-eq span:nth-child(3) { animation-delay: 0.15s; }
+@keyframes mp-eq {
+  0%, 100% { height: 25%; }
+  50%      { height: 85%; }
+}
+.music-app.paused .mp-track.playing .mp-eq span { animation-play-state: paused; }
 
 .mp-track-info {
   flex: 1 1 auto;
@@ -246,91 +193,218 @@
   display: flex;
   flex-direction: column;
 }
-
 .mp-track-title {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--fp-green);
+  font-size: 0.92rem;
+  color: var(--green);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .mp-track.playing .mp-track-title {
-  color: var(--fp-bright-green);
-  text-shadow: 0 0 6px var(--fp-glow-green);
+  color: var(--bright);
+  text-shadow: 0 0 6px var(--glow);
 }
-
 .mp-track-sub {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--fp-dim-green);
+  font-size: 0.73rem;
+  color: var(--dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .mp-track-dur {
-  font-family: var(--font-mono);
+  flex: 0 0 auto;
   font-size: 0.78rem;
-  color: var(--fp-dim-green);
-  flex: 0 0 auto;
-  min-width: 4.5ch;
+  color: var(--dim);
+  min-width: 4ch;
   text-align: right;
-}
-
-/* ---- Share affordances --------------------------------------------------- */
-.mp-share-current {
-  flex: 0 0 auto;
-  margin-left: auto;
-  width: 36px;
-  height: 36px;
-  font-size: 0.95rem;
-}
-
-.mp-share-current:disabled {
-  opacity: 0.35;
-  cursor: default;
-  box-shadow: none;
 }
 
 .mp-track-share {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background: transparent;
   border: 1px solid transparent;
-  color: var(--fp-dim-green);
+  color: var(--dim);
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
-
 .mp-track-share:hover,
 .mp-track-share:focus-visible {
-  color: var(--fp-bright-green);
-  border-color: var(--fp-bright-green);
-  box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+  color: var(--bright);
+  border-color: var(--bright);
   outline: none;
 }
 
-.mp-track.playing .mp-track-share { color: var(--fp-green); }
+/* ---- Player (docked footer) --------------------------------------------- */
+.mp-player {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0.5rem 0.9rem calc(0.6rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--green);
+  background:
+    linear-gradient(180deg, rgba(0, 20, 14, 0.6), rgba(0, 0, 0, 0.4)),
+    var(--bg-2);
+  box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.55);
+}
 
-/* Toast confirmation for "link copied" */
+.mp-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.5rem;
+}
+.mp-time {
+  font-size: 0.72rem;
+  color: var(--dim);
+  min-width: 3ch;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.mp-seek, .mp-vol {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: rgba(0, 255, 136, 0.14);
+  border: 1px solid var(--line);
+  outline: none;
+  cursor: pointer;
+}
+.mp-seek { flex: 1 1 auto; width: 100%; }
+.mp-vol  { width: 90px; }
+.mp-seek::-webkit-slider-thumb, .mp-vol::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px;
+  background: var(--bright);
+  box-shadow: 0 0 8px var(--glow);
+  cursor: pointer;
+}
+.mp-seek::-moz-range-thumb, .mp-vol::-moz-range-thumb {
+  width: 14px; height: 14px; border: none;
+  background: var(--bright);
+  box-shadow: 0 0 8px var(--glow);
+  cursor: pointer;
+}
+
+/* bar: now-playing + controls (+ extras on desktop) */
+.mp-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mp-nowplaying {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.mp-cover {
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: rgba(0, 255, 136, 0.06);
+  background-size: cover;
+  background-position: center;
+  color: var(--dim);
+  overflow: hidden;
+}
+.mp-cover.has-art { color: transparent; }
+.mp-meta { min-width: 0; display: flex; flex-direction: column; }
+.mp-title {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--bright);
+  text-shadow: 0 0 8px var(--glow);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mp-artist {
+  font-size: 0.76rem;
+  color: var(--green);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.mp-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mp-btn {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--green);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.mp-btn:hover, .mp-btn:focus-visible {
+  color: var(--bright);
+  border-color: var(--bright);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
+  outline: none;
+}
+.mp-btn.active {
+  color: var(--bright);
+  border-color: var(--bright);
+  background: rgba(0, 255, 136, 0.1);
+}
+.mp-btn-sm { width: 38px; height: 38px; font-size: 0.95rem; }
+.mp-btn-play {
+  width: 54px; height: 54px;
+  font-size: 1.6rem;
+  color: var(--bright);
+  border-color: var(--bright);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+.mp-extras {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.mp-share-current:disabled { opacity: 0.35; cursor: default; box-shadow: none; }
+
+/* ---- Desktop: single-row player, show volume + share -------------------- */
+@media (min-width: 640px) {
+  .mp-bar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 0.75rem 1.25rem;
+  }
+  .mp-extras { display: flex; }
+  .mp-cover { width: 46px; height: 46px; }
+}
+
+/* ---- Toast -------------------------------------------------------------- */
 .mp-toast {
   position: fixed;
   left: 50%;
-  bottom: 1.25rem;
-  transform: translate(-50%, 1.5rem);
+  bottom: calc(6.5rem + env(safe-area-inset-bottom));
+  transform: translate(-50%, 1rem);
   z-index: 60;
-  padding: 0.6rem 1rem;
+  padding: 0.55rem 1rem;
   background: rgba(0, 15, 10, 0.96);
-  border: 1px solid var(--fp-bright-green);
-  color: var(--fp-bright-green);
-  font-family: var(--font-mono);
+  border: 1px solid var(--bright);
+  color: var(--bright);
   font-size: 0.8rem;
   letter-spacing: 0.03em;
   box-shadow: 0 0 14px rgba(0, 255, 136, 0.3);
@@ -340,47 +414,27 @@
   max-width: 90vw;
   text-align: center;
 }
+.mp-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-.mp-toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-/* ---- Empty state --------------------------------------------------------- */
+/* ---- Empty state -------------------------------------------------------- */
 .mp-empty {
-  margin-top: 2rem;
-  padding: 2.5rem 1.5rem;
+  margin: 2.5rem auto;
+  max-width: 420px;
+  padding: 2rem 1.5rem;
   text-align: center;
   border: 1px dashed rgba(0, 204, 119, 0.35);
-  color: var(--fp-dim-green);
-  font-family: var(--font-mono);
+  color: var(--dim);
 }
-
-.mp-empty i { font-size: 2.5rem; color: var(--fp-dim-green); }
+.mp-empty i { font-size: 2.5rem; }
 .mp-empty p { margin: 0.75rem 0 0; letter-spacing: 0.08em; }
 .mp-empty .mp-empty-hint { font-size: 0.8rem; }
 .mp-empty code {
-  color: var(--fp-bright-green);
+  color: var(--bright);
   background: rgba(0, 255, 136, 0.1);
   padding: 0.1rem 0.35rem;
   border: 1px solid rgba(0, 204, 119, 0.3);
 }
 
-/* ---- Desktop refinements ------------------------------------------------- */
-@media (min-width: 700px) {
-  .mp-player {
-    grid-template-columns: minmax(0, 1.3fr) auto;
-    grid-template-areas:
-      "stage    controls"
-      "progress progress"
-      "volume   volume";
-    align-items: center;
-    gap: 0.75rem 1.25rem;
-  }
-  .mp-stage    { grid-area: stage; }
-  .mp-controls { grid-area: controls; }
-  .mp-progress { grid-area: progress; }
-  .mp-volume   { grid-area: volume; justify-self: end; }
-  .mp-cover { width: 64px; height: 64px; }
-  .mp-title { font-size: 1.1rem; }
+@media (prefers-reduced-motion: reduce) {
+  .mp-eq span { animation: none; height: 55%; }
 }
