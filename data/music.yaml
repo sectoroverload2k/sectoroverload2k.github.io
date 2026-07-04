@@ -21,4 +21,9 @@
 #     cover: "covers/midnight-run.jpg"
 # ─────────────────────────────────────────────────────────────────────────────
 
-tracks: []
+tracks:
+  - file: "ye-haw-merica.mp3"
+    title: "Ye Haw 'Merica"
+    artist: "CalmEnsemble353"
+    year: 2026
+    cover: "covers/ye-haw-merica.jpg"
