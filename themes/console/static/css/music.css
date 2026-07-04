@@ -279,6 +279,73 @@
   text-align: right;
 }
 
+/* ---- Share affordances --------------------------------------------------- */
+.mp-share-current {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  font-size: 0.95rem;
+}
+
+.mp-share-current:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+}
+
+.mp-track-share {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--fp-dim-green);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mp-track-share:hover,
+.mp-track-share:focus-visible {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+  outline: none;
+}
+
+.mp-track.playing .mp-track-share { color: var(--fp-green); }
+
+/* Toast confirmation for "link copied" */
+.mp-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translate(-50%, 1.5rem);
+  z-index: 60;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 15, 10, 0.96);
+  border: 1px solid var(--fp-bright-green);
+  color: var(--fp-bright-green);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.mp-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* ---- Empty state --------------------------------------------------------- */
 .mp-empty {
   margin-top: 2rem;

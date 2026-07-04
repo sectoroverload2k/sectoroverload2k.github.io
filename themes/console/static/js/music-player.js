@@ -28,12 +28,15 @@
   var titleEl    = document.getElementById('mp-title');
   var artistEl   = document.getElementById('mp-artist');
   var coverEl    = document.getElementById('mp-cover');
+  var shareBtn   = document.getElementById('mp-share');
+  var toastEl    = document.getElementById('mp-toast');
 
   // Build track model from the DOM (single source of truth = rendered playlist)
   var tracks = items.map(function (li) {
     return {
       el: li,
       src: li.getAttribute('data-src'),
+      slug: li.getAttribute('data-slug') || '',
       title: li.getAttribute('data-title') || 'Untitled',
       artist: li.getAttribute('data-artist') || '',
       album: li.getAttribute('data-album') || '',
@@ -89,9 +92,70 @@
     setCover(t);
 
     t.el.classList.add('playing');
-    if (autoplay) {
-      audio.play().catch(function () { /* autoplay may be blocked */ });
+
+    // Reflect the current track in the URL so it can be copied / shared,
+    // without adding a new history entry per track.
+    if (t.slug && window.history && history.replaceState) {
+      history.replaceState(null, '', '#' + t.slug);
     }
+    if (shareBtn) shareBtn.disabled = false;
+
+    if (autoplay) {
+      audio.play().catch(function () { /* autoplay may be blocked until a tap */ });
+    }
+  }
+
+  // ---- Sharing / deep links ----------------------------------------------
+  function shareUrl(slug) {
+    return location.origin + location.pathname + '#' + slug;
+  }
+
+  function toast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
+  }
+
+  function shareTrack(t) {
+    if (!t || !t.slug) return;
+    var url = shareUrl(t.slug);
+    var title = t.title + (t.artist ? ' — ' + t.artist : '');
+    // Native share sheet on supported devices (great on mobile)
+    if (navigator.share) {
+      navigator.share({ title: t.title, text: title, url: url }).catch(function () {});
+      return;
+    }
+    // Otherwise copy the link to the clipboard
+    var done = function () { toast('Link copied — share it anywhere'); };
+    var fail = function () { window.prompt('Copy this link:', url); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, fail);
+    } else {
+      fail();
+    }
+  }
+
+  function findBySlug(slug) {
+    for (var i = 0; i < tracks.length; i++) {
+      if (tracks[i].slug === slug) return i;
+    }
+    return -1;
+  }
+
+  // Load whatever track the URL hash points at (deep link from a shared URL)
+  function openFromHash(autoplay) {
+    var slug = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    if (!slug) return false;
+    var idx = findBySlug(slug);
+    if (idx === -1) return false;
+    load(idx, autoplay);
+    // bring the shared track into view within the scroll container
+    if (tracks[idx].el.scrollIntoView) {
+      tracks[idx].el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return true;
   }
 
   function togglePlay() {
@@ -118,8 +182,8 @@
   // ---- Wire playlist rows -------------------------------------------------
   tracks.forEach(function (t, i) {
     t.el.addEventListener('click', function (e) {
-      // avoid double-trigger when the inner button is clicked
-      if (e.target.closest('.mp-track-play')) return;
+      // avoid double-trigger when an inner button is clicked
+      if (e.target.closest('.mp-track-play') || e.target.closest('.mp-track-share')) return;
       if (i === current) { togglePlay(); } else { load(i, true); }
     });
     var b = t.el.querySelector('.mp-track-play');
@@ -129,7 +193,21 @@
         if (i === current) { togglePlay(); } else { load(i, true); }
       });
     }
+    var s = t.el.querySelector('.mp-track-share');
+    if (s) {
+      s.addEventListener('click', function (e) {
+        e.stopPropagation();
+        shareTrack(t);
+      });
+    }
   });
+
+  // Share the currently-playing track from the player bar
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function () {
+      if (current > -1) shareTrack(tracks[current]);
+    });
+  }
 
   // ---- Transport controls -------------------------------------------------
   playBtn.addEventListener('click', togglePlay);
@@ -234,4 +312,17 @@
 
   // init volume icon
   updateMuteIcon();
+
+  // ---- Deep linking -------------------------------------------------------
+  // If the page was opened with #<slug>, cue that track. Attempt to autoplay;
+  // browsers block audio autoplay until a gesture, so it stays cued if blocked.
+  openFromHash(true);
+
+  // React to hash changes (e.g. the visitor edits the URL or clicks a link
+  // pointing at another track on the same page).
+  window.addEventListener('hashchange', function () {
+    var slug = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    if (slug && tracks[current] && tracks[current].slug === slug) return;
+    openFromHash(true);
+  });
 })();

@@ -47,6 +47,7 @@
       {{ end }}
       {{ $tracks = $tracks | append (dict
           "src" (printf "/music/%s" $file)
+          "slug" (anchorize $base)
           "title" $title
           "artist" $artist
           "album" $album
@@ -73,6 +74,7 @@
         <div class="mp-title" id="mp-title">Select a track</div>
         <div class="mp-artist" id="mp-artist">&mdash;</div>
       </div>
+      <button class="mp-btn mp-share-current" id="mp-share" title="Share this track" aria-label="Share current track" disabled><i class="bi bi-share-fill"></i></button>
     </div>
 
     <div class="mp-progress">
@@ -100,8 +102,9 @@
   <!-- Playlist -->
   <ol class="mp-list" id="mp-list">
     {{ range $i, $t := $tracks }}
-    <li class="mp-track" data-index="{{ $i }}"
+    <li class="mp-track" id="track-{{ $t.slug }}" data-index="{{ $i }}"
         data-src="{{ $t.src }}"
+        data-slug="{{ $t.slug }}"
         data-title="{{ $t.title }}"
         data-artist="{{ $t.artist }}"
         data-album="{{ $t.album }}"
@@ -115,9 +118,12 @@
         </span>
       </div>
       <span class="mp-track-dur" data-src="{{ $t.src }}">--:--</span>
+      <button class="mp-track-share" aria-label="Copy share link for {{ $t.title }}" title="Share this track"><i class="bi bi-share-fill"></i></button>
     </li>
     {{ end }}
   </ol>
+
+  <div class="mp-toast" id="mp-toast" role="status" aria-live="polite"></div>
 
 </div>
 {{ else }}
