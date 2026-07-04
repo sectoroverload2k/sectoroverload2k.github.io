@@ -15,7 +15,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/css/music.css">
+  {{ $musicCSS := resources.Get "css/music.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $musicCSS.RelPermalink }}">
 </head>
 <body class="music-page">
 
@@ -153,6 +154,7 @@
 </main>
 {{ end }}
 
-<script src="/js/music-player.js" defer></script>
+{{ $playerJS := resources.Get "js/music-player.js" | minify | fingerprint }}
+<script src="{{ $playerJS.RelPermalink }}" defer></script>
 </body>
 </html>

@@ -65,7 +65,9 @@
     </div>
   </div>
 
-  <script src="/js/fullpage.js"></script>
-  <script src="/js/terminal-status.js"></script>
+  {{ $fullpageJS := resources.Get "js/fullpage.js" | minify | fingerprint }}
+  <script src="{{ $fullpageJS.RelPermalink }}"></script>
+  {{ $terminalJS := resources.Get "js/terminal-status.js" | minify | fingerprint }}
+  <script src="{{ $terminalJS.RelPermalink }}"></script>
 </body>
 </html>
