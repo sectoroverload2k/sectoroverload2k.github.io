@@ -37,6 +37,11 @@ tracks:
     artist: "Andrew Miller"
     year: 2026
     cover: "covers/burritos-on-gaston.jpg"
+  - file: "lazy-day-on-gaston.mp3"
+    title: "Lazy Day on Gaston"
+    artist: "Andrew Miller"
+    year: 2026
+    cover: "covers/lazy-day-on-gaston.jpg"
   - file: "ye-haw-merica.mp3"
     title: "Ye Haw 'Merica"
     artist: "Andrew Miller"
