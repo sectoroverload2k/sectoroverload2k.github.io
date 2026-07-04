@@ -27,6 +27,11 @@ tracks:
     artist: "Andrew Miller"
     year: 2026
     cover: "covers/allison-says.jpg"
+  - file: "allison-says-38-long.mp3"
+    title: "Allison Says: 38 Long"
+    artist: "Andrew Miller"
+    year: 2026
+    cover: "covers/allison-says-38-long.jpg"
   - file: "ye-haw-merica.mp3"
     title: "Ye Haw 'Merica"
     artist: "Andrew Miller"
