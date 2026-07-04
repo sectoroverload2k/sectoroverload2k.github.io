@@ -22,6 +22,11 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 tracks:
+  - file: "allison-says.mp3"
+    title: "Allison Says"
+    artist: "CalmEnsemble353"
+    year: 2026
+    cover: "covers/allison-says.jpg"
   - file: "ye-haw-merica.mp3"
     title: "Ye Haw 'Merica"
     artist: "CalmEnsemble353"
