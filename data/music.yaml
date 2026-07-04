@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Music library metadata
+# ─────────────────────────────────────────────────────────────────────────────
+# Any .mp3 you drop into  static/music/  automatically shows up on /music/.
+#
+# By default a track's title is derived from its filename. Add an entry below
+# (keyed by the EXACT filename) to override the title and attach real metadata
+# such as artist, album, year and cover art.
+#
+# Cover art (optional): put an image in static/music/covers/ and reference it
+# as covers/<file>.jpg
+#
+# Example:
+#
+# tracks:
+#   - file: "midnight-run.mp3"
+#     title: "Midnight Run"
+#     artist: "Anthony Linsday"
+#     album: "After Hours"
+#     year: 2026
+#     cover: "covers/midnight-run.jpg"
+# ─────────────────────────────────────────────────────────────────────────────
+
+tracks: []

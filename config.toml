@@ -28,6 +28,10 @@ theme = "console"
     name = "Wiki"
     url = "/wiki/"
     weight = 3
+  [[menu.main]]
+    name = "Music"
+    url = "/music/"
+    weight = 4
 
 [markup]
   [markup.highlight]

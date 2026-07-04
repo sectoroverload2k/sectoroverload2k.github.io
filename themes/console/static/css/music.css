@@ -1,0 +1,319 @@
+/* ============================================================================
+   Music library + player — CRT terminal theme, mobile-first
+   ========================================================================== */
+
+.music-app {
+  margin-top: 1.5rem;
+}
+
+/* ---- Player -------------------------------------------------------------- */
+.mp-player {
+  position: sticky;
+  top: 0.5rem;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(0, 15, 10, 0.92);
+  border: 1px solid var(--fp-green);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+.mp-stage {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.mp-cover {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--fp-dim-green);
+  background: rgba(0, 255, 136, 0.06);
+  background-size: cover;
+  background-position: center;
+  color: var(--fp-dim-green);
+  font-size: 1.5rem;
+  overflow: hidden;
+}
+
+.mp-cover.has-art { color: transparent; }
+
+.mp-meta { min-width: 0; }
+
+.mp-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--fp-dim-green);
+  margin-bottom: 0.15rem;
+}
+
+.mp-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 8px var(--fp-glow-green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp-artist {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fp-green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Progress bar -------------------------------------------------------- */
+.mp-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mp-time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fp-dim-green);
+  min-width: 3ch;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+/* Range inputs (seek + volume) share the CRT slider look */
+.mp-seek, .mp-vol {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid var(--fp-dim-green);
+  outline: none;
+  cursor: pointer;
+}
+
+.mp-seek { flex: 1 1 auto; }
+
+.mp-seek::-webkit-slider-thumb,
+.mp-vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--fp-bright-green);
+  border: none;
+  box-shadow: 0 0 8px var(--fp-glow-green);
+  cursor: pointer;
+}
+
+.mp-seek::-moz-range-thumb,
+.mp-vol::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--fp-bright-green);
+  border: none;
+  box-shadow: 0 0 8px var(--fp-glow-green);
+  cursor: pointer;
+}
+
+/* ---- Controls ------------------------------------------------------------ */
+.mp-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.mp-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--fp-dim-green);
+  color: var(--fp-green);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mp-btn:hover,
+.mp-btn:focus-visible {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
+  outline: none;
+}
+
+.mp-btn.active {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.mp-btn-play {
+  width: 52px;
+  height: 52px;
+  font-size: 1.5rem;
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
+}
+
+.mp-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mp-volume .mp-vol { max-width: 120px; }
+
+/* ---- Playlist ------------------------------------------------------------ */
+.mp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(0, 204, 119, 0.3);
+}
+
+.mp-track {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid rgba(0, 204, 119, 0.15);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mp-track:last-child { border-bottom: none; }
+
+.mp-track:hover { background: rgba(0, 255, 136, 0.06); }
+
+.mp-track.playing {
+  background: rgba(0, 255, 136, 0.1);
+  box-shadow: inset 3px 0 0 var(--fp-bright-green);
+}
+
+.mp-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fp-dim-green);
+  min-width: 2.2ch;
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.mp-track.playing .mp-num { color: var(--fp-bright-green); }
+
+.mp-track-play {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid var(--fp-dim-green);
+  color: var(--fp-green);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mp-track:hover .mp-track-play,
+.mp-track.playing .mp-track-play {
+  color: var(--fp-bright-green);
+  border-color: var(--fp-bright-green);
+}
+
+.mp-track-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mp-track-title {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--fp-green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp-track.playing .mp-track-title {
+  color: var(--fp-bright-green);
+  text-shadow: 0 0 6px var(--fp-glow-green);
+}
+
+.mp-track-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fp-dim-green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp-track-dur {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fp-dim-green);
+  flex: 0 0 auto;
+  min-width: 4.5ch;
+  text-align: right;
+}
+
+/* ---- Empty state --------------------------------------------------------- */
+.mp-empty {
+  margin-top: 2rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border: 1px dashed rgba(0, 204, 119, 0.35);
+  color: var(--fp-dim-green);
+  font-family: var(--font-mono);
+}
+
+.mp-empty i { font-size: 2.5rem; color: var(--fp-dim-green); }
+.mp-empty p { margin: 0.75rem 0 0; letter-spacing: 0.08em; }
+.mp-empty .mp-empty-hint { font-size: 0.8rem; }
+.mp-empty code {
+  color: var(--fp-bright-green);
+  background: rgba(0, 255, 136, 0.1);
+  padding: 0.1rem 0.35rem;
+  border: 1px solid rgba(0, 204, 119, 0.3);
+}
+
+/* ---- Desktop refinements ------------------------------------------------- */
+@media (min-width: 700px) {
+  .mp-player {
+    grid-template-columns: minmax(0, 1.3fr) auto;
+    grid-template-areas:
+      "stage    controls"
+      "progress progress"
+      "volume   volume";
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+  .mp-stage    { grid-area: stage; }
+  .mp-controls { grid-area: controls; }
+  .mp-progress { grid-area: progress; }
+  .mp-volume   { grid-area: volume; justify-self: end; }
+  .mp-cover { width: 64px; height: 64px; }
+  .mp-title { font-size: 1.1rem; }
+}

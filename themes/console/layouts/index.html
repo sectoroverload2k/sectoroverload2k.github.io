@@ -169,6 +169,32 @@
       </div>
     </section>
 
+    <!-- Music Panel -->
+    <section class="panel music">
+      <h2 class="panel-title"><a href="/music/">Music</a> <i class="bi bi-arrow-return-left return-icon"></i></h2>
+      <div class="panel-content">
+        {{ $mp3s := slice }}
+        {{ if fileExists "static/music" }}
+          {{ range (readDir "static/music") }}
+            {{ if and (not .IsDir) (strings.HasSuffix (lower .Name) ".mp3") }}
+              {{ $nm := replaceRE `[-_]+` " " (replaceRE `(?i)\.mp3$` "" .Name) }}
+              {{ $mp3s = $mp3s | append (title (trim $nm " ")) }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ if gt (len $mp3s) 0 }}
+        {{ range first 5 (sort $mp3s) }}
+        <div class="project-item">
+          <h3><a href="/music/"><i class="bi bi-music-note-beamed"></i> {{ . }}</a></h3>
+        </div>
+        {{ end }}
+        {{ else }}
+        <p>Personal audio archive &mdash; original tracks, streamed from the terminal.</p>
+        {{ end }}
+        <a href="/music/" class="see-more">> Open player</a>
+      </div>
+    </section>
+
     <!-- Contact Panel -->
     <section class="panel contact">
       <h2 class="panel-title">Contact <i class="bi bi-arrow-return-left return-icon"></i></h2>

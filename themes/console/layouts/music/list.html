@@ -1,0 +1,132 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+
+<link rel="stylesheet" href="/css/music.css">
+
+<h1 class="page-title"><i class="bi bi-music-note-beamed"></i> {{ .Title }}</h1>
+<p class="page-subtitle">Personal audio archive // streaming from the terminal</p>
+
+{{ with .Content }}
+<div class="article-content">{{ . }}</div>
+{{ end }}
+
+{{/* ---- Build a filename -> metadata lookup from data/music.yaml ---- */}}
+{{ $meta := dict }}
+{{ with .Site.Data.music }}
+  {{ with .tracks }}
+    {{ range . }}
+      {{ $t := . }}
+      {{ with $t.file }}
+        {{ $meta = merge $meta (dict . $t) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* ---- Discover mp3 files in static/music/ ---- */}}
+{{ $tracks := slice }}
+{{ $dir := "static/music" }}
+{{ if fileExists $dir }}
+  {{ range (readDir $dir) }}
+    {{ if and (not .IsDir) (strings.HasSuffix (lower .Name) ".mp3") }}
+      {{ $file := .Name }}
+      {{ $info := index $meta $file }}
+      {{ $base := replaceRE `(?i)\.mp3$` "" $file }}
+      {{ $name := replaceRE `[-_]+` " " $base }}
+      {{ $title := title (trim $name " ") }}
+      {{ $artist := "" }}
+      {{ $album := "" }}
+      {{ $year := "" }}
+      {{ $cover := "" }}
+      {{ with $info }}
+        {{ $title = or .title $title }}
+        {{ $artist = or .artist "" }}
+        {{ $album = or .album "" }}
+        {{ $year = or (string .year) "" }}
+        {{ $cover = or .cover "" }}
+      {{ end }}
+      {{ $tracks = $tracks | append (dict
+          "src" (printf "/music/%s" $file)
+          "title" $title
+          "artist" $artist
+          "album" $album
+          "year" $year
+          "cover" (cond (ne $cover "") (printf "/music/%s" $cover) "")
+      ) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $tracks = sort $tracks "title" }}
+
+{{ if gt (len $tracks) 0 }}
+<div class="music-app" data-track-count="{{ len $tracks }}">
+
+  <!-- Now Playing / Player -->
+  <div class="mp-player" id="mp-player" aria-label="Audio player">
+    <div class="mp-stage">
+      <div class="mp-cover" id="mp-cover" aria-hidden="true">
+        <i class="bi bi-music-note-beamed"></i>
+      </div>
+      <div class="mp-meta">
+        <div class="mp-eyebrow">> NOW PLAYING</div>
+        <div class="mp-title" id="mp-title">Select a track</div>
+        <div class="mp-artist" id="mp-artist">&mdash;</div>
+      </div>
+    </div>
+
+    <div class="mp-progress">
+      <span class="mp-time" id="mp-current">0:00</span>
+      <input type="range" class="mp-seek" id="mp-seek" value="0" min="0" max="100" step="0.1" aria-label="Seek">
+      <span class="mp-time" id="mp-duration">0:00</span>
+    </div>
+
+    <div class="mp-controls">
+      <button class="mp-btn" id="mp-shuffle" title="Shuffle" aria-label="Shuffle"><i class="bi bi-shuffle"></i></button>
+      <button class="mp-btn" id="mp-prev" title="Previous" aria-label="Previous track"><i class="bi bi-skip-start-fill"></i></button>
+      <button class="mp-btn mp-btn-play" id="mp-play" title="Play" aria-label="Play"><i class="bi bi-play-fill"></i></button>
+      <button class="mp-btn" id="mp-next" title="Next" aria-label="Next track"><i class="bi bi-skip-end-fill"></i></button>
+      <button class="mp-btn" id="mp-repeat" title="Repeat" aria-label="Repeat"><i class="bi bi-repeat"></i></button>
+    </div>
+
+    <div class="mp-volume">
+      <button class="mp-btn mp-btn-mute" id="mp-mute" title="Mute" aria-label="Mute"><i class="bi bi-volume-up-fill"></i></button>
+      <input type="range" class="mp-vol" id="mp-vol" value="100" min="0" max="100" step="1" aria-label="Volume">
+    </div>
+
+    <audio id="mp-audio" preload="metadata"></audio>
+  </div>
+
+  <!-- Playlist -->
+  <ol class="mp-list" id="mp-list">
+    {{ range $i, $t := $tracks }}
+    <li class="mp-track" data-index="{{ $i }}"
+        data-src="{{ $t.src }}"
+        data-title="{{ $t.title }}"
+        data-artist="{{ $t.artist }}"
+        data-album="{{ $t.album }}"
+        data-cover="{{ $t.cover }}">
+      <span class="mp-num">{{ printf "%02d" (add $i 1) }}</span>
+      <button class="mp-track-play" aria-label="Play {{ $t.title }}"><i class="bi bi-play-fill"></i></button>
+      <div class="mp-track-info">
+        <span class="mp-track-title">{{ $t.title }}</span>
+        <span class="mp-track-sub">
+          {{ with $t.artist }}{{ . }}{{ else }}Unknown artist{{ end }}{{ with $t.album }} &middot; {{ . }}{{ end }}{{ with $t.year }} &middot; {{ . }}{{ end }}
+        </span>
+      </div>
+      <span class="mp-track-dur" data-src="{{ $t.src }}">--:--</span>
+    </li>
+    {{ end }}
+  </ol>
+
+</div>
+{{ else }}
+<div class="mp-empty">
+  <i class="bi bi-music-note-list"></i>
+  <p>> NO TRACKS FOUND</p>
+  <p class="mp-empty-hint">Drop <code>.mp3</code> files into <code>static/music/</code> and they'll appear here.</p>
+</div>
+{{ end }}
+
+<script src="/js/music-player.js" defer></script>
+{{ end }}
