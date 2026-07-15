@@ -71,7 +71,7 @@ tracks:
     year: 2026
     cover: "covers/production.jpg"
   - file: "git-blame.mp3"
-    title: "Git Blame"
+    title: "git blame"
     artist: "sectoroverload2k"
     album: "production"
     year: 2026
