@@ -33,7 +33,7 @@ Redesign of anthonyl.com from the green "console" terminal theme to a profession
 2. **Hero** — "AWS Architecture & Automation for Teams That Need to Scale"; subhead; "Schedule a Call" + "View Projects" buttons; headshot `static/images/headshot.jpg` (900x1125, real photo).
 3. **Trust bar** — "Experience with" Zendesk, Mood Media, Citco, U.S. Navy (GovCloud), Levvel (text, grayscale).
 4. **How I Can Help** — "Sound familiar?" checklist + 3 engagement cards (Architecture Review, Migration / Build Project, Fractional DevOps Retainer) with "Contact for quote".
-5. **Stats** — `[X]% infra cost reduction`, `[X] migrations delivered`, `20+ years`. Values in `data/stats.yaml`; owner fills in real numbers.
+5. **Stats** — values in `data/stats.yaml`. Use the owner-provided figures below: `$182K` saved in one year / `$75K+/yr` saved by one migration / `20+` years.
 6. **Featured Projects** — full-width navy band, 3 dark cards with screenshot, description, tags, arrow link to the portfolio page.
 7. **Case Studies** — 3 cards: On-prem to AWS migration (financial services), GovCloud automation (U.S. Navy), Large-scale Kubernetes deployments (SaaS). Each links to its own page (see below).
 8. **How I Work** — Assess → Design → Implement → Support.
@@ -49,6 +49,18 @@ The mockup is AI-generated. Fix these instead of reproducing them:
 - Case-study claims "zero downtime" and "millions of users" are invented — use neutral text or ask the owner.
 - Stock photos (skyscrapers, ship, containers) are placeholders. Use the real headshot, not the mockup's.
 - No testimonials unless the owner provides real ones.
+
+## Owner-provided results (real, use these)
+
+- **$182K** in AWS cost savings for Mood Media in one year (2025).
+- **$75K+/yr** ongoing savings from a migration completed at Mood Media in September 2026.
+
+Where to use them:
+- Stats row (above).
+- Mood Media job page (`content/experience/mood-media.md`) — list both as outcomes.
+- A new case study, e.g. "AWS cost optimization & migration — media company", with the details beyond these numbers marked `TODO`.
+
+Do not add percentages, timelines or other numbers the owner hasn't provided.
 
 ## Calls to action
 
@@ -69,8 +81,9 @@ Each **job** and each **case study** gets its own page.
 - [x] Booking CTA → `mailto:` email (for now)
 - [x] Headshot → `static/images/headshot.jpg`
 - [x] Each job and case study gets its own page
+- [x] Stats: $182K saved in a year; $75K+/yr from one migration
 
 ## Open questions for the owner
 
-- Real numbers for the stats row.
+- Confirm it's OK to name Mood Media alongside the savings figures (default: name it on the job page, use "media company" on the home page/case study).
 - Case-study details (challenge, approach, results).
