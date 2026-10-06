@@ -11,6 +11,7 @@ tech:
   - "White Label"
   - "API"
   - "High Availability"
+image: "/images/projects/tritonemail.jpg"
 weight: 13
 ---
 

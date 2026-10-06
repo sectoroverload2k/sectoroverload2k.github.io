@@ -11,6 +11,7 @@ tech:
   - "DNS Management"
   - "SMTP/IMAP"
   - "Spam Filtering"
+image: "/images/projects/startup-email.jpg"
 weight: 14
 ---
 
