@@ -4,7 +4,7 @@ description: "Party trivia where your TV hosts and everyone's phone is the buzze
 icon: "tv"
 demo: "https://jackstube.com"
 image: "/images/projects/jackstube.jpg"
-weight: 8
+weight: 9
 cardTags: ["Roku", "Real-time", "Trivia"]
 tech:
   - "Roku"

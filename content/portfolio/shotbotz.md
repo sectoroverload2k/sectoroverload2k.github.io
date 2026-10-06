@@ -11,8 +11,7 @@ tech:
   - "Multi-Viewport"
   - "Device Emulation"
   - "AWS Lambda"
-featured: true
-weight: 1
+weight: 7
 image: "/images/projects/shotbotz.jpg"
 cardTags: ["AWS Lambda", "Headless Chrome", "API"]
 ---

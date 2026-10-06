@@ -36,7 +36,7 @@ Redesign of anthonyl.com from the green "console" terminal theme to a profession
 3. **Trust bar** — "Experience with" Zendesk, Mood Media, Citco, U.S. Navy (GovCloud), Levvel (text, grayscale).
 4. **How I Can Help** — "Sound familiar?" checklist + 3 engagement cards (Architecture Review, Migration / Build Project, Fractional DevOps Retainer) with "Contact for quote".
 5. **Stats** — values in `data/stats.yaml`. Use the owner-provided figures below: `$182K` saved in one year / `$75K+/yr` saved by one migration / `20+` years.
-6. **Featured Projects** — full-width navy band, dark cards with real site screenshots (`static/images/projects/`), description, tags, arrow link to the project page. Shows projects with `featured: true`, sorted by `weight` (currently 6).
+6. **Featured Projects** — full-width navy band, dark cards with real site screenshots (`static/images/projects/`), description, tags, arrow link to the project page. Shows projects with `featured: true`, sorted by `weight` (currently 6: CathyBot, WelcomeSign, Triton Agency, SignaCast, FriendFrame, YonderSim).
 7. **Case Studies** — 3 cards: On-prem to AWS migration (financial services), GovCloud automation (U.S. Navy), Large-scale Kubernetes deployments (SaaS). Each links to its own page (see below).
 8. **How I Work** — Assess → Design → Implement → Support.
 9. **Experience** — compact timeline from `content/experience/` pages (sorted by `weight`). Each job links to its own page.

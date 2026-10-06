@@ -4,7 +4,7 @@ description: "Transparent interchange-plus card processing with no contracts or 
 icon: "wallet2"
 demo: "https://tritonpay.us"
 image: "/images/projects/tritonpay.jpg"
-weight: 11
+weight: 12
 status: "Launching soon"
 cardTags: ["Payments", "Dashboard", "FinTech"]
 tech:

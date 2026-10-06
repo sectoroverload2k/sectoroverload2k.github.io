@@ -4,7 +4,7 @@ description: "One team behind your payments, email, hosting and IT — nine serv
 icon: "building"
 demo: "https://choosetriton.com"
 image: "/images/projects/choosetriton.jpg"
-weight: 9
+weight: 10
 cardTags: ["Managed IT", "Payments", "Hosting"]
 tech:
   - "Card Processing"

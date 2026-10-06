@@ -11,7 +11,7 @@ tech:
   - "DNS Management"
   - "SMTP/IMAP"
   - "Spam Filtering"
-weight: 13
+weight: 14
 ---
 
 ## Overview
