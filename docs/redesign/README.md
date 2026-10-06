@@ -93,7 +93,7 @@ Each **job** and each **case study** gets its own page.
 - Featured Projects shows 6 projects (2 rows) instead of 3.
 - Experience timeline includes Carolina Brew Supply (all 5 jobs).
 - Case studies: 4 total (media company cost optimization added); home shows the first 3 by `weight`.
-- Project screenshots are real captures of each live site.
+- Project screenshots are real captures of each live site (all 14 projects have one).
 
 ## Open questions for the owner
 
