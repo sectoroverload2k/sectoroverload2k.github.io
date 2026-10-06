@@ -52,13 +52,14 @@ The mockup is AI-generated. Fix these instead of reproducing them:
 
 ## Owner-provided results (real, use these)
 
-- **$182K** in AWS cost savings for Mood Media in one year (2025).
-- **$75K+/yr** ongoing savings from a migration completed at Mood Media in September 2026.
+- **$182K** in AWS cost savings for a media company in one year.
+- **$75K+/yr** ongoing savings from a migration completed for a media company (September 2026).
+
+**Always attribute these to "a media company". Never name the client or place these figures on/next to a named employer (including the Mood Media job page).**
 
 Where to use them:
 - Stats row (above).
-- Mood Media job page (`content/experience/mood-media.md`) — list both as outcomes.
-- A new case study, e.g. "AWS cost optimization & migration — media company", with the details beyond these numbers marked `TODO`.
+- A case study, e.g. "AWS cost optimization & migration — media company", with the details beyond these numbers marked `TODO`.
 
 Do not add percentages, timelines or other numbers the owner hasn't provided.
 
@@ -82,8 +83,8 @@ Each **job** and each **case study** gets its own page.
 - [x] Headshot → `static/images/headshot.jpg`
 - [x] Each job and case study gets its own page
 - [x] Stats: $182K saved in a year; $75K+/yr from one migration
+- [x] Savings attributed only to "a media company" — client never named
 
 ## Open questions for the owner
 
-- Confirm it's OK to name Mood Media alongside the savings figures (default: name it on the job page, use "media company" on the home page/case study).
 - Case-study details (challenge, approach, results).
