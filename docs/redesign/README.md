@@ -30,14 +30,14 @@ Redesign of anthonyl.com from the green "console" terminal theme to a profession
 ## Sections (top to bottom)
 
 1. **Sticky nav** — name + "Cloud Architecture & DevOps Consulting"; Services, Projects, Case Studies, Experience, Contact; navy "Book a Consultation" button.
-2. **Hero** — "AWS Architecture & Automation for Teams That Need to Scale"; subhead; "Schedule a Call" + "View Projects" buttons; headshot (placeholder until a real photo is supplied).
+2. **Hero** — "AWS Architecture & Automation for Teams That Need to Scale"; subhead; "Schedule a Call" + "View Projects" buttons; headshot `static/images/headshot.jpg` (900x1125, real photo).
 3. **Trust bar** — "Experience with" Zendesk, Mood Media, Citco, U.S. Navy (GovCloud), Levvel (text, grayscale).
 4. **How I Can Help** — "Sound familiar?" checklist + 3 engagement cards (Architecture Review, Migration / Build Project, Fractional DevOps Retainer) with "Contact for quote".
 5. **Stats** — `[X]% infra cost reduction`, `[X] migrations delivered`, `20+ years`. Values in `data/stats.yaml`; owner fills in real numbers.
 6. **Featured Projects** — full-width navy band, 3 dark cards with screenshot, description, tags, arrow link to the portfolio page.
-7. **Case Studies** — 3 cards: On-prem to AWS migration (financial services), GovCloud automation (U.S. Navy), Large-scale Kubernetes deployments (SaaS).
+7. **Case Studies** — 3 cards: On-prem to AWS migration (financial services), GovCloud automation (U.S. Navy), Large-scale Kubernetes deployments (SaaS). Each links to its own page (see below).
 8. **How I Work** — Assess → Design → Implement → Support.
-9. **Experience** — compact timeline from `data/experience.yaml`.
+9. **Experience** — compact timeline from `data/experience.yaml`. Each job links to its own page (see below).
 10. **CTA band** — "Let's talk about your infrastructure" + "Book a Consultation".
 11. **Footer** — Charlotte NC, email, LinkedIn, GitHub, links to Wiki and Portfolio.
 
@@ -47,12 +47,30 @@ The mockup is AI-generated. Fix these instead of reproducing them:
 
 - Typo "Kuberentes" → **Kubernetes**.
 - Case-study claims "zero downtime" and "millions of users" are invented — use neutral text or ask the owner.
-- Stock photos (skyscrapers, ship, containers) and the headshot are placeholders.
+- Stock photos (skyscrapers, ship, containers) are placeholders. Use the real headshot, not the mockup's.
 - No testimonials unless the owner provides real ones.
+
+## Calls to action
+
+All "Book a Consultation" / "Schedule a Call" / "Contact for quote" buttons are `mailto:anthony@linsday.net` for now (use `params.email` from `config.toml`, add a sensible `?subject=`). Keep the URL in one place (e.g. `params.bookingURL`) so it can be swapped for a booking link later.
+
+## Detail pages
+
+Each **job** and each **case study** gets its own page.
+
+- `content/experience/<slug>.md` — one per job in `data/experience.yaml` (Mood Media, Carolina Brew Supply, EverOps / Zendesk, Levvel, Citco). Front matter: company, role, dates, summary, tech tags. Body: responsibilities and outcomes. Section list page at `/experience/`.
+- `content/case-studies/<slug>.md` — one per case study. Suggested structure: Client/industry, Challenge, Approach, Results, Tech stack. Section list page at `/case-studies/`.
+- Use page bundles or front matter for card images.
+- Home page cards and the timeline link to these pages.
+- Pre-populate with only what is already known (the site/resume content); mark anything else `TODO` for the owner. Do not invent details, metrics or clients.
+
+## Decisions made
+
+- [x] Booking CTA → `mailto:` email (for now)
+- [x] Headshot → `static/images/headshot.jpg`
+- [x] Each job and case study gets its own page
 
 ## Open questions for the owner
 
-- "Book a Consultation" target: Calendly/booking link, or `mailto:anthony@linsday.net`?
-- Real headshot photo.
 - Real numbers for the stats row.
-- Should case studies get their own pages, or link to the portfolio?
+- Case-study details (challenge, approach, results).
