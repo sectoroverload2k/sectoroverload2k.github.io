@@ -1,5 +1,7 @@
 # Consultant Redesign
 
+**Status: built** — theme at `themes/consultant/`, live once merged to `main`. See the root `README.md` for where content lives.
+
 Redesign of anthonyl.com from the green "console" terminal theme to a professional consulting site.
 
 ![Approved mockup](mockup.png)
@@ -34,10 +36,10 @@ Redesign of anthonyl.com from the green "console" terminal theme to a profession
 3. **Trust bar** — "Experience with" Zendesk, Mood Media, Citco, U.S. Navy (GovCloud), Levvel (text, grayscale).
 4. **How I Can Help** — "Sound familiar?" checklist + 3 engagement cards (Architecture Review, Migration / Build Project, Fractional DevOps Retainer) with "Contact for quote".
 5. **Stats** — values in `data/stats.yaml`. Use the owner-provided figures below: `$182K` saved in one year / `$75K+/yr` saved by one migration / `20+` years.
-6. **Featured Projects** — full-width navy band, 3 dark cards with screenshot, description, tags, arrow link to the portfolio page.
+6. **Featured Projects** — full-width navy band, dark cards with real site screenshots (`static/images/projects/`), description, tags, arrow link to the project page. Shows projects with `featured: true`, sorted by `weight` (currently 6).
 7. **Case Studies** — 3 cards: On-prem to AWS migration (financial services), GovCloud automation (U.S. Navy), Large-scale Kubernetes deployments (SaaS). Each links to its own page (see below).
 8. **How I Work** — Assess → Design → Implement → Support.
-9. **Experience** — compact timeline from `data/experience.yaml`. Each job links to its own page (see below).
+9. **Experience** — compact timeline from `content/experience/` pages (sorted by `weight`). Each job links to its own page.
 10. **CTA band** — "Let's talk about your infrastructure" + "Book a Consultation".
 11. **Footer** — Charlotte NC, email, LinkedIn, GitHub, links to Wiki and Portfolio.
 
@@ -47,7 +49,7 @@ The mockup is AI-generated. Fix these instead of reproducing them:
 
 - Typo "Kuberentes" → **Kubernetes**.
 - Case-study claims "zero downtime" and "millions of users" are invented — use neutral text or ask the owner.
-- Stock photos (skyscrapers, ship, containers) are placeholders. Use the real headshot, not the mockup's.
+- Stock photos (skyscrapers, ship, containers) are placeholders. Use the real headshot, not the mockup's. Case-study cards use a navy gradient banner with an icon instead of stock photos.
 - No testimonials unless the owner provides real ones.
 
 ## Owner-provided results (real, use these)
@@ -84,6 +86,14 @@ Each **job** and each **case study** gets its own page.
 - [x] Each job and case study gets its own page
 - [x] Stats: $182K saved in a year; $75K+/yr from one migration
 - [x] Savings attributed only to "a media company" — client never named
+
+## Built — deviations from the mockup
+
+- Nav adds **Wiki**; Music is linked from the footer only.
+- Featured Projects shows 6 projects (2 rows) instead of 3.
+- Experience timeline includes Carolina Brew Supply (all 5 jobs).
+- Case studies: 4 total (media company cost optimization added); home shows the first 3 by `weight`.
+- Project screenshots are real captures of each live site.
 
 ## Open questions for the owner
 

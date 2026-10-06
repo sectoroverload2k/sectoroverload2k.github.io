@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <span class="brand-name">{{ .Site.Params.author }}</span>
+      <span class="brand-tag">{{ .Site.Params.tagline }}</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><i class="bi bi-list"></i></button>
+    <nav id="site-nav" class="site-nav">
+      {{ $current := . }}
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (and (ne .URL "/") (hasPrefix $current.RelPermalink .URL)) }} class="active"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+      <a href="{{ .Site.Params.bookingURL }}" class="btn btn-primary nav-cta">Book a Consultation</a>
+    </nav>
+  </div>
+</header>

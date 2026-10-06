@@ -1,0 +1,106 @@
+{{ define "main" }}
+{{ $data := .Site.Data }}
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>AWS Architecture &amp; Automation for Teams That Need to Scale</h1>
+      <p class="lead">20+ years designing secure, cost-efficient cloud infrastructure. {{ .Site.Params.certifications }}.</p>
+      <div class="btn-row">
+        <a href="{{ .Site.Params.bookingURL }}" class="btn btn-primary">Schedule a Call <i class="bi bi-arrow-right"></i></a>
+        <a href="#projects" class="btn btn-outline">View Projects</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="{{ .Site.Params.headshot }}" alt="{{ .Site.Params.author }}" width="900" height="1125">
+    </div>
+  </div>
+</section>
+
+<!-- Trust bar -->
+<section class="trust">
+  <div class="container trust-inner">
+    <span class="trust-label">Experience with</span>
+    <ul>{{ range $data.clients }}<li>{{ . }}</li>{{ end }}</ul>
+  </div>
+</section>
+
+<!-- How I can help -->
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-title">How I Can Help</h2>
+    <div class="help-grid">
+      <div class="pain">
+        <h3>Sound familiar?</h3>
+        <ul>{{ range $data.services.painPoints }}<li><i class="bi bi-check-circle-fill"></i> {{ . }}</li>{{ end }}</ul>
+      </div>
+      <div class="engagements">
+        {{ range $data.services.engagements }}
+        <div class="card engagement">
+          <i class="bi bi-{{ .icon }} engagement-icon"></i>
+          <h3>{{ .title }}</h3>
+          {{ with .duration }}<p class="meta">{{ . }}</p>{{ end }}
+          <p>{{ .description }}</p>
+          <a href="{{ $.Site.Params.bookingURL }}" class="btn btn-outline btn-block">Contact for quote</a>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="stats">
+      {{ range $data.stats }}
+      <div class="stat"><span class="stat-value">{{ .value }}</span><span class="stat-label">{{ .label }}</span></div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Featured projects -->
+<section class="section projects-band" id="projects">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Featured Projects</h2>
+      <a href="/portfolio/" class="text-link">View all projects <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="project-grid">
+      {{ range where (where .Site.RegularPages "Section" "portfolio") "Params.featured" true }}{{ partial "project-card.html" . }}{{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Case studies -->
+<section class="section" id="case-studies">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Case Studies</h2>
+      <a href="/case-studies/" class="text-link">View all case studies <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="card-grid">
+      {{ range first 3 (where .Site.RegularPages "Section" "case-studies").ByWeight }}{{ partial "case-card.html" . }}{{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section section-tight">
+  <div class="container">
+    <h2 class="section-title">How I Work</h2>
+    <ol class="process">
+      {{ range $i, $s := $data.process }}
+      <li><span class="step-num">{{ add $i 1 }}</span><div><h3>{{ $s.title }}</h3><p>{{ $s.description }}</p></div></li>
+      {{ end }}
+    </ol>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="section section-tight" id="experience">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Experience</h2>
+      <a href="/experience/" class="text-link">Full experience <i class="bi bi-arrow-right"></i></a>
+    </div>
+    {{ partial "timeline.html" (where .Site.RegularPages "Section" "experience").ByWeight }}
+  </div>
+</section>
+{{ end }}

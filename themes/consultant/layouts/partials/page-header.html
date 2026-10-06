@@ -1,0 +1,16 @@
+{{/* Inner page title band. Pass the page as context. */}}
+<section class="page-hero">
+  <div class="container">
+    {{ if .IsPage }}
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span>/</span>
+      {{ with .Parent }}{{ if not .IsHome }}<a href="{{ .RelPermalink }}">{{ .Title }}</a> <span>/</span>{{ end }}{{ end }}
+      <span class="current">{{ .Title }}</span>
+    </nav>
+    {{ end }}
+    {{ with .Params.industry }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    {{ with .Params.role }}<p class="eyebrow">{{ . }}{{ with $.Params.dates }} · {{ . }}{{ end }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description | default .Params.summary | default .Params.subtitle }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+</section>

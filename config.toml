@@ -1,8 +1,8 @@
 baseURL = "https://anthonyl.com/"
 relativeURLs = true
 languageCode = "en-us"
-title = "Anthony Linsday - Cloud Architect & DevOps Engineer"
-theme = "console"
+title = "Anthony Linsday — Cloud Architecture & DevOps Consulting"
+theme = "consultant"  # previous theme: "console" (kept in themes/ for rollback)
 
 [params]
   author = "Anthony Linsday"
@@ -14,24 +14,37 @@ theme = "console"
   linkedin = "https://linkedin.com/in/anthonylinsday"
   location = "Charlotte, NC"
   certifications = "AWS Certified Solutions Architect"
+  tagline = "Cloud Architecture & DevOps Consulting"
+  headshot = "/images/headshot.jpg"
+  # All "Book a Consultation" / "Contact for quote" buttons use this URL.
+  # Swap for a booking link (e.g. Calendly) later.
+  bookingURL = "mailto:anthony@linsday.net?subject=Consultation%20request"
 
 [menu]
   [[menu.main]]
-    name = "Home"
-    url = "/"
+    name = "Services"
+    url = "/#services"
     weight = 1
   [[menu.main]]
-    name = "Portfolio"
+    name = "Projects"
     url = "/portfolio/"
     weight = 2
   [[menu.main]]
-    name = "Wiki"
-    url = "/wiki/"
+    name = "Case Studies"
+    url = "/case-studies/"
     weight = 3
   [[menu.main]]
-    name = "Music"
-    url = "/music/"
+    name = "Experience"
+    url = "/experience/"
     weight = 4
+  [[menu.main]]
+    name = "Wiki"
+    url = "/wiki/"
+    weight = 5
+  [[menu.main]]
+    name = "Contact"
+    url = "/#contact"
+    weight = 6
 
 [markup]
   [markup.highlight]

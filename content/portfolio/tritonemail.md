@@ -11,6 +11,7 @@ tech:
   - "White Label"
   - "API"
   - "High Availability"
+weight: 12
 ---
 
 ## Overview

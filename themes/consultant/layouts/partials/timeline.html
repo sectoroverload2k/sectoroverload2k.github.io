@@ -1,0 +1,13 @@
+{{/* Experience timeline. Context: slice of experience pages. */}}
+<ol class="timeline">
+  {{ range . }}
+  <li>
+    <a href="{{ .RelPermalink }}">
+      <span class="tl-company">{{ .Title }}</span>
+      <span class="tl-dates">{{ .Params.dates }}</span>
+      <span class="tl-role">{{ .Params.role }}</span>
+      <i class="bi bi-chevron-right tl-arrow"></i>
+    </a>
+  </li>
+  {{ end }}
+</ol>

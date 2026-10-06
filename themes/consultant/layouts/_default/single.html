@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="container narrow">
+    {{ if .Date }}
+    <p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></p>
+    {{ end }}
+    <article class="prose">{{ .Content }}</article>
+    {{ with .Params.tags }}
+    <div class="tags">{{ range . }}<a class="tag" href="{{ "tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}</div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="container detail-grid wiki-grid">
+    <article class="prose">
+      <p class="meta">{{ if not .Date.IsZero }}Last updated {{ .Date.Format "January 2, 2006" }}{{ end }}{{ with .Params.difficulty }} · {{ . }}{{ end }}</p>
+      {{ .Content }}
+      {{ with .Params.tags }}<div class="tags">{{ range . }}<a class="tag" href="{{ "tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}</div>{{ end }}
+    </article>
+    <aside class="detail-side">
+      {{ if and .Params.toc (gt (len .TableOfContents) 40) }}
+      <nav class="card toc"><h4>Contents</h4>{{ .TableOfContents }}</nav>
+      {{ end }}
+      {{ $related := where (.Site.RegularPages.Related .) "Section" "wiki" | first 3 }}
+      {{ with $related }}
+      <div class="card"><h4>Related</h4><ul class="plain">{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul></div>
+      {{ end }}
+    </aside>
+  </div>
+</section>
+{{ end }}

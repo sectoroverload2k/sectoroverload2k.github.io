@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="container detail-grid">
+    <article class="prose">
+      {{ with .Params.image }}<img class="detail-shot" src="{{ . }}" alt="{{ $.Title }} website screenshot">{{ end }}
+      {{ .Content }}
+    </article>
+    <aside class="detail-side">
+      <div class="card">
+        {{ with .Params.role }}<h4>Role</h4><p>{{ . }}</p>{{ end }}
+        {{ with .Params.timeline }}<h4>Timeline</h4><p>{{ . }}</p>{{ end }}
+        {{ with .Params.status }}<h4>Status</h4><p>{{ . }}</p>{{ end }}
+        {{ with .Params.tech }}<h4>Tech</h4><div class="pills light">{{ range . }}<span class="pill">{{ . }}</span>{{ end }}</div>{{ end }}
+        {{ with .Params.techStack }}<h4>Tech stack</h4>{{ range $k, $v := . }}<p class="meta">{{ humanize $k }}</p><div class="pills light">{{ range $v }}<span class="pill">{{ . }}</span>{{ end }}</div>{{ end }}{{ end }}
+        {{ with .Params.demo }}<a href="{{ . }}" class="btn btn-primary btn-block" rel="noopener">Visit site <i class="bi bi-box-arrow-up-right"></i></a>{{ end }}
+        {{ with .Params.github }}<a href="{{ . }}" class="btn btn-outline btn-block" rel="noopener"><i class="bi bi-github"></i> GitHub</a>{{ end }}
+      </div>
+    </aside>
+  </div>
+</section>
+{{ end }}

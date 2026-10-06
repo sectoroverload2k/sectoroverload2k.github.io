@@ -1,0 +1,9 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="container narrow">
+    {{ partial "timeline.html" .Pages.ByWeight }}
+    <p class="meta" style="margin-top:2rem"><a class="text-link" href="/resume-2023.pdf">Download resume (PDF) <i class="bi bi-download"></i></a></p>
+  </div>
+</section>
+{{ end }}
