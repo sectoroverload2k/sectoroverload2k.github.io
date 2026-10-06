@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">{{ .Site.Params.author }}</span>
+      <span class="brand-tag">{{ .Site.Params.tagline }}</span>
+    </div>
+    <ul class="footer-contact">
+      {{ with .Site.Params.location }}<li><i class="bi bi-geo-alt"></i> {{ . }}</li>{{ end }}
+      {{ with .Site.Params.email }}<li><a href="mailto:{{ . }}"><i class="bi bi-envelope"></i> {{ . }}</a></li>{{ end }}
+      {{ with .Site.Params.linkedin }}<li><a href="{{ . }}" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a></li>{{ end }}
+      {{ with .Site.Params.github }}<li><a href="{{ . }}" rel="noopener"><i class="bi bi-github"></i> GitHub</a></li>{{ end }}
+    </ul>
+    <ul class="footer-links">
+      <li><a href="/wiki/">Wiki</a></li>
+      <li><a href="/portfolio/">Portfolio</a></li>
+      <li><a href="/music/">Music</a></li>
+    </ul>
+  </div>
+  <div class="container footer-copy">&copy; {{ now.Year }} {{ .Site.Params.author }}</div>
+</footer>

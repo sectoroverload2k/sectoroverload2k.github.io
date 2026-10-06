@@ -12,6 +12,10 @@ tech:
   - "Video Conferencing"
   - "Voice AI"
   - "Chat Systems"
+featured: true
+weight: 3
+image: "/images/projects/tritonagency.jpg"
+cardTags: ["AI Agents", "Automation", "Voice AI"]
 ---
 
 ## Overview

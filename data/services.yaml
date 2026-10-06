@@ -1,0 +1,18 @@
+# "How I Can Help" section on the home page.
+painPoints:
+  - "Rising AWS bill"
+  - "Manual deployments"
+  - "No infrastructure-as-code"
+  - "A migration that keeps stalling"
+
+engagements:
+  - title: "Architecture Review"
+    duration: "1–2 weeks"
+    icon: "cloud"
+    description: "Deep dive into your AWS environment with prioritized, practical recommendations."
+  - title: "Migration / Build Project"
+    icon: "hdd-stack"
+    description: "Plan and execute an AWS migration or greenfield build with modern DevOps practices."
+  - title: "Fractional DevOps Retainer"
+    icon: "people"
+    description: "Ongoing help with architecture, automation, reliability and team enablement."

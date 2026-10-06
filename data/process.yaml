@@ -1,0 +1,9 @@
+# "How I Work" steps on the home page.
+- title: "Assess"
+  description: "Understand your goals, current environment, and key challenges."
+- title: "Design"
+  description: "Create a tailored architecture and plan with clear milestones."
+- title: "Implement"
+  description: "Build and automate using infrastructure-as-code and AWS best practices."
+- title: "Support"
+  description: "Ongoing guidance, optimization, and team enablement."

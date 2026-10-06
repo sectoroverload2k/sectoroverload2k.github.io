@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section projects-band">
+  <div class="container">
+    {{ with .Content }}<div class="prose narrow">{{ . }}</div>{{ end }}
+    <div class="project-grid">
+      {{ range .Pages.ByWeight }}{{ partial "project-card.html" . }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

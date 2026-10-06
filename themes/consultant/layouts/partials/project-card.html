@@ -1,0 +1,13 @@
+<a href="{{ .RelPermalink }}" class="project-card">
+  <div class="project-shot">
+    {{ with .Params.image }}<img src="{{ . }}" alt="{{ $.Title }} website screenshot" loading="lazy">{{ else }}<i class="bi bi-{{ .Params.icon | default "window" }}"></i>{{ end }}
+  </div>
+  <div class="project-body">
+    <h3>{{ .Title }}</h3>
+    <p>{{ .Description | default .Params.subtitle }}</p>
+    <div class="project-foot">
+      <div class="pills">{{ range (.Params.cardTags | default (first 3 (.Params.tech | default slice))) }}<span class="pill">{{ . }}</span>{{ end }}</div>
+      <span class="arrow-btn" aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+    </div>
+  </div>
+</a>

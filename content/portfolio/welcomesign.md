@@ -44,6 +44,11 @@ stats:
     label: "Reduction in Guest Questions"
   - value: "$400+"
     label: "Monthly Revenue Per Property"
+description: "SaaS platform that turns vacation rental TVs into guest welcome screens"
+demo: "https://welcomesign.com"
+weight: 2
+image: "/images/projects/welcomesign.jpg"
+cardTags: ["AWS ECS", "Terraform", "SaaS"]
 ---
 
 ## Overview

@@ -1,0 +1,12 @@
+name = "Consultant"
+license = "MIT"
+licenselink = "https://github.com/sectoroverload2k/sectoroverload2k.github.io"
+description = "Professional cloud/DevOps consulting theme (navy & teal) for resume, portfolio and wiki"
+homepage = "https://anthonyl.com/"
+tags = ["consulting", "resume", "portfolio", "business"]
+features = ["responsive"]
+min_version = "0.124.0"
+
+[author]
+  name = "Anthony Linsday"
+  homepage = "https://anthonyl.com/"

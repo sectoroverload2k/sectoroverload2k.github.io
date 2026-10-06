@@ -1,0 +1,20 @@
+{{ define "main" }}
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="container detail-grid">
+    <article class="prose">
+      {{ with .Params.results }}
+      <div class="result-row">{{ range . }}<div class="stat"><span class="stat-value">{{ .value }}</span><span class="stat-label">{{ .label }}</span></div>{{ end }}</div>
+      {{ end }}
+      {{ .Content }}
+    </article>
+    <aside class="detail-side">
+      <div class="card">
+        {{ with .Params.industry }}<h4>Industry</h4><p>{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}<h4>Tech</h4><div class="pills light">{{ range . }}<span class="pill">{{ . }}</span>{{ end }}</div>{{ end }}
+        <a href="{{ $.Site.Params.bookingURL }}" class="btn btn-primary btn-block">Discuss a similar project</a>
+      </div>
+    </aside>
+  </div>
+</section>
+{{ end }}

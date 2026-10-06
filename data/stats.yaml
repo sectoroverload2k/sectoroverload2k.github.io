@@ -1,0 +1,8 @@
+# Home page results row. Only real, owner-provided figures.
+# Savings are attributed to "a media company" only — never name the client.
+- value: "$182K"
+  label: "AWS savings in one year for a media company"
+- value: "$75K+/yr"
+  label: "Ongoing savings from a single migration"
+- value: "20+"
+  label: "Years in infrastructure & automation"
