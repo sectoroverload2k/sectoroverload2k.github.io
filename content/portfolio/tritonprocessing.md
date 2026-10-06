@@ -4,7 +4,7 @@ description: "Merchant services with interchange-plus pricing and free line-by-l
 icon: "credit-card"
 demo: "https://tritonprocessing.com"
 image: "/images/projects/tritonprocessing.jpg"
-weight: 10
+weight: 11
 cardTags: ["Payments", "Merchant Services", "FinTech"]
 tech:
   - "Merchant Services"

@@ -4,7 +4,7 @@ description: "Party games played on a Roku TV — the TV hosts and everyone's ph
 icon: "controller"
 demo: "https://wazoogames.com"
 image: "/images/projects/wazoogames.jpg"
-weight: 7
+weight: 8
 cardTags: ["Roku", "Multiplayer", "Games"]
 tech:
   - "Roku"
