@@ -30,6 +30,8 @@ hugo --minify          # production build to ./public
 | Wiki articles | `content/wiki/<category>/*.md` |
 | Music player | `static/music/*.mp3` + `data/music.yaml` |
 | Images (headshot, project screenshots) | `static/images/`, `static/images/projects/` |
+| Home hero background image | `static/images/hero-bg.webp` + `hero-bg.jpg` (fallback) |
+| Hero network animation | `themes/consultant/assets/js/hero-network.js` (canvas; off on mobile, static for reduced-motion users, pauses when off screen) |
 
 ### Projects
 
