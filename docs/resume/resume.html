@@ -1,0 +1,112 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Anthony Linsday — Resume</title>
+<style>
+@page { size: Letter; margin: 0.35in 0.5in; }
+* { box-sizing: border-box; }
+body { font-family: "Helvetica Neue", Arial, sans-serif; color: #1f2933; font-size: 9.2pt; line-height: 1.28; margin: 0; }
+header { border-bottom: 3px solid #0f9d9a; padding-bottom: 8px; margin-bottom: 10px; }
+h1 { font-size: 21pt; margin: 0; color: #0b2545; letter-spacing: .5px; }
+.role { font-size: 12pt; color: #0f9d9a; font-weight: 600; margin-top: 2px; }
+.contact { margin-top: 6px; font-size: 8.6pt; white-space: nowrap; color: #3e4c59; }
+.contact span + span::before { content: " · "; color: #9aa5b1; }
+a { color: inherit; text-decoration: none; }
+h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #0b2545; border-bottom: 1px solid #cbd2d9; padding-bottom: 2px; margin: 9px 0 4px; }
+p { margin: 0 0 4px; }
+ul { margin: 3px 0 0; padding-left: 16px; }
+li { margin-bottom: 0; }
+.results { display: flex; gap: 10px; margin-top: 4px; }
+.stat { flex: 1; background: #f0f7f7; border-left: 3px solid #0f9d9a; padding: 5px 9px; }
+.stat b { display: block; font-size: 12pt; color: #0b2545; }
+.stat small { font-size: 8.6pt; color: #3e4c59; }
+.skills { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 18px; }
+.skills div b { color: #0b2545; }
+.job { margin-bottom: 5px; page-break-inside: avoid; }
+.job-head { display: flex; justify-content: space-between; align-items: baseline; }
+.job-title { font-weight: 700; color: #0b2545; }
+.job-co { font-weight: 600; color: #0f9d9a; }
+.dates { font-size: 9pt; color: #616e7c; white-space: nowrap; }
+.tags { font-size: 8.6pt; color: #616e7c; margin-top: 1px; }
+.products { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 4px; }
+.products div b { color: #0b2545; }
+</style></head><body>
+<header>
+  <h1>Anthony Linsday</h1>
+  <div class="role">Cloud Architect &amp; Infrastructure Automation Engineer</div>
+  <div class="contact">
+    <span>Charlotte, NC</span><span>(704) 466-5581</span><span>anthony@linsday.net</span><span>anthonyl.com</span><span>linkedin.com/in/anthonylinsday</span><span>github.com/sectoroverload2k</span>
+  </div>
+</header>
+
+<h2>Summary</h2>
+<p>AWS Certified Solutions Architect with 20+ years building scalable infrastructure, automation pipelines and cloud-native applications across media, SaaS, financial services and government (U.S. Navy). Hands-on with Terraform, CloudFormation, Kubernetes and CI/CD; also founder and lead architect of several production SaaS products.</p>
+
+<div class="results">
+  <div class="stat"><b>$182K</b><small>AWS savings in one year for a media company</small></div>
+  <div class="stat"><b>$75K+/yr</b><small>Ongoing savings from a single migration</small></div>
+  <div class="stat"><b>20+ yrs</b><small>Infrastructure &amp; automation</small></div>
+</div>
+
+<h2>Skills</h2>
+<div class="skills">
+  <div><b>Cloud:</b> AWS (EC2, RDS, Lambda, S3, SQS, CloudFormation, CodePipeline, GovCloud), Linux, networking</div>
+  <div><b>IaC &amp; DevOps:</b> Terraform, Ansible, Jenkins, GitHub Actions, Docker, Kubernetes</div>
+  <div><b>Observability:</b> ELK / OpenSearch, Logstash, Filebeat, CloudWatch</div>
+  <div><b>Development:</b> PHP, Python, Perl, JavaScript / Node.js, REST APIs, WebSockets</div>
+  <div><b>Data:</b> MySQL, PostgreSQL, SQL Server, Redis, message queues</div>
+  <div><b>Security:</b> IAM, OAuth 2.0 / OIDC, SSL/TLS, iptables, VPNs</div>
+</div>
+
+<h2>Experience</h2>
+<div class="job">
+  <div class="job-head"><div><span class="job-title">Senior AWS Engineer</span> — <span class="job-co">Mood Media</span></div><span class="dates">2025 – Present</span></div>
+  <ul><li>AWS infrastructure, Terraform and DevOps</li></ul>
+</div>
+<div class="job">
+  <div class="job-head"><div><span class="job-title">Owner / Manager</span> — <span class="job-co">Carolina Brew Supply</span></div><span class="dates">Apr 2021 – May 2023</span></div>
+  <ul>
+    <li>Designed and hosted POS software, integrated with the e-commerce site</li>
+    <li>Designed fault-tolerant, self-healing infrastructure using AWS CloudFormation</li>
+    <li>Designed and implemented AWS SQS for internal printer operations</li>
+    <li>Integrated DoorDash and Google Maps for delivery estimates</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="job-head"><div><span class="job-title">CloudOps Engineer (Contractor)</span> — <span class="job-co">EverOps / Zendesk</span></div><span class="dates">Mar 2020 – Feb 2021</span></div>
+  <ul>
+    <li>Used Jenkins, Kubernetes and Ansible for large-scale deployments</li>
+    <li>Worked with a 100% remote team across multiple time zones</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="job-head"><div><span class="job-title">Senior Automation Engineer / Cloud Architect (Contractor)</span> — <span class="job-co">Levvel</span></div><span class="dates">Jun 2019 – Mar 2020</span></div>
+  <ul>
+    <li>Automated deployments for U.S. Navy battleship systems</li>
+    <li>Used AWS GovCloud to emulate SIPR and NIPR networks</li>
+    <li>Automated cloud infrastructure builds with Ansible and Jenkins</li>
+  </ul>
+</div>
+<div class="job">
+  <div class="job-head"><div><span class="job-title">Senior Automation Engineer / Cloud Architect</span> — <span class="job-co">Citco</span></div><span class="dates">Jan 2017 – May 2019</span></div>
+  <ul>
+    <li>Migrated on-premises workloads to AWS with automated CloudFormation and CodePipeline infrastructure</li>
+    <li>Designed cross-region fail-over and recovery templates</li>
+    <li>Built a server provisioning portal with PHP/MySQL</li>
+    <li>Team lead for 3 remote engineers</li>
+  </ul>
+</div>
+
+<h2>Founder &amp; Lead Architect · SaaS Products · 2024–Present</h2>
+<div class="products">
+  <div><b>Triton Email</b> — multi-tenant, white-label email platform for hosting providers</div>
+  <div><b>Triton Agency</b> — AI-agent consulting firm with deep tool integrations</div>
+  <div><b>CathyBot</b> — AI support chatbot trained on Google Drive docs</div>
+  <div><b>SignaCast</b> — player-agnostic digital signage SaaS</div>
+  <div><b>WelcomeSign</b> — guest-experience platform for vacation-rental TVs</div>
+  <div><b>FriendFrame</b> — phone-to-TV family photo sharing (Roku)</div>
+</div>
+
+<h2>Education &amp; Certification</h2>
+
+<div class="job-head"><div><b>AWS Certified Solutions Architect</b></div></div>
+<div class="job-head"><div><b>Computer Information Systems</b> — Cape Fear Community College</div><span class="dates">2002 – 2006</span></div>
+</body></html>
